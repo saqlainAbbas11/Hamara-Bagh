@@ -1,0 +1,463 @@
+{% extends "base.html" %}
+
+{% block title %}Flower Atlas — 270+ flowers for Pakistani gardens — Hamara Bagh{% endblock %}
+{% block description %}Browse every flower people actually grow in Pakistan — roses, bulbs, mogra, palms, cacti and succulents — with bloom calendars, water needs and pot-friendly truths. Filter by bloom month, care level and more.{% endblock %}
+{% block og_title %}Flower Atlas — Hamara Bagh{% endblock %}
+{% block og_description %}270+ flowers with bloom calendars built for Pakistan's seasons. Search, filter, and find what fits your garden.{% endblock %}
+
+{% block content %}
+<section class="mx-auto max-w-6xl px-4 pt-10 sm:px-6">
+  <span class="chip bg-blush-100 text-blush-600">🌸 Flower atlas</span>
+  <h1 class="mt-4 font-display text-3xl font-semibold tracking-tight text-ink-900 sm:text-4xl">The flower atlas</h1>
+  <p class="mt-3 max-w-2xl leading-relaxed text-ink-500">
+    Every rose, bulb, palm and cactus people actually grow in Pakistan — each with its
+    <strong class="text-leaf-700">bloom calendar</strong>, water needs, and whether it is truly
+    happy in a pot. Search, filter, and
+    <span class="font-semibold text-blush-600">build the garden your space can actually keep alive.</span>
+  </p>
+  <p class="mt-2 font-urdu text-base text-leaf-700" dir="rtl">پھول ہیں تو باغ ہے</p>
+
+  <div class="mt-5 flex flex-wrap gap-2">
+    <span class="chip bg-leaf-50 text-leaf-800"><span id="stat-total" class="font-semibold">…</span> flowers &amp; plants</span>
+    <span class="chip bg-sun-100 text-[#8a6d1f]"><span id="stat-bloom-now" class="font-semibold">…</span> in bloom this month</span>
+    <span class="chip bg-sky-100 text-sky-600"><span class="font-semibold">12</span> plant groups</span>
+  </div>
+
+  <!-- ======================= filter bar ======================= -->
+  <div class="sticky top-14 z-30 mt-6 border-b border-leaf-100 bg-white/95 pb-3 backdrop-blur xl:top-28">
+    <div class="relative">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-300" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.8-3.8"/></svg>
+      <input id="flower-search" type="text" autocomplete="off"
+             placeholder="Search by name, Urdu name or botanical name…"
+             class="input input-bordered h-12 w-full rounded-2xl border-leaf-200 bg-white pl-11 pr-11 text-sm focus:border-leaf-500">
+      <button id="search-clear" type="button" aria-label="Clear search"
+              class="absolute right-3 top-1/2 hidden -translate-y-1/2 rounded-full p-1 text-ink-300 transition hover:bg-leaf-50 hover:text-ink-700">✕</button>
+    </div>
+
+    <div id="group-pills" class="mt-3 flex flex-wrap gap-1.5"></div>
+
+    <div id="trait-chips" class="mt-2.5 flex flex-wrap gap-1.5"></div>
+
+    <div class="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
+      <div class="flex items-center gap-2">
+        <span class="text-[11px] font-semibold uppercase tracking-wide text-ink-300">Blooms in</span>
+        <div id="bloom-month-bar" class="flex flex-wrap gap-1"></div>
+      </div>
+      <div class="ml-auto flex flex-wrap items-center gap-2">
+        <select id="sort-select" class="select select-bordered select-sm h-9 rounded-xl border-leaf-200 bg-white text-xs font-medium">
+          <option value="az">Sort: A → Z</option>
+          <option value="bloom">Blooming soonest</option>
+          <option value="easy">Easiest first</option>
+          <option value="water">Most water-wise first</option>
+        </select>
+        <button id="random-btn" type="button" class="press rounded-xl border border-leaf-200 bg-white px-3 py-2 text-xs font-semibold text-ink-700 transition hover:bg-leaf-50">🎲 Surprise me</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================= results ======================= -->
+  <div class="mt-5 flex flex-wrap items-center justify-between gap-2">
+    <p id="result-count" class="text-sm text-ink-500"></p>
+    <button id="reset-btn" type="button" class="hidden text-xs font-semibold text-leaf-700 underline-offset-2 hover:underline">Reset filters</button>
+  </div>
+
+  <div id="flower-grid" class="mt-4 grid gap-4 pb-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"></div>
+
+  <div id="flower-empty" class="mt-4 hidden rounded-3xl border border-dashed border-leaf-200 bg-leaf-50 p-10 text-center">
+    <p class="text-3xl">🥀</p>
+    <p class="mt-2 font-display text-lg font-semibold text-ink-900">Nothing matches those filters</p>
+    <p class="mt-1 text-sm text-ink-500">Try removing a trait or two — or reset and start again.</p>
+  </div>
+
+  <p id="catalog-note" class="mt-6 max-w-3xl text-xs leading-relaxed text-ink-300"></p>
+</section>
+
+<!-- ======================= flower detail modal ======================= -->
+<dialog id="flower-modal" class="modal">
+  <div class="modal-box max-w-2xl rounded-3xl bg-white p-0">
+    <div class="flex items-center justify-between border-b border-leaf-100 px-6 py-4">
+      <h3 class="font-display text-lg font-semibold text-ink-900">Flower details</h3>
+      <form method="dialog">
+        <button class="btn btn-sm btn-ghost rounded-xl text-ink-500" aria-label="Close">✕</button>
+      </form>
+    </div>
+    <div id="fm-body" class="max-h-[75vh] overflow-y-auto px-6 py-5"></div>
+  </div>
+  <form method="dialog" class="modal-backdrop">
+    <button>close</button>
+  </form>
+</dialog>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const $f = function (id) { return document.getElementById(id); };
+  const NOW_MONTH = new Date().getMonth() + 1;
+  const MONTH_INITIALS = ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'];
+
+  const GROUP_TINTS = {
+    seasonal: 'bg-blush-100 text-blush-600',
+    perennial: 'bg-leaf-100 text-leaf-700',
+    rose: 'bg-blush-100 text-blush-600',
+    bulb: 'bg-sun-100 text-[#8a6d1f]',
+    fragrant: 'bg-terra-100 text-terra-700',
+    palm: 'bg-sky-100 text-sky-600',
+    indoor: 'bg-terra-100 text-terra-700',
+    cactus: 'bg-sun-100 text-[#8a6d1f]',
+    succulent: 'bg-leaf-50 text-leaf-700',
+    tree: 'bg-leaf-100 text-leaf-800',
+    fruit: 'bg-sun-100 text-[#8a6d1f]',
+    native: 'bg-leaf-50 text-leaf-800',
+  };
+
+  const COLOR_HEX = {
+    white: '#ffffff', yellow: '#edc65f', red: '#c0392b', pink: '#f0b9c4',
+    purple: '#9b7bb8', violet: '#9b7bb8', blue: '#5da7c4', orange: '#e8954a',
+    lavender: '#b9a7d8', coral: '#f08080', cream: '#f5f0dc', peach: '#f5c396',
+    bicolor: '#d97a92', green: '#7db664', maroon: '#8a4a4a', magenta: '#c25f79',
+  };
+
+  const TRAITS = [
+    { id: 'fragrant', label: '🌙 Fragrant', test: function (f) { return f.fragrant; } },
+    { id: 'pollinator', label: '🐝 Bee-friendly', test: function (f) { return f.pollinator; } },
+    { id: 'pet_safe', label: '🐾 Pet-safe', test: function (f) { return f.pet_safe; } },
+    { id: 'native', label: '🇵🇰 Native', test: function (f) { return f.native; } },
+    { id: 'low_water', label: '💧 Low water', test: function (f) { return f.water === 'very_low' || f.water === 'low'; } },
+    { id: 'heat', label: '🔥 Heat-proof', test: function (f) { return f.heat_tolerance === 'very_high'; } },
+    { id: 'frost', label: '❄️ Frost-hardy', test: function (f) { return f.frost_tolerance === 'high'; } },
+    { id: 'container', label: '🪴 Loves pots', test: function (f) { return f.container; } },
+    { id: 'indoor', label: '🏠 Indoor-friendly', test: function (f) { return f.indoor; } },
+    { id: 'beginner', label: '🌱 Beginner-proof', test: function (f) { return f.difficulty === 'very_easy' || f.difficulty === 'easy'; } },
+  ];
+
+  const DIFF_RANK = { very_easy: 0, easy: 1, medium: 2, hard: 3 };
+  const WATER_RANK = { very_low: 0, low: 1, medium: 2, high: 3 };
+  const HEAT_LABEL = { low: 'Low', medium: 'Medium', high: 'High', very_high: 'Very high' };
+  const SUN_TEXT = { full: 'Full sun', part: 'Part shade', shade: 'Full shade' };
+
+  const PILL_ACTIVE = 'rounded-full bg-leaf-600 px-3 py-1.5 text-xs font-semibold text-white shadow-sm press';
+  const PILL_IDLE = 'rounded-full border border-leaf-200 bg-white px-3 py-1.5 text-xs font-medium text-ink-700 transition hover:bg-leaf-50 press';
+
+  let catalog = null;
+  let searchIndex = [];
+  let activeGroup = 'all';
+  let activeTraits = {};
+  let bloomMonth = null;
+  let query = '';
+  let sortMode = 'az';
+
+  function matchesTraits(f) {
+    return TRAITS.every(function (t) { return !activeTraits[t.id] || t.test(f); });
+  }
+
+  function matchesQuery(f, index) {
+    return !query || searchIndex[index].indexOf(query) !== -1;
+  }
+
+  function matchesBloom(f) {
+    return bloomMonth === null || f.bloom_months.indexOf(bloomMonth) !== -1;
+  }
+
+  function isFiltering() {
+    return activeGroup !== 'all' || query !== '' || bloomMonth !== null ||
+      TRAITS.some(function (t) { return activeTraits[t.id]; });
+  }
+
+  function nextBloomIn(f) {
+    if (!f.bloom_months.length) return 99;
+    let best = 99;
+    f.bloom_months.forEach(function (m) {
+      const gap = ((m - NOW_MONTH) % 12 + 12) % 12;
+      if (gap < best) best = gap;
+    });
+    return best;
+  }
+
+  function filteredFlowers() {
+    const out = [];
+    catalog.flowers.forEach(function (f, i) {
+      if (activeGroup !== 'all' && f.group !== activeGroup) return;
+      if (!matchesTraits(f) || !matchesQuery(f, i) || !matchesBloom(f)) return;
+      out.push(f);
+    });
+    out.sort(function (a, b) {
+      if (sortMode === 'bloom') {
+        const d = nextBloomIn(a) - nextBloomIn(b);
+        return d !== 0 ? d : a.name.localeCompare(b.name);
+      }
+      if (sortMode === 'easy') {
+        const d = DIFF_RANK[a.difficulty] - DIFF_RANK[b.difficulty];
+        return d !== 0 ? d : a.name.localeCompare(b.name);
+      }
+      if (sortMode === 'water') {
+        const d = WATER_RANK[a.water] - WATER_RANK[b.water];
+        return d !== 0 ? d : a.name.localeCompare(b.name);
+      }
+      return a.name.localeCompare(b.name);
+    });
+    return out;
+  }
+
+  function bloomStrip(months, onCls) {
+    return '<div class="flex gap-[3px]" title="' + esc(MONTHS.filter(function (_, i) { return months.indexOf(i + 1) !== -1; }).join(', ') || 'No regular bloom window') + '">' +
+      MONTH_INITIALS.map(function (_, i) {
+        const m = i + 1;
+        const on = months.indexOf(m) !== -1;
+        const now = m === NOW_MONTH;
+        return '<span class="h-1.5 flex-1 rounded-full ' + (on ? onCls : 'bg-leaf-100') + (now ? ' ring-2 ring-leaf-300' : '') + '"></span>';
+      }).join('') + '</div>';
+  }
+
+  function cardHtml(f, i) {
+    const g = catalog.groups[f.group] || {};
+    const tint = GROUP_TINTS[f.group] || 'bg-leaf-50 text-leaf-700';
+    const inBloom = f.bloom_months.indexOf(NOW_MONTH) !== -1;
+    const chips = [];
+    if (inBloom) chips.push('<span class="chip bg-leaf-600 text-white">✦ Blooming now</span>');
+    if (!f.pet_safe) chips.push('<span class="chip bg-blush-100 text-blush-600">⚠ Keep from pets</span>');
+    if (f.water === 'low' || f.water === 'very_low') chips.push('<span class="chip bg-sky-100 text-sky-600">💧 Low water</span>');
+    if (f.fragrant) chips.push('<span class="chip bg-terra-100 text-terra-700">🌙 Fragrant</span>');
+    if (f.native) chips.push('<span class="chip bg-leaf-50 text-leaf-800">🇵🇰 Native</span>');
+    if (f.indoor) chips.push('<span class="chip bg-terra-100 text-terra-700">🏠 Indoor</span>');
+
+    return '<button type="button" data-index="' + i + '" class="lift press flex w-full flex-col rounded-3xl border border-leaf-100 bg-white p-4 text-left shadow-sm hover:border-leaf-300">' +
+      '<div class="flex items-start gap-3">' +
+        '<span class="tile h-12 w-12 text-2xl ' + tint + '">' + (g.emoji || '🌸') + '</span>' +
+        '<div class="min-w-0 flex-1">' +
+          '<h3 class="truncate font-display text-base font-semibold text-ink-900">' + esc(f.name) + '</h3>' +
+          '<p class="truncate text-xs text-ink-500">' +
+            (f.local_name ? esc(f.local_name) + ' · ' : '') +
+            '<span class="italic">' + esc(f.scientific) + '</span></p>' +
+        '</div>' +
+      '</div>' +
+      (chips.length ? '<div class="mt-3 flex flex-wrap gap-1.5">' + chips.slice(0, 3).join('') + '</div>' : '') +
+      '<div class="mt-auto pt-3">' +
+        '<div class="mb-1.5 flex items-center justify-between text-[10px] uppercase tracking-wide text-ink-300">' +
+          '<span>Bloom</span><span>' + esc(g.label || '') + '</span>' +
+        '</div>' +
+        bloomStrip(f.bloom_months, 'bg-leaf-600') +
+      '</div>' +
+    '</button>';
+  }
+
+  function render() {
+    // group pill counts = matches ignoring the group selection itself
+    const countFor = function (gid) {
+      let n = 0;
+      catalog.flowers.forEach(function (f, i) {
+        if (gid !== 'all' && f.group !== gid) return;
+        if (matchesTraits(f) && matchesQuery(f, i) && matchesBloom(f)) n += 1;
+      });
+      return n;
+    };
+
+    const pills = [];
+    pills.push(groupPill('all', '✨ All', catalog.flowers.length, countFor('all')));
+    Object.keys(catalog.groups).forEach(function (gid) {
+      const g = catalog.groups[gid];
+      pills.push(groupPill(gid, g.emoji + ' ' + g.label, g.count, countFor(gid)));
+    });
+    $f('group-pills').innerHTML = pills.join('');
+
+    $f('trait-chips').innerHTML = TRAITS.map(function (t) {
+      const active = !!activeTraits[t.id];
+      return '<button type="button" data-trait="' + t.id + '" aria-pressed="' + active + '" class="' + (active ? PILL_ACTIVE : PILL_IDLE) + '">' + t.label + '</button>';
+    }).join('');
+
+    $f('bloom-month-bar').innerHTML = MONTH_INITIALS.map(function (initial, i) {
+      const m = i + 1;
+      const active = bloomMonth === m;
+      const isNow = m === NOW_MONTH;
+      return '<button type="button" data-month="' + m + '" title="' + MONTHS[i] + '" aria-pressed="' + active + '" ' +
+        'class="press relative h-7 w-7 rounded-lg text-[11px] font-semibold transition ' +
+        (active ? 'bg-leaf-600 text-white shadow-sm' : 'border border-leaf-200 bg-white text-ink-500 hover:bg-leaf-50') + '">' +
+        initial + (isNow ? '<span class="absolute -top-0.5 right-1 h-1.5 w-1.5 rounded-full bg-sun-400"></span>' : '') +
+        '</button>';
+    }).join('');
+
+    const list = filteredFlowers();
+    const byIndex = {};
+    catalog.flowers.forEach(function (f, i) { byIndex[f.slug] = i; });
+    $f('flower-grid').innerHTML = list.map(function (f) { return cardHtml(f, byIndex[f.slug]); }).join('');
+    $f('flower-empty').classList.toggle('hidden', list.length > 0);
+
+    const nowCount = catalog.flowers.filter(function (f) { return f.bloom_months.indexOf(NOW_MONTH) !== -1; }).length;
+    $f('result-count').innerHTML = 'Showing <b class="text-ink-900">' + list.length + '</b> of ' + catalog.flowers.length +
+      ' · <span class="text-leaf-700">' + nowCount + ' blooming in ' + MONTHS[NOW_MONTH - 1] + '</span>';
+    $f('reset-btn').classList.toggle('hidden', !isFiltering());
+    $f('search-clear').classList.toggle('hidden', query === '');
+  }
+
+  function groupPill(gid, label, total, matched) {
+    const active = activeGroup === gid;
+    return '<button type="button" data-group="' + gid + '" class="' + (active ? PILL_ACTIVE : PILL_IDLE) + '">' + label +
+      ' <span class="ml-0.5 ' + (active ? 'text-white/70' : 'text-ink-300') + '">' + matched + '</span></button>';
+  }
+
+  function monthRow(months, onCls) {
+    return '<div class="grid grid-cols-12 gap-1 text-center">' + MONTH_INITIALS.map(function (initial, i) {
+      const m = i + 1;
+      const on = months.indexOf(m) !== -1;
+      const now = m === NOW_MONTH;
+      return '<div>' +
+        '<div class="mx-auto h-2.5 w-2.5 rounded-full ' + (on ? onCls : 'bg-leaf-100') + (now ? ' ring-2 ring-leaf-300' : '') + '"></div>' +
+        '<div class="mt-1 text-[10px] ' + (on ? 'font-semibold text-ink-700' : 'text-ink-300') + '">' + initial + '</div>' +
+        '</div>';
+    }).join('') + '</div>';
+  }
+
+  function openFlower(f) {
+    const g = catalog.groups[f.group] || {};
+    const tint = GROUP_TINTS[f.group] || 'bg-leaf-50 text-leaf-700';
+    const inBloom = f.bloom_months.indexOf(NOW_MONTH) !== -1;
+
+    const badges = [];
+    badges.push('<span class="chip ' + tint + '">' + (g.emoji || '🌸') + ' ' + esc(g.label || f.group) + '</span>');
+    if (f.fragrant) badges.push('<span class="chip bg-terra-100 text-terra-700">🌙 Fragrant</span>');
+    if (f.pollinator) badges.push('<span class="chip bg-sun-100 text-[#8a6d1f]">🐝 Pollinators</span>');
+    badges.push(f.pet_safe
+      ? '<span class="chip bg-leaf-50 text-leaf-800">🐾 Pet-safe</span>'
+      : '<span class="chip bg-blush-100 text-blush-600">⚠ Toxic to pets</span>');
+    if (f.native) badges.push('<span class="chip bg-leaf-50 text-leaf-800">🇵🇰 Native</span>');
+    if (f.salt_tolerant) badges.push('<span class="chip bg-sky-100 text-sky-600">🌊 Salt-tolerant</span>');
+
+    const facts = [];
+    facts.push(factTile('droplet', 'Water need', WATER_LABEL[f.water] || titleCase(f.water)));
+    facts.push(factTile('sun', 'Sunlight', (SUN_TEXT[f.sun] || f.sun) + ' · ' + f.sun_hours_min + 'h+'));
+    facts.push(factTile('target', 'Care level', DIFFICULTY_LABEL[f.difficulty] || titleCase(f.difficulty)));
+    facts.push(factTile('thermometer', 'Heat', HEAT_LABEL[f.heat_tolerance] || f.heat_tolerance));
+    facts.push(factTile('snow', 'Frost', HEAT_LABEL[f.frost_tolerance] || f.frost_tolerance));
+    facts.push(factTile('pot', 'In a pot?', f.container ? 'Yes, happily' : 'Better in ground'));
+
+    const where = [];
+    if (f.container) where.push('Pot');
+    if (f.balcony) where.push('Balcony');
+    if (f.rooftop) where.push('Rooftop');
+    if (f.ground) where.push('Garden bed');
+    if (f.indoor) where.push('Indoors');
+
+    const colours = (f.colors || []).map(function (c) {
+      return '<span class="inline-flex items-center gap-1.5 rounded-full border border-leaf-100 bg-white px-2.5 py-1 text-xs text-ink-700">' +
+        '<span class="h-3 w-3 rounded-full border border-ink-300/30" style="background:' + (COLOR_HEX[c] || '#a6cf92') + '"></span>' +
+        titleCase(c) + '</span>';
+    }).join(' ');
+
+    const tip = f.care || g.tip || '';
+
+    $f('fm-body').innerHTML =
+      '<div class="flex items-start gap-4">' +
+        '<span class="tile h-14 w-14 text-2xl ' + tint + '">' + (g.emoji || '🌸') + '</span>' +
+        '<div class="min-w-0 flex-1">' +
+          '<h3 class="font-display text-2xl font-semibold leading-snug text-ink-900">' + esc(f.name) + '</h3>' +
+          (f.local_name ? '<p class="text-sm font-medium text-leaf-700">' + esc(f.local_name) + '</p>' : '') +
+          '<p class="text-sm italic text-ink-500">' + esc(f.scientific) + '</p>' +
+          '<div class="mt-2 flex flex-wrap gap-2">' + badges.join('') + '</div>' +
+        '</div>' +
+      '</div>' +
+      (inBloom ? '<div class="mt-4 rounded-2xl bg-leaf-600 px-4 py-2.5 text-sm font-semibold text-white">✦ It is blooming right now — ' + MONTHS[NOW_MONTH - 1] + '</div>' : '') +
+      '<div class="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3">' + facts.join('') + '</div>' +
+      (colours ? '<div class="mt-5"><h4 class="text-xs font-semibold uppercase tracking-wide text-ink-300">Flower colours</h4><div class="mt-2 flex flex-wrap gap-2">' + colours + '</div></div>' : '') +
+      '<div class="mt-5"><h4 class="text-xs font-semibold uppercase tracking-wide text-ink-300">Where it grows</h4>' +
+        '<div class="mt-2 flex flex-wrap gap-2">' + where.map(function (w) { return '<span class="chip bg-leaf-50 text-leaf-800">' + w + '</span>'; }).join('') + '</div></div>' +
+      '<div class="mt-5 rounded-2xl border border-leaf-100 p-4">' +
+        '<div class="flex items-center justify-between text-xs font-semibold uppercase tracking-wide text-ink-300"><span>Bloom months</span><span class="text-leaf-600">' + MONTHS[NOW_MONTH - 1] + ' ringed</span></div>' +
+        '<div class="mt-3">' + monthRow(f.bloom_months, 'bg-leaf-600') + '</div>' +
+        '<div class="mt-4 flex items-center justify-between text-xs font-semibold uppercase tracking-wide text-ink-300"><span>Best sowing months</span></div>' +
+        '<div class="mt-3">' + monthRow(f.sow_months, 'bg-sky-500') + '</div>' +
+      '</div>' +
+      (tip ? '<div class="mt-5 rounded-2xl bg-leaf-50 p-4"><h4 class="text-sm font-semibold text-leaf-800">🌿 ' + (f.care ? 'Care tip' : esc(g.label || '') + ' care') + '</h4>' +
+        '<p class="mt-1 text-sm leading-relaxed text-ink-700">' + esc(tip) + '</p></div>' : '');
+
+    $f('flower-modal').showModal();
+  }
+
+  async function load() {
+    try {
+      catalog = await api('/api/flowers');
+    } catch (err) {
+      $f('flower-grid').innerHTML = '<div class="col-span-full rounded-3xl border border-blush-200 bg-blush-100 p-6 text-sm text-blush-600">' +
+        esc(err.message) + '</div>';
+      return;
+    }
+    searchIndex = catalog.flowers.map(function (f) {
+      return [f.name, f.scientific, f.local_name || '', f.group, (f.colors || []).join(' ')].join(' ').toLowerCase();
+    });
+    $f('stat-total').textContent = catalog.total;
+    $f('stat-bloom-now').textContent = catalog.flowers.filter(function (f) { return f.bloom_months.indexOf(NOW_MONTH) !== -1; }).length;
+    $f('catalog-note').textContent = '📌 ' + (catalog.note || '');
+    $f('flower-search').placeholder = 'Search ' + catalog.total + ' flowers — name, Urdu name or botanical name…';
+    render();
+
+    const wanted = new URLSearchParams(location.search).get('flower');
+    if (wanted) {
+      const f = catalog.flowers.find(function (x) { return x.slug === wanted; });
+      if (f) openFlower(f);
+    }
+  }
+
+  // ---- events -------------------------------------------------------------
+  $f('flower-search').addEventListener('input', function (e) {
+    query = e.target.value.trim().toLowerCase();
+    render();
+  });
+
+  $f('search-clear').addEventListener('click', function () {
+    $f('flower-search').value = '';
+    query = '';
+    render();
+  });
+
+  $f('group-pills').addEventListener('click', function (e) {
+    const btn = e.target.closest('[data-group]');
+    if (!btn) return;
+    activeGroup = btn.getAttribute('data-group');
+    render();
+  });
+
+  $f('trait-chips').addEventListener('click', function (e) {
+    const btn = e.target.closest('[data-trait]');
+    if (!btn) return;
+    const id = btn.getAttribute('data-trait');
+    activeTraits[id] = !activeTraits[id];
+    render();
+  });
+
+  $f('bloom-month-bar').addEventListener('click', function (e) {
+    const btn = e.target.closest('[data-month]');
+    if (!btn) return;
+    const m = parseInt(btn.getAttribute('data-month'), 10);
+    bloomMonth = bloomMonth === m ? null : m;
+    render();
+  });
+
+  $f('sort-select').addEventListener('change', function (e) {
+    sortMode = e.target.value;
+    render();
+  });
+
+  $f('reset-btn').addEventListener('click', function () {
+    activeGroup = 'all';
+    activeTraits = {};
+    bloomMonth = null;
+    query = '';
+    sortMode = 'az';
+    $f('flower-search').value = '';
+    $f('sort-select').value = 'az';
+    render();
+  });
+
+  $f('random-btn').addEventListener('click', function () {
+    const list = filteredFlowers();
+    if (!list.length) return;
+    openFlower(list[Math.floor(Math.random() * list.length)]);
+  });
+
+  $f('flower-grid').addEventListener('click', function (e) {
+    const btn = e.target.closest('[data-index]');
+    if (!btn) return;
+    openFlower(catalog.flowers[parseInt(btn.getAttribute('data-index'), 10)]);
+  });
+
+  load();
+</script>
+{% endblock %}

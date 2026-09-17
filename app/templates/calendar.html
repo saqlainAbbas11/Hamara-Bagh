@@ -1,0 +1,341 @@
+{% extends "base.html" %}
+
+{% block title %}Seasonal Calendar — what to sow in Pakistan, month by month — Hamara Bagh{% endblock %}
+{% block description %}Pakistan's growing year runs on Rabi and Kharif seasons. Pick any month and see exactly which vegetables, herbs and flowers are worth sowing right now.{% endblock %}
+{% block og_title %}Seasonal sowing calendar — Hamara Bagh{% endblock %}
+{% block og_description %}Pick a month, see what to sow — Rabi, Kharif and the transition weeks in between.{% endblock %}
+
+{% block content %}
+<section class="mx-auto max-w-6xl px-4 pt-10 sm:px-6">
+  <span class="chip bg-sun-100 text-[#8a6d1f]"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2.5"/><path d="M16 2.5v4M8 2.5v4M3 9.5h18"/></svg>Month by month</span>
+  <h1 class="mt-4 font-display text-3xl font-semibold tracking-tight text-ink-900 sm:text-4xl">Seasonal calendar</h1>
+  <p class="mt-3 max-w-2xl leading-relaxed text-ink-500">
+    Pakistan's sowing year runs on two big seasons — <strong class="text-sky-600">Rabi</strong> (winter) and <strong class="text-leaf-700">Kharif</strong> (summer).
+    Pick any month and see what's worth putting in the ground, plus a hardiness check for cold cities.
+  </p>
+  <p class="mt-2 text-sm font-medium text-leaf-700">Aaj kya boya ja sakta hai? Chaliye dekhte hain.</p>
+
+  <div id="months" class="mt-8 flex flex-wrap gap-2"></div>
+
+  <div id="season-banner" class="mt-5"></div>
+
+  <div class="mt-10 flex flex-wrap items-center justify-between gap-2">
+    <h2 class="font-display text-2xl font-semibold tracking-tight text-ink-900">
+      Good to sow in <span id="month-name" class="text-leaf-600"></span>
+    </h2>
+    <span id="sow-count" class="text-sm text-ink-500"></span>
+  </div>
+
+  <div id="sow-grid" class="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
+  <div id="sow-empty" class="mt-5 hidden rounded-3xl border border-dashed border-leaf-200 bg-leaf-50 p-10 text-center text-ink-500">
+    Nothing on the calendar this month — a good time to prep soil and plan the next season.
+  </div>
+
+  <!-- City growing guide -->
+  <div class="mt-12 rounded-3xl border border-leaf-100 bg-white p-5 shadow-sm sm:p-6">
+    <div class="flex flex-wrap items-start justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <span class="tile h-11 w-11 bg-leaf-50"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-leaf-600" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.4 4 5.6 4 9s-1.5 6.6-4 9c-2.5-2.4-4-5.6-4-9s1.5-6.6 4-9z"/></svg></span>
+        <div class="min-w-0">
+          <h2 class="font-display text-xl font-semibold text-ink-900">City growing guide</h2>
+          <p class="text-sm text-ink-500">Pick a city — its season notes, best sowing months and star plants, matched to the month you selected.</p>
+        </div>
+      </div>
+      <div id="guide-cities" class="flex flex-wrap gap-2"></div>
+    </div>
+    <div id="guide-body" class="mt-5 hidden"></div>
+  </div>
+
+  <!-- Hardiness check -->
+  <div class="mt-14 rounded-3xl border border-leaf-100 bg-white p-6 shadow-sm sm:p-8">
+    <div class="flex flex-wrap items-start gap-4">
+      <span class="tile h-12 w-12 bg-sky-100"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 text-sky-600" aria-hidden="true"><path d="M12 2.5v19"/><path d="M4.2 7l15.6 9M19.8 7L4.2 16"/><path d="M9.2 4.8L12 7.5l2.8-2.7M9.2 19.2L12 16.5l2.8 2.7"/></svg></span>
+      <div class="min-w-0 flex-1">
+        <h2 class="font-display text-2xl font-semibold tracking-tight text-ink-900">Will it survive winter there?</h2>
+        <p class="mt-1 max-w-2xl text-sm leading-relaxed text-ink-500">
+          We look at five years of local records to estimate how cold your city really gets —
+          the closest thing to a USDA hardiness zone for Pakistan.
+        </p>
+        <form id="hardy-form" class="mt-4 flex max-w-md gap-2">
+          <input id="hardy-city" type="text" placeholder="e.g. Murree, Islamabad, Quetta"
+                 class="input input-bordered w-full rounded-xl border-leaf-200 bg-white focus:border-leaf-500">
+          <button type="submit" class="shrink-0 rounded-xl bg-leaf-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-leaf-700">
+            Check
+          </button>
+        </form>
+        <div id="hardy-result" class="mt-5"></div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const $ = function (id) { return document.getElementById(id); };
+  const COTTON_IMG = "{{ url_for('static', filename='img/cotton.svg') }}";
+  let currentMonth = null;
+  let currentSeason = null;
+  let guide = null;
+  let guideCity = '';
+  const MONTH_CHIP_ACTIVE = 'rounded-xl bg-leaf-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm';
+  const MONTH_CHIP_IDLE = 'rounded-xl border border-leaf-200 bg-white px-3.5 py-2 text-sm font-medium text-ink-700 transition hover:bg-leaf-50';
+
+  function renderMonthButtons() {
+    const wrap = $('months');
+    wrap.innerHTML = '';
+    MONTHS.forEach(function (name, index) {
+      const month = index + 1;
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.dataset.month = month;
+      btn.textContent = name.slice(0, 3);
+      btn.className = month === currentMonth ? MONTH_CHIP_ACTIVE : MONTH_CHIP_IDLE;
+      btn.title = name;
+      btn.addEventListener('click', function () { load(month); });
+      wrap.appendChild(btn);
+    });
+  }
+
+  function renderSowCard(plant, index) {
+    const meta = categoryMeta(plant.category);
+    const chips = [];
+    chips.push(chip(meta.emoji + ' ' + titleCase(plant.category || 'other'), meta.tile + ' ' + meta.text));
+    if (plant.difficulty) {
+      chips.push(chip(iconSvg('target', 'h-3.5 w-3.5') + (DIFFICULTY_LABEL[plant.difficulty] || esc(plant.difficulty)), DIFFICULTY_BADGE[plant.difficulty] || 'bg-leaf-50 text-leaf-700'));
+    }
+    if (plant.category === 'houseplant') chips.push(chip(iconSvg('home', 'h-3.5 w-3.5') + 'Indoor', 'border border-terra-300 bg-terra-100 text-terra-700'));
+    if (plant.days_to_maturity) chips.push(chip(iconSvg('clock', 'h-3.5 w-3.5') + '~' + plant.days_to_maturity + ' days', 'bg-terra-100 text-terra-700'));
+    if (plant.container_friendly) chips.push(chip(iconSvg('pot', 'h-3.5 w-3.5') + 'Pot-friendly', 'bg-sky-100 text-sky-600'));
+
+    return '<article class="flex flex-col rounded-3xl border border-leaf-100 bg-white p-5 shadow-sm transition hover:shadow-md">' +
+      '<div class="flex items-center gap-3">' +
+      '<span class="tile h-12 w-12 text-2xl ' + meta.tile + '">' + plantEmoji(plant) + '</span>' +
+      '<div class="min-w-0">' +
+      '<h3 class="font-display text-lg font-semibold leading-snug text-ink-900">' + esc(plant.common_name) + '</h3>' +
+      '<p class="truncate text-xs italic text-ink-500">' + esc(plant.scientific_name || '') + '</p>' +
+      '</div></div>' +
+      '<div class="mt-3 flex flex-wrap gap-2">' + chips.join('') + '</div>' +
+      '<div class="mt-4 flex gap-2 border-t border-leaf-100 pt-4">' +
+      '<button type="button" data-id="' + plant.id + '" class="w-full rounded-xl border border-leaf-200 px-3 py-2 text-xs font-semibold text-leaf-700 transition hover:bg-leaf-50">View details →</button>' +
+      '</div></article>';
+  }
+
+  async function load(month) {
+    currentMonth = month;
+    renderMonthButtons();
+
+    const grid = $('sow-grid');
+    grid.innerHTML = '<div class="col-span-full py-10 text-center text-sm text-ink-500">' +
+      '<span class="loading loading-spinner loading-sm text-leaf-600"></span> Reading the season…</div>';
+    $('sow-empty').classList.add('hidden');
+
+    try {
+      const data = await api('/api/location/seasonal-calendar?month=' + month);
+      $('month-name').textContent = MONTHS[data.month - 1];
+
+      const season = data.season || {};
+      currentSeason = season;
+      const sIcon = seasonIcon(season.season);
+      $('season-banner').innerHTML =
+        '<div class="pattern-leaf flex flex-wrap items-center gap-4 rounded-3xl border border-leaf-100 bg-leaf-50 px-5 py-4">' +
+        '<span class="tile h-11 w-11 bg-white">' + iconSvg(sIcon, 'h-6 w-6 text-leaf-700') + '</span>' +
+        '<div class="min-w-0">' +
+        '<div class="font-semibold text-leaf-800">' + esc(season.label || '') + '</div>' +
+        '<div class="text-sm text-ink-500">' + esc(season.description || '') + '</div>' +
+        '</div>' +
+        '<img src="' + COTTON_IMG + '" alt="" loading="lazy" class="ml-auto hidden h-20 w-20 self-center sm:block" aria-hidden="true">' +
+        '</div>';
+
+      const plants = data.plants_to_sow || [];
+      grid.innerHTML = plants.map(renderSowCard).join('');
+      $('sow-count').textContent = plants.length + ' plant' + (plants.length === 1 ? '' : 's') + ' to sow';
+      $('sow-empty').classList.toggle('hidden', plants.length > 0);
+
+      if (guide) renderGuide();
+    } catch (err) {
+      grid.innerHTML = '';
+      $('sow-empty').innerHTML = '<span class="inline-flex items-center gap-2">' + iconSvg('alert', 'h-4 w-4 shrink-0') + esc(err.message) + '</span>';
+      $('sow-empty').classList.remove('hidden');
+    }
+  }
+
+  $('sow-grid').addEventListener('click', function (e) {
+    const btn = e.target.closest('button[data-id]');
+    if (btn) openPlantModal(btn.dataset.id);
+  });
+
+  // ---------------------------------------------------------------------
+  // City growing guide — month-aware notes, challenges and star plants
+  // ---------------------------------------------------------------------
+  const GUIDE_CHIP_IDLE = 'chip border border-leaf-200 bg-white text-ink-700 hover:bg-leaf-50';
+  const GUIDE_CHIP_ACTIVE = 'chip bg-leaf-600 text-white';
+
+  function markActiveCity(slug) {
+    Array.prototype.forEach.call($('guide-cities').children, function (btn) {
+      btn.className = btn.dataset.slug === slug ? GUIDE_CHIP_ACTIVE : GUIDE_CHIP_IDLE;
+    });
+  }
+
+  async function loadGuideCities() {
+    try {
+      const data = await api('/api/location/reference-cities');
+      const wrap = $('guide-cities');
+      wrap.innerHTML = '';
+      Object.keys(data).forEach(function (key) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = GUIDE_CHIP_IDLE;
+        btn.dataset.slug = key;
+        btn.textContent = key.charAt(0).toUpperCase() + key.slice(1);
+        btn.title = (data[key] && data[key].summary) || '';
+        btn.addEventListener('click', function () { selectGuideCity(key); });
+        wrap.appendChild(btn);
+      });
+    } catch (err) {
+      /* city chips are optional */
+    }
+  }
+
+  async function selectGuideCity(slug) {
+    const body = $('guide-body');
+    body.classList.remove('hidden');
+    body.innerHTML = '<div class="flex items-center gap-3 text-sm text-ink-500">' +
+      '<span class="loading loading-spinner loading-sm text-leaf-600"></span>Loading the city guide…</div>';
+    try {
+      const data = await api('/api/location/growing-guide?city=' + encodeURIComponent(slug));
+      guide = data.guide;
+      guideCity = slug.charAt(0).toUpperCase() + slug.slice(1);
+      renderGuide();
+      markActiveCity(slug);
+    } catch (err) {
+      guide = null;
+      body.innerHTML = '<div class="rounded-2xl border border-blush-200 bg-blush-100 px-4 py-3 text-sm text-blush-600">' + esc(err.message) + '</div>';
+    }
+  }
+
+  function renderGuide() {
+    if (!guide) return;
+    const notes = guide.growing_notes || {};
+    const best = guide.best_sowing_months || [];
+    const active = (currentSeason && currentSeason.season) || null;  // rabi | kharif | transition
+
+    const monthPills = MONTHS.map(function (name, index) {
+      const month = index + 1;
+      const isCurrent = month === currentMonth;
+      const isBest = best.indexOf(month) !== -1;
+      let cls = 'border border-leaf-100 bg-white text-ink-500 opacity-50';
+      if (isBest) cls = 'bg-leaf-600 text-white';
+      if (isCurrent && isBest) cls = 'bg-leaf-600 text-white ring-2 ring-leaf-400';
+      else if (isCurrent) cls = 'border border-leaf-400 bg-leaf-50 font-semibold text-leaf-800';
+      return '<span class="chip ' + cls + '">' + name.slice(0, 3) + '</span>';
+    }).join('');
+
+    function noteTile(seasonKey, icon, title, text) {
+      const isActive = active === seasonKey;
+      return '<div class="rounded-2xl border ' + (isActive ? 'border-leaf-400 bg-leaf-50' : 'border-leaf-100 bg-white') + ' p-4">' +
+        '<div class="flex flex-wrap items-center justify-between gap-2">' +
+        '<div class="flex items-center gap-1.5 text-sm font-semibold ' + (isActive ? 'text-leaf-800' : 'text-ink-700') + '">' + iconSvg(icon, 'h-4 w-4 text-leaf-600') + title + '</div>' +
+        (isActive ? '<span class="chip bg-leaf-600 text-white">Selected month</span>' : '') +
+        '</div>' +
+        '<p class="mt-2 text-sm leading-relaxed ' + (isActive ? 'text-ink-700' : 'text-ink-500') + '">' + esc(text || '—') + '</p>' +
+        '</div>';
+    }
+
+    const challenges = (guide.challenges || []).map(function (item) {
+      return '<li class="flex gap-2 text-sm text-ink-700">' + iconSvg('alert', 'mt-0.5 h-4 w-4 shrink-0 text-[#8a6d1f]') + '<span>' + esc(item) + '</span></li>';
+    }).join('');
+
+    const stars = (guide.star_plants || []).map(function (name) {
+      return '<button type="button" class="chip border border-leaf-200 bg-white text-ink-700 hover:bg-leaf-50" ' +
+        'data-star="' + esc(name) + '">' + iconSvg('star', 'h-3.5 w-3.5 text-[#8a6d1f]') + esc(name) + '</button>';
+    }).join('');
+
+    const isPrime = best.indexOf(currentMonth) !== -1;
+    $('guide-body').innerHTML =
+      '<div class="rounded-3xl border border-leaf-100 bg-leaf-50 p-5">' +
+      '<div class="flex flex-wrap items-center justify-between gap-3">' +
+      '<div class="flex items-center gap-2 font-display text-lg font-semibold text-ink-900">' + iconSvg('globe', 'h-5 w-5 text-leaf-600') + esc(guideCity) + ' · ' + MONTHS[currentMonth - 1] + '</div>' +
+      '<span class="chip ' + (isPrime ? 'bg-leaf-600 text-white' : 'border border-leaf-100 bg-white text-ink-500') + '">' +
+      (isPrime ? iconSvg('check', 'h-3.5 w-3.5') + 'Prime sowing month here' : iconSvg('clock', 'h-3.5 w-3.5') + 'Outside the main sowing window — good for prep & potting') +
+      '</span></div>' +
+      '<div class="mt-3 flex flex-wrap items-center gap-1.5">' +
+      '<span class="mr-1 text-xs font-medium uppercase tracking-wide text-ink-500">Best sowing months</span>' + monthPills +
+      '</div></div>' +
+      '<div class="mt-4 grid gap-4 lg:grid-cols-3">' +
+      noteTile('rabi', 'snow', 'Rabi (winter)', notes.rabi) +
+      noteTile('kharif', 'sun', 'Kharif (summer)', notes.kharif) +
+      noteTile('transition', 'refresh', 'Shoulder season', notes.transition) +
+      '</div>' +
+      '<div class="mt-4 grid gap-4 lg:grid-cols-2">' +
+      '<div class="rounded-2xl border border-leaf-100 bg-white p-4">' +
+      '<div class="flex items-center gap-1.5 text-sm font-semibold text-leaf-800">' + iconSvg('alert', 'h-4 w-4 text-[#8a6d1f]') + 'Local challenges</div>' +
+      '<ul class="mt-2 space-y-1.5">' + challenges + '</ul></div>' +
+      '<div class="rounded-2xl border border-leaf-100 bg-white p-4">' +
+      '<div class="flex items-center gap-1.5 text-sm font-semibold text-leaf-800">' + iconSvg('star', 'h-4 w-4 text-[#8a6d1f]') + 'Star plants for this city</div>' +
+      '<div class="mt-2 flex flex-wrap gap-2">' + stars + '</div>' +
+      '<p class="mt-3 text-xs text-ink-500">Tap a star plant for full care details.</p></div>' +
+      '</div>' +
+      '<a href="/guides?city=' + encodeURIComponent(guideCity) + '" class="group mt-4 flex items-center justify-between gap-3 rounded-2xl border border-leaf-100 bg-white p-3.5 text-sm transition hover:bg-leaf-50">' +
+      '<span class="font-semibold text-leaf-800">Browse growing guides for 115 cities</span>' +
+      iconSvg('arrowRight', 'h-4 w-4 text-leaf-600 transition group-hover:translate-x-0.5') +
+      '</a>' +
+      '</div>';
+  }
+
+  $('guide-body').addEventListener('click', async function (e) {
+    const btn = e.target.closest('button[data-star]');
+    if (!btn) return;
+    const id = await plantIdByName(btn.dataset.star);
+    if (id) openPlantModal(id);
+  });
+
+  // ---------------------------------------------------------------------
+  // Hardiness check
+  // ---------------------------------------------------------------------
+  $('hardy-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const city = $('hardy-city').value.trim();
+    if (!city) return;
+
+    $('hardy-result').innerHTML = '<div class="flex items-center gap-3 text-sm text-ink-500">' +
+      '<span class="loading loading-spinner loading-sm text-leaf-600"></span>Crunching five years of local weather…</div>';
+
+    try {
+      const data = await api('/api/location/hardiness?city=' + encodeURIComponent(city));
+      const h = data.hardiness || {};
+      const zoneLabel = h.zone_label || '';
+      const zoneTone = zoneLabel === 'tropical' ? 'bg-leaf-100 text-leaf-800'
+        : zoneLabel === 'subtropical' ? 'bg-leaf-50 text-leaf-700'
+        : zoneLabel === 'mild' ? 'bg-sky-100 text-sky-600'
+        : zoneLabel === 'cold' ? 'bg-sun-100 text-[#8a6d1f]'
+        : 'bg-blush-100 text-blush-600';
+
+      $('hardy-result').innerHTML =
+        '<div class="rounded-3xl border border-leaf-100 bg-leaf-50 p-5">' +
+        '<div class="flex flex-wrap items-center justify-between gap-3">' +
+        '<div class="font-display text-xl font-semibold text-ink-900">' + esc(data.location.resolved_name) + '</div>' +
+        '<span class="chip ' + zoneTone + '">' + esc(titleCase(zoneLabel)) + ' climate</span>' +
+        '</div>' +
+        '<dl class="mt-4 grid gap-3 sm:grid-cols-3">' +
+        '<div class="rounded-2xl border border-leaf-100 bg-white px-4 py-3">' +
+        '<dt class="flex items-center gap-1.5 text-xs text-ink-500">' + iconSvg('snow', 'h-3.5 w-3.5 text-sky-600') + 'Coldest night (5 yrs)</dt>' +
+        '<dd class="mt-0.5 font-display text-lg font-semibold text-ink-900">' + h.extreme_min_c + '°C</dd></div>' +
+        '<div class="rounded-2xl border border-leaf-100 bg-white px-4 py-3">' +
+        '<dt class="flex items-center gap-1.5 text-xs text-ink-500">' + iconSvg('sun', 'h-3.5 w-3.5 text-[#8a6d1f]') + 'Avg daytime high</dt>' +
+        '<dd class="mt-0.5 font-display text-lg font-semibold text-ink-900">' + h.avg_daytime_high_c + '°C</dd></div>' +
+        '<div class="rounded-2xl border border-leaf-100 bg-white px-4 py-3">' +
+        '<dt class="flex items-center gap-1.5 text-xs text-ink-500">' + iconSvg('globe', 'h-3.5 w-3.5 text-leaf-600') + 'USDA equivalent</dt>' +
+        '<dd class="mt-0.5 font-display text-lg font-semibold text-ink-900">Zone ' + esc(h.usda_zone_equivalent) + '</dd></div>' +
+        '</dl>' +
+        '<p class="mt-3 text-xs text-ink-500">Based on ' + esc(h.period || 'the last five years') + ' of records from Open-Meteo archives.</p>' +
+        '</div>';
+    } catch (err) {
+      $('hardy-result').innerHTML = '<div class="rounded-2xl border border-blush-200 bg-blush-100 px-4 py-3 text-sm text-blush-600">' + esc(err.message) + '</div>';
+    }
+  });
+
+  loadGuideCities();
+  load(new Date().getMonth() + 1);
+</script>
+{% endblock %}

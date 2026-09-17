@@ -1,0 +1,38 @@
+{
+  "verdict.excellent_match": {"en": "Excellent match", "ur": "بہترین موزوں"},
+  "verdict.good_match": {"en": "Good match", "ur": "اچھا موزوں"},
+  "verdict.risky": {"en": "Risky", "ur": "کم موزوں - خطرہ"},
+  "verdict.not_recommended": {"en": "Not recommended", "ur": "تجویز نہیں کی جاتی"},
+
+  "zone.heat.extreme_heat": {"en": "extreme heat", "ur": "شدید گرمی"},
+  "zone.heat.hot": {"en": "hot", "ur": "گرم"},
+  "zone.heat.warm": {"en": "warm", "ur": "معتدل گرم"},
+  "zone.heat.mild": {"en": "mild", "ur": "ہلکا درجہ حرارت"},
+  "zone.heat.cool": {"en": "cool", "ur": "ٹھنڈا"},
+  "zone.moisture.wet": {"en": "wet", "ur": "بارش سے بھرپور"},
+  "zone.moisture.moderate_rain": {"en": "moderate rain", "ur": "درمیانی بارش"},
+  "zone.moisture.dry": {"en": "dry", "ur": "خشک"},
+  "zone.humidity.humid": {"en": "humid", "ur": "مرطوب"},
+  "zone.humidity.moderate_humidity": {"en": "moderate humidity", "ur": "درمیانی نمی"},
+  "zone.humidity.arid": {"en": "arid", "ur": "خشک ہوا"},
+  "zone.humidity.unknown": {"en": "unknown", "ur": "نامعلوم"},
+
+  "season.rabi.label": {"en": "Rabi (winter) sowing season", "ur": "ربیع (سردیوں کا کاشت کا موسم)"},
+  "season.rabi.description": {"en": "Good time to sow winter/cool-season crops - spinach, fenugreek, petunia, and to plant roses.", "ur": "سردیوں کی فصلوں کے لیے اچھا وقت ہے - پالک، میتھی، پیٹونیا بونے اور گلاب لگانے کا موسم۔"},
+  "season.kharif.label": {"en": "Kharif (summer/monsoon) sowing season", "ur": "خریف (گرمیوں/مون سون کا کاشت کا موسم)"},
+  "season.kharif.description": {"en": "Good time to sow heat-loving crops - chili, basil, zinnia - ahead of the monsoon.", "ur": "گرمی پسند فصلوں کا وقت - مرچ، تلسی، زینیا - مون سون سے پہلے بونے کے لیے موزوں۔"},
+  "season.transition.label": {"en": "Transition period", "ur": "درمیانی دور"},
+  "season.transition.description": {"en": "Between main sowing seasons - good time to prep beds, or grow fast perennials/houseplants.", "ur": "اہم کاشت کے موسموں کے درمیان وقفہ - زمین تیار کرنے یا پھر تیزی سے بڑھنے والے پودوں کے لیے اچھا وقت۔"},
+
+  "reason_temp_good": {"en": "Temperature range matches well.", "ur": "درجہ حرارت اس پودے کے لیے موزوں ہے۔"},
+  "reason_temp_bad": {"en": "Temperature is a significant mismatch for this plant.", "ur": "درجہ حرارت اس پودے کے لیے زیادہ موزوں نہیں ہے۔"},
+  "reason_water_good": {"en": "Well suited to current rainfall/dryness.", "ur": "موجودہ بارش اور خشکی کے مطابق موزوں ہے۔"},
+  "reason_water_needs_irrigation": {"en": "Will likely need frequent manual watering here.", "ur": "یہاں اسے بار بار خود پانی دینے کی ضرورت پڑے گی۔"},
+  "reason_season_good": {"en": "Right now is a good sowing month for this plant.", "ur": "ابھی اس پودے کو بونے کا اچھا مہینہ ہے۔"},
+  "reason_season_not_ideal": {"en": "This isn't the ideal sowing season - consider waiting.", "ur": "یہ بونے کا بہترین موسم نہیں - انتظار کرنا بہتر ہوگا۔"},
+  "reason_aqi_bonus": {"en": "Bonus: tolerates poor air quality, relevant for your current air conditions.", "ur": "فائدہ: یہ پودا خراب ہوا برداشت کر لیتا ہے، جو آپ کے موجودہ فضائی حالات کے لیے مفید ہے۔"},
+  "reason_aqi_caution": {"en": "Caution: local air quality is currently poor and this plant is not known to be pollution tolerant.", "ur": "احتیاط: مقامی ہوا اس وقت آلودہ ہے اور یہ پودا آلودگی برداشت کرنے والا نہیں سمجھا جاتا۔"},
+  "reason_indoor_mode": {"en": "Scored for indoor / window-sill conditions - room temperatures, no outdoor rain or smog.", "ur": "گھر کے اندرونی حالات کے مطابق اسکور کیا گیا - کمرے کا درجہ حرارت، باہر کی بارش یا اسموگ شامل نہیں۔"},
+
+  "ui.water_every_days": {"en": "Water every {days} days", "ur": "پانی ہر {days} دن بعد دیں"}
+}

@@ -1,0 +1,558 @@
+{% extends "base.html" %}
+
+{% block title %}Plant Matchmaker — answer 8 questions, meet your perfect plants — Hamara Bagh{% endblock %}
+{% block description %}Tell us your city, light, space, watering routine and pets — our matchmaker scores 270+ flowers plus the full plant library against your real life, and tells you honestly which plants to skip and why.{% endblock %}
+{% block og_title %}Plant Matchmaker — Hamara Bagh{% endblock %}
+{% block og_description %}Eight quick questions. Your city's climate, your light, your laziness about watering — matched against 400+ plants.{% endblock %}
+
+{% block content %}
+<section class="mx-auto max-w-5xl px-4 pt-10 sm:px-6">
+  <!-- ======================= hero ======================= -->
+  <div id="hero">
+    <span class="chip bg-terra-100 text-terra-700">💘 Plant matchmaker</span>
+    <h1 class="mt-4 font-display text-3xl font-semibold tracking-tight text-ink-900 sm:text-4xl">Find your plant soulmate</h1>
+    <p class="mt-3 max-w-2xl leading-relaxed text-ink-500">
+      Most plant advice assumes a perfect garden. You have a <strong class="text-terra-700">balcony in Karachi</strong>,
+      <strong class="text-sky-600">water that comes twice a week</strong>, and a <strong class="text-blush-600">cat who eats everything green</strong>.
+      Answer 8 quick questions — our engine scores every flower and plant in the library against
+      <em>your</em> reality, and it is not shy about telling you what to skip and why.
+    </p>
+    <p class="mt-2 font-urdu text-base text-leaf-700" dir="rtl">آپ کے حالات، آپ کے پھول</p>
+  </div>
+
+  <!-- ======================= wizard ======================= -->
+  <div id="wizard-wrap" class="mt-8">
+    <div class="flex items-center gap-3">
+      <div class="score-track h-2 flex-1"><div id="wizard-progress" class="score-fill bg-leaf-600" style="width: 12%"></div></div>
+      <span id="wizard-step-label" class="shrink-0 text-xs font-semibold text-ink-500"></span>
+    </div>
+    <div id="step-card" class="mt-4"></div>
+    <div class="mt-4 flex items-center justify-between">
+      <button id="back-btn" type="button" class="press hidden rounded-xl border border-leaf-200 bg-white px-4 py-2.5 text-sm font-semibold text-ink-700 transition hover:bg-leaf-50">← Back</button>
+      <button id="next-btn" type="button" class="press ml-auto rounded-xl bg-leaf-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-leaf-700">Next →</button>
+    </div>
+    <p class="mt-3 text-center text-xs text-ink-300">No account, no emails — answers stay on this page.</p>
+  </div>
+
+  <!-- ======================= results ======================= -->
+  <div id="results-wrap" class="hidden">
+    <div class="flex flex-wrap items-center justify-between gap-3">
+      <h2 class="font-display text-2xl font-semibold tracking-tight text-ink-900">Your matches <span id="results-count" class="text-sm font-normal text-ink-500"></span></h2>
+      <button id="edit-btn" type="button" class="press rounded-xl border border-leaf-200 bg-white px-4 py-2 text-xs font-semibold text-ink-700 transition hover:bg-leaf-50">✎ Change my answers</button>
+    </div>
+    <div id="profile-chips" class="mt-3 flex flex-wrap gap-2"></div>
+
+    <!-- optional AI garden plan -->
+    <div id="ai-card" class="mt-8 hidden rounded-3xl border border-terra-200 bg-terra-100/60 p-5 sm:p-6">
+      <div class="flex flex-wrap items-start justify-between gap-3">
+        <div class="flex items-start gap-3">
+          <span class="tile h-11 w-11 bg-white text-xl">🪄</span>
+          <div>
+            <h3 class="font-display text-lg font-semibold text-ink-900">Want a personalised garden plan?</h3>
+            <p class="mt-1 max-w-xl text-sm leading-relaxed text-ink-500">
+              Turn these matches into a real plan — what to plant first, where, the watering rhythm,
+              and what to expect month by month. Written by AI from your profile; the matching itself
+              never needs AI.
+            </p>
+          </div>
+        </div>
+        <button id="ai-btn" type="button" class="press shrink-0 rounded-xl bg-terra-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-terra-700">✨ Write my plan</button>
+      </div>
+      <div id="ai-status" class="mt-4 hidden text-sm text-ink-500"><span class="loading loading-spinner loading-sm text-terra-600"></span><span class="ml-2">Writing your plan — usually takes a few seconds…</span></div>
+      <div id="ai-error" class="mt-4 hidden rounded-2xl border border-blush-200 bg-white px-4 py-3 text-sm text-blush-600"></div>
+      <div id="ai-plan-wrap" class="mt-4 hidden">
+        <div class="rounded-2xl bg-white p-5">
+          <p id="ai-plan" class="whitespace-pre-wrap text-sm leading-relaxed text-ink-700"></p>
+          <p id="ai-model" class="mt-4 border-t border-leaf-100 pt-3 text-xs text-ink-300"></p>
+        </div>
+      </div>
+    </div>
+
+    <div id="results-grid" class="mt-6 grid gap-4 sm:grid-cols-2"></div>
+
+    <div id="results-empty" class="mt-6 hidden rounded-3xl border border-dashed border-leaf-200 bg-leaf-50 p-8 text-center text-ink-500"></div>
+
+    <div id="avoid-wrap" class="mt-12 hidden">
+      <h2 class="font-display text-2xl font-semibold tracking-tight text-ink-900">🛑 Lovely — but not for you</h2>
+      <p class="mt-2 max-w-2xl text-sm leading-relaxed text-ink-500">
+        Honest negative recommendations: these are good plants that clash with your answers.
+        Knowing what <em>not</em> to plant saves more gardens than any top-ten list.
+      </p>
+      <div id="avoid-grid" class="mt-4 grid gap-3 sm:grid-cols-2"></div>
+    </div>
+
+    <div class="mt-12 flex flex-wrap items-center justify-center gap-3">
+      <a href="/flowers" class="rounded-xl border border-leaf-200 bg-white px-5 py-3 text-sm font-semibold text-ink-700 transition hover:bg-leaf-50">🌸 Browse the flower atlas</a>
+      <button id="restart-btn" type="button" class="press rounded-xl bg-leaf-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-leaf-700">↺ Start over</button>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const $m = function (id) { return document.getElementById(id); };
+  const NOW_MONTH = new Date().getMonth() + 1;
+  const MONTH_INITIALS = ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'];
+
+  const QUESTIONS = [
+    {
+      key: 'city', kicker: 'Setting the scene',
+      title: 'Where is your garden?',
+      helper: 'Climate decides half the answer — we tune heat, frost and salt tolerance to your city.',
+      type: 'city',
+    },
+    {
+      key: 'space', kicker: 'The stage',
+      title: 'Where will the plants live?',
+      helper: 'A rooftop and a window ledge need very different survivors.',
+      type: 'single',
+      options: [
+        { value: 'balcony', emoji: '🪟', label: 'Balcony / window ledge', sub: 'Pots and railings' },
+        { value: 'rooftop', emoji: '🌇', label: 'Rooftop / terrace', sub: 'Full sky, full heat' },
+        { value: 'ground', emoji: '🌳', label: 'Garden bed / lawn', sub: 'Open soil, real monsoon' },
+        { value: 'indoor', emoji: '🏠', label: 'Indoors', sub: 'By a window' },
+      ],
+    },
+    {
+      key: 'sun', kicker: 'The light',
+      title: 'How much direct sun does that spot get?',
+      helper: 'Direct sun means the sun actually touching the leaves — not just daylight.',
+      type: 'single',
+      options: [
+        { value: 'full', emoji: '☀️', label: 'Full sun', sub: '6+ hours a day' },
+        { value: 'half', emoji: '⛅', label: 'Half a day', sub: '3–6 hours' },
+        { value: 'shade', emoji: '🌥️', label: 'Mostly shade', sub: 'Under 3 hours' },
+        { value: 'unsure', emoji: '🤷', label: 'Honestly not sure', sub: 'We will assume a mix' },
+      ],
+    },
+    {
+      key: 'water', kicker: 'The hard truth',
+      title: 'How often can you realistically water?',
+      helper: 'Be honest. This is where most Pakistani gardens get into trouble.',
+      type: 'single',
+      options: [
+        { value: 'often', emoji: '🚿', label: 'Every day if needed', sub: 'I am home and dedicated' },
+        { value: 'sometimes', emoji: '💧', label: 'Every few days', sub: 'A normal routine' },
+        { value: 'rarely', emoji: '🏜️', label: 'Once a week or less', sub: 'Life is busy' },
+        { value: 'almost_never', emoji: '🐪', label: 'Only when I remember', sub: 'Survival of the fittest' },
+      ],
+    },
+    {
+      key: 'experience', kicker: 'Your hands',
+      title: 'How green is your thumb?',
+      helper: 'No judgement — the engine just knows which plants forgive mistakes.',
+      type: 'single',
+      options: [
+        { value: 'first_time', emoji: '🌱', label: 'Brand new', sub: 'My very first plants' },
+        { value: 'some', emoji: '🌿', label: 'Getting there', sub: 'Kept a few alive' },
+        { value: 'confident', emoji: '🌳', label: 'Confident', sub: 'I know my way around' },
+      ],
+    },
+    {
+      key: 'pets', kicker: 'The housemates',
+      title: 'Any pets at home?',
+      helper: 'Cats and dogs chew leaves. With pets we automatically drop every toxic plant from your matches.',
+      type: 'single',
+      options: [
+        { value: false, emoji: '🐾', label: 'No pets', sub: 'Plants only' },
+        { value: true, emoji: '🐈', label: 'Yes — cat or dog', sub: 'Safety filter on' },
+      ],
+    },
+    {
+      key: 'purposes', kicker: 'The dream',
+      title: 'What do you want from your garden?',
+      helper: 'Pick as many as you like — or none, and we will show everything.',
+      type: 'multi',
+      options: [
+        { value: 'flowers', emoji: '🌸', label: 'Flowers' },
+        { value: 'vegetables', emoji: '🥬', label: 'Vegetables' },
+        { value: 'herbs', emoji: '🌿', label: 'Herbs' },
+        { value: 'fruit', emoji: '🍋', label: 'Fruit' },
+        { value: 'indoor', emoji: '🪴', label: 'Indoor plants' },
+        { value: 'trees', emoji: '🌳', label: 'Trees & shade' },
+        { value: 'cactus_succulents', emoji: '🌵', label: 'Cacti & succulents' },
+        { value: 'pollinator', emoji: '🐝', label: 'Bees & butterflies' },
+        { value: 'greenery', emoji: '🍃', label: 'Just greenery' },
+      ],
+    },
+    {
+      key: 'priorities', kicker: 'The fine print',
+      title: 'What matters most to you?',
+      helper: 'Optional — pick the two or three that sound like you.',
+      type: 'multi',
+      options: [
+        { value: 'save_water', emoji: '💧', label: 'Save water' },
+        { value: 'lots_of_flowers', emoji: '🌸', label: 'Flowers for months' },
+        { value: 'handle_heat', emoji: '🔥', label: 'Laugh at 45° summers' },
+        { value: 'handle_cold', emoji: '❄️', label: 'Survive cold winters' },
+        { value: 'low_maintenance', emoji: '🧘', label: 'Barely any effort' },
+        { value: 'fragrance', emoji: '🌙', label: 'Fragrance in the air' },
+      ],
+    },
+  ];
+
+  const STATE_LABELS = {
+    space: { balcony: 'Balcony', rooftop: 'Rooftop', ground: 'Garden bed', indoor: 'Indoors' },
+    sun: { full: 'Full sun', half: 'Half-day sun', shade: 'Mostly shade', unsure: 'Sun unsure' },
+    water: { often: 'Waters daily', sometimes: 'Waters often', rarely: 'Waters weekly', almost_never: 'Rarely waters' },
+    experience: { first_time: 'First-timer', some: 'Some experience', confident: 'Confident' },
+  };
+
+  let step = 0;
+  let answers = { city: '', space: null, sun: null, water: null, experience: null, pets: null, purposes: [], priorities: [] };
+  let matchData = null;
+  let aiEnabled = false;
+  let cityNames = [];
+
+  function currentValue(key) { return answers[key]; }
+
+  function isAnswered(q) {
+    if (q.type === 'multi') return true; // optional
+    if (q.type === 'city') return true;  // city optional
+    return answers[q.key] !== null && answers[q.key] !== undefined && answers[q.key] !== '';
+  }
+
+  function optionTile(q, opt) {
+    const selected = q.type === 'multi'
+      ? (answers[q.key] || []).indexOf(opt.value) !== -1
+      : answers[q.key] === opt.value;
+    return '<button type="button" data-opt="' + esc(opt.value) + '" ' +
+      'class="lift flex items-center gap-3 rounded-2xl border p-4 text-left transition ' +
+      (selected ? 'border-leaf-600 bg-leaf-50 ring-2 ring-leaf-300' : 'border-leaf-100 bg-white hover:border-leaf-300') + '">' +
+      '<span class="tile h-11 w-11 border border-leaf-100 bg-white text-xl">' + opt.emoji + '</span>' +
+      '<span class="min-w-0 flex-1">' +
+        '<span class="block text-sm font-semibold text-ink-900">' + opt.label + '</span>' +
+        (opt.sub ? '<span class="block text-xs text-ink-500">' + opt.sub + '</span>' : '') +
+      '</span>' +
+      (q.type === 'multi'
+        ? '<span class="tile h-5 w-5 ' + (selected ? 'bg-leaf-600 text-white' : 'border border-leaf-200 bg-white text-transparent') + ' text-[10px]">✓</span>'
+        : '') +
+    '</button>';
+  }
+
+  function renderStep() {
+    const q = QUESTIONS[step];
+    $m('wizard-progress').style.width = Math.round(((step + 1) / QUESTIONS.length) * 100) + '%';
+    $m('wizard-step-label').textContent = 'Step ' + (step + 1) + ' of ' + QUESTIONS.length;
+    $m('back-btn').classList.toggle('hidden', step === 0);
+    $m('next-btn').textContent = step === QUESTIONS.length - 1 ? '💘 Find my matches' : 'Next →';
+
+    let body = '';
+    if (q.type === 'city') {
+      body =
+        '<div class="relative">' +
+          '<input id="city-input" type="text" autocomplete="off" list="city-options" value="' + esc(answers.city) + '" ' +
+          'placeholder="Type any city — e.g. Lahore, Quetta, Gilgit…" ' +
+          'class="input input-bordered h-12 w-full rounded-2xl border-leaf-200 bg-white text-sm focus:border-leaf-500">' +
+          '<datalist id="city-options">' + cityNames.map(function (c) { return '<option value="' + esc(c) + '"></option>'; }).join('') + '</datalist>' +
+        '</div>' +
+        '<div class="mt-3 flex flex-wrap gap-1.5">' +
+          cityNames.map(function (c) {
+            const active = answers.city.toLowerCase() === c.toLowerCase();
+            return '<button type="button" data-city="' + esc(c) + '" class="' + (active
+              ? 'rounded-full bg-leaf-600 px-3 py-1.5 text-xs font-semibold text-white press'
+              : 'rounded-full border border-leaf-200 bg-white px-3 py-1.5 text-xs font-medium text-ink-700 transition hover:bg-leaf-50 press') + '">' + esc(c) + '</button>';
+          }).join('') +
+        '</div>';
+    } else {
+      const cols = q.options.length === 2 ? 'sm:grid-cols-2' : 'sm:grid-cols-2';
+      body = '<div class="grid gap-2.5 ' + cols + '">' + q.options.map(function (o) { return optionTile(q, o); }).join('') + '</div>';
+    }
+
+    $m('step-card').innerHTML =
+      '<div class="rounded-3xl border border-leaf-100 bg-white p-5 shadow-sm sm:p-7">' +
+        '<span class="chip bg-leaf-50 text-leaf-800">' + q.kicker + '</span>' +
+        '<h2 class="mt-3 font-display text-xl font-semibold text-ink-900 sm:text-2xl">' + q.title + '</h2>' +
+        '<p class="mt-1.5 text-sm leading-relaxed text-ink-500">' + q.helper + '</p>' +
+        '<div class="mt-5">' + body + '</div>' +
+      '</div>';
+
+    if (q.type === 'city') {
+      $m('city-input').addEventListener('input', function (e) {
+        answers.city = e.target.value.trim();
+      });
+    }
+  }
+
+  function advance() {
+    if (step < QUESTIONS.length - 1) {
+      step += 1;
+      renderStep();
+    } else {
+      runMatch();
+    }
+  }
+
+  $m('step-card').addEventListener('click', function (e) {
+    const q = QUESTIONS[step];
+
+    const cityBtn = e.target.closest('[data-city]');
+    if (cityBtn) {
+      answers.city = cityBtn.getAttribute('data-city');
+      renderStep();
+      return;
+    }
+
+    const optBtn = e.target.closest('[data-opt]');
+    if (!optBtn) return;
+    let value = optBtn.getAttribute('data-opt');
+    if (value === 'true') value = true;
+    if (value === 'false') value = false;
+
+    if (q.type === 'multi') {
+      const list = answers[q.key] || (answers[q.key] = []);
+      const idx = list.indexOf(value);
+      if (idx === -1) list.push(value); else list.splice(idx, 1);
+      renderStep();
+      return;
+    }
+
+    answers[q.key] = value;
+    renderStep();
+    // single-choice: show the selection, then glide to the next step
+    const expectedStep = step;
+    window.setTimeout(function () {
+      if (step === expectedStep && QUESTIONS[step] === q) advance();
+    }, 260);
+  });
+
+  $m('back-btn').addEventListener('click', function () {
+    if (step > 0) { step -= 1; renderStep(); }
+  });
+
+  $m('next-btn').addEventListener('click', function () {
+    const q = QUESTIONS[step];
+    if (!isAnswered(q)) {
+      const card = $m('step-card').querySelector('.rounded-3xl');
+      card.classList.add('ring-2', 'ring-blush-300');
+      window.setTimeout(function () { card.classList.remove('ring-2', 'ring-blush-300'); }, 700);
+      return;
+    }
+    advance();
+  });
+
+  function matchPayload() {
+    return {
+      city: answers.city,
+      space: answers.space,
+      sun: answers.sun,
+      water: answers.water,
+      experience: answers.experience,
+      pets: answers.pets === true,
+      purposes: answers.purposes || [],
+      priorities: answers.priorities || [],
+    };
+  }
+
+  async function runMatch() {
+    $m('wizard-wrap').classList.add('hidden');
+    $m('results-wrap').classList.remove('hidden');
+    $m('results-grid').innerHTML = '<div class="col-span-full rounded-3xl border border-leaf-100 bg-white p-10 text-center text-sm text-ink-500"><span class="loading loading-spinner loading-sm text-leaf-600"></span><span class="ml-2">Scoring every plant against your answers…</span></div>';
+    $m('results-empty').classList.add('hidden');
+    $m('avoid-wrap').classList.add('hidden');
+    $m('ai-plan-wrap').classList.add('hidden');
+    $m('ai-error').classList.add('hidden');
+    window.scrollTo({ top: $m('results-wrap').offsetTop - 80, behavior: 'smooth' });
+
+    try {
+      matchData = await api('/api/match/recommend', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(matchPayload()),
+      });
+    } catch (err) {
+      $m('results-grid').innerHTML = '<div class="col-span-full rounded-3xl border border-blush-200 bg-blush-100 p-6 text-sm text-blush-600">' + esc(err.message) + '</div>';
+      return;
+    }
+    renderResults();
+  }
+
+  function bloomStrip(months) {
+    return '<div class="flex gap-[3px]" title="' + esc(MONTHS.filter(function (_, i) { return months.indexOf(i + 1) !== -1; }).join(', ') || 'No regular bloom window') + '">' +
+      MONTH_INITIALS.map(function (_, i) {
+        const m = i + 1;
+        const on = months.indexOf(m) !== -1;
+        return '<span class="h-1.5 flex-1 rounded-full ' + (on ? 'bg-leaf-600' : 'bg-leaf-100') + (m === NOW_MONTH ? ' ring-2 ring-leaf-300' : '') + '"></span>';
+      }).join('') + '</div>';
+  }
+
+  function rankChip(rank) {
+    if (rank === 1) return '<span class="tile h-7 w-9 bg-sun-100 text-sm">🥇</span>';
+    if (rank === 2) return '<span class="tile h-7 w-9 bg-leaf-50 text-sm">🥈</span>';
+    if (rank === 3) return '<span class="tile h-7 w-9 bg-terra-100 text-sm">🥉</span>';
+    return '<span class="tile h-7 w-9 bg-leaf-50 text-xs font-semibold text-ink-500">#' + rank + '</span>';
+  }
+
+  function resultCard(item, rank) {
+    const meta = verdictMeta(item.verdict);
+    const reasons = (item.reasons || []).map(function (r) {
+      return '<li class="flex gap-2"><span class="text-leaf-600">✓</span><span>' + esc(r) + '</span></li>';
+    }).join('');
+    const warnings = (item.warnings || []).map(function (w) {
+      return '<li class="flex gap-2"><span class="text-[#8a6d1f]">⚠</span><span class="text-ink-500">' + esc(w) + '</span></li>';
+    }).join('');
+
+    let actions = '';
+    if (item.type === 'flower') {
+      actions = '<a href="/flowers?flower=' + encodeURIComponent(item.id) + '" class="rounded-xl border border-leaf-200 bg-white px-3.5 py-2 text-xs font-semibold text-ink-700 transition hover:bg-leaf-50">📖 Full guide</a>';
+      if (item.plant_id) {
+        actions += '<button type="button" data-journal="' + item.plant_id + '" class="rounded-xl border border-leaf-200 bg-white px-3.5 py-2 text-xs font-semibold text-ink-700 transition hover:bg-leaf-50">📓 Journal entry</button>';
+      }
+    } else if (item.plant_id) {
+      actions = '<button type="button" data-journal="' + item.plant_id + '" class="rounded-xl border border-leaf-200 bg-white px-3.5 py-2 text-xs font-semibold text-ink-700 transition hover:bg-leaf-50">📖 Care details</button>';
+    }
+
+    return '<div class="lift flex flex-col rounded-3xl border border-leaf-100 bg-white p-4 shadow-sm sm:p-5">' +
+      '<div class="flex items-start gap-3">' +
+        rankChip(rank) +
+        '<span class="tile h-12 w-12 bg-leaf-50 text-2xl">' + item.emoji + '</span>' +
+        '<div class="min-w-0 flex-1">' +
+          '<h3 class="truncate font-display text-base font-semibold text-ink-900">' + esc(item.name) + '</h3>' +
+          '<p class="truncate text-xs text-ink-500">' +
+            (item.local_name ? esc(item.local_name) + ' · ' : '') +
+            '<span class="italic">' + esc(item.scientific || '') + '</span></p>' +
+          '<div class="mt-1.5 flex flex-wrap gap-1.5">' +
+            '<span class="chip bg-leaf-50 text-leaf-800">' + item.emoji + ' ' + esc(item.label || '') + '</span>' +
+            '<span class="chip ' + meta.badge + '">' + meta.label + '</span>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="mt-4 flex items-center gap-3">' +
+        '<div class="score-track flex-1"><div class="score-fill ' + meta.bar + '" style="width: ' + item.score + '%"></div></div>' +
+        '<span class="shrink-0 text-sm font-bold text-ink-900">' + item.score + '<span class="text-xs font-normal text-ink-300">/100</span></span>' +
+      '</div>' +
+      ((reasons || warnings) ? '<ul class="mt-3 space-y-1 text-sm leading-relaxed text-ink-700">' + reasons + warnings + '</ul>' : '') +
+      (item.bloom_months && item.bloom_months.length
+        ? '<div class="mt-3"><div class="mb-1.5 text-[10px] uppercase tracking-wide text-ink-300">Bloom months — ' + MONTHS[NOW_MONTH - 1] + ' ringed</div>' + bloomStrip(item.bloom_months) + '</div>'
+        : '') +
+      (actions ? '<div class="mt-4 flex flex-wrap gap-2 border-t border-leaf-100 pt-3">' + actions + '</div>' : '') +
+    '</div>';
+  }
+
+  function renderResults() {
+    const data = matchData;
+
+    // recap chips — each one jumps back to its question for editing
+    const recap = [
+      { label: '📍 ' + (data.answers.city || 'Any city'), stepIdx: 0 },
+      { label: '🏡 ' + (STATE_LABELS.space[data.answers.space] || '—'), stepIdx: 1 },
+      { label: '☀️ ' + (STATE_LABELS.sun[data.answers.sun] || '—'), stepIdx: 2 },
+      { label: '💧 ' + (STATE_LABELS.water[data.answers.water] || '—'), stepIdx: 3 },
+      { label: '🌱 ' + (STATE_LABELS.experience[data.answers.experience] || '—'), stepIdx: 4 },
+      { label: '🐾 ' + (data.answers.pets ? 'Pets at home' : 'No pets'), stepIdx: 5 },
+    ];
+    if (data.answers.purposes.length) {
+      recap.push({ label: '✨ ' + data.answers.purposes.length + ' garden goals', stepIdx: 6 });
+    }
+    if (data.answers.priorities.length) {
+      recap.push({ label: '🎯 ' + data.answers.priorities.length + ' priorities', stepIdx: 7 });
+    }
+    $m('profile-chips').innerHTML = recap.map(function (c) {
+      return '<button type="button" data-edit-step="' + c.stepIdx + '" class="press rounded-full border border-leaf-200 bg-white px-3 py-1.5 text-xs font-medium text-ink-700 transition hover:bg-leaf-50">' + esc(c.label) + ' <span class="text-ink-300">✎</span></button>';
+    }).join('');
+
+    $m('results-count').textContent = '— ' + data.counts.returned + ' of ' + data.counts.considered + ' possible plants' +
+      (data.city ? ' · tuned for ' + data.city.key.charAt(0).toUpperCase() + data.city.key.slice(1) : '');
+
+    $m('results-grid').innerHTML = data.results.map(function (item, i) { return resultCard(item, i + 1); }).join('');
+    $m('results-empty').classList.toggle('hidden', data.results.length > 0);
+    if (!data.results.length) {
+      $m('results-empty').innerHTML = '<p class="text-3xl">🌵</p><p class="mt-2 font-display text-lg font-semibold text-ink-900">Nothing survived that combination</p><p class="mt-1 text-sm">Try loosening one answer — more sun, more water, or a bigger space.</p>';
+    }
+
+    if (data.avoid && data.avoid.length) {
+      $m('avoid-wrap').classList.remove('hidden');
+      $m('avoid-grid').innerHTML = data.avoid.map(function (a) {
+        return '<div class="flex items-start gap-3 rounded-2xl border border-leaf-100 bg-white p-3.5">' +
+          '<span class="tile h-10 w-10 bg-blush-100 text-lg">' + a.emoji + '</span>' +
+          '<div class="min-w-0"><p class="text-sm font-semibold text-ink-900">' + esc(a.name) + '</p>' +
+          '<p class="mt-0.5 text-xs leading-relaxed text-ink-500">' + esc(a.reason) + '</p></div>' +
+        '</div>';
+      }).join('');
+    } else {
+      $m('avoid-wrap').classList.add('hidden');
+    }
+
+    if (aiEnabled) $m('ai-card').classList.remove('hidden');
+  }
+
+  // ---- events -------------------------------------------------------------
+  $m('profile-chips').addEventListener('click', function (e) {
+    const btn = e.target.closest('[data-edit-step]');
+    if (!btn) return;
+    step = parseInt(btn.getAttribute('data-edit-step'), 10);
+    $m('results-wrap').classList.add('hidden');
+    $m('wizard-wrap').classList.remove('hidden');
+    renderStep();
+    window.scrollTo({ top: $m('wizard-wrap').offsetTop - 80, behavior: 'smooth' });
+  });
+
+  $m('edit-btn').addEventListener('click', function () {
+    $m('results-wrap').classList.add('hidden');
+    $m('wizard-wrap').classList.remove('hidden');
+    renderStep();
+    window.scrollTo({ top: $m('wizard-wrap').offsetTop - 80, behavior: 'smooth' });
+  });
+
+  $m('restart-btn').addEventListener('click', function () {
+    step = 0;
+    answers = { city: '', space: null, sun: null, water: null, experience: null, pets: null, purposes: [], priorities: [] };
+    matchData = null;
+    $m('results-wrap').classList.add('hidden');
+    $m('wizard-wrap').classList.remove('hidden');
+    renderStep();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  $m('results-grid').addEventListener('click', function (e) {
+    const btn = e.target.closest('[data-journal]');
+    if (btn) openPlantModal(parseInt(btn.getAttribute('data-journal'), 10));
+  });
+
+  $m('ai-btn').addEventListener('click', async function () {
+    const btn = $m('ai-btn');
+    btn.disabled = true;
+    btn.classList.add('opacity-60');
+    $m('ai-error').classList.add('hidden');
+    $m('ai-plan-wrap').classList.add('hidden');
+    $m('ai-status').classList.remove('hidden');
+    try {
+      const data = await api('/api/match/explain', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(matchPayload()),
+      });
+      $m('ai-plan').textContent = data.answer;
+      $m('ai-model').textContent = 'Written with ' + (data.model || 'AI') + ' · always cross-check with the care tips above.';
+      $m('ai-plan-wrap').classList.remove('hidden');
+    } catch (err) {
+      $m('ai-error').textContent = err.message;
+      $m('ai-error').classList.remove('hidden');
+    } finally {
+      $m('ai-status').classList.add('hidden');
+      btn.disabled = false;
+      btn.classList.remove('opacity-60');
+    }
+  });
+
+  // ---- boot ---------------------------------------------------------------
+  async function boot() {
+    renderStep();
+    try {
+      const cities = await api('/api/location/reference-cities');
+      cityNames = Object.keys(cities).map(function (k) { return k.charAt(0).toUpperCase() + k.slice(1); });
+      if (QUESTIONS[step].type === 'city') renderStep();
+    } catch (err) { /* city list is a nicety, not a requirement */ }
+    try {
+      const status = await api('/api/external/status');
+      aiEnabled = !!(status.huggingface && status.huggingface.enabled);
+      if (aiEnabled && !$m('results-wrap').classList.contains('hidden')) {
+        $m('ai-card').classList.remove('hidden');
+      }
+    } catch (err) { /* AI card simply stays hidden */ }
+  }
+
+  boot();
+</script>
+{% endblock %}

@@ -1,0 +1,78 @@
+[
+  {
+    "symptom_key": "yellow_leaves",
+    "symptom_label": "Leaves turning yellow",
+    "causes": [
+      {"cause": "Overwatering", "likelihood": "high", "fix": "Let the soil dry out fully before watering again. Check the pot has drainage holes and isn't sitting in a saucer of water."},
+      {"cause": "Nitrogen deficiency", "likelihood": "medium", "fix": "Feed with a balanced or nitrogen-rich fertilizer, especially if older/lower leaves are yellowing first."},
+      {"cause": "Natural aging", "likelihood": "low", "fix": "If it's just one or two older leaves, this can be normal. No action needed."}
+    ]
+  },
+  {
+    "symptom_key": "wilting_despite_watering",
+    "symptom_label": "Wilting even though soil is moist",
+    "causes": [
+      {"cause": "Root rot from overwatering", "likelihood": "high", "fix": "Remove plant from pot, check roots - brown/mushy roots mean root rot. Trim dead roots and repot in fresh, well-draining soil."},
+      {"cause": "Heat stress", "likelihood": "medium", "fix": "Move to a spot with afternoon shade during peak summer heat, even if the plant normally likes full sun."},
+      {"cause": "Transplant shock", "likelihood": "low", "fix": "If recently repotted or moved, give it a week to recover before changing anything else."}
+    ]
+  },
+  {
+    "symptom_key": "brown_crispy_leaf_edges",
+    "symptom_label": "Brown, crispy leaf edges or tips",
+    "causes": [
+      {"cause": "Underwatering / low humidity", "likelihood": "high", "fix": "Increase watering frequency slightly and consider misting or grouping plants together to raise humidity."},
+      {"cause": "Too much direct fertilizer", "likelihood": "medium", "fix": "Flush the soil with plain water and reduce fertilizer frequency - 'fertilizer burn' looks exactly like this."},
+      {"cause": "Excess direct sun", "likelihood": "low", "fix": "Move away from harsh afternoon sun, especially for houseplants not adapted to full outdoor sun."}
+    ]
+  },
+  {
+    "symptom_key": "leggy_stretched_growth",
+    "symptom_label": "Plant looks leggy / stretched out with big gaps between leaves",
+    "causes": [
+      {"cause": "Not enough light", "likelihood": "high", "fix": "Move to a brighter spot - closer to a window or into direct sun if the species tolerates it."},
+      {"cause": "Needs pruning", "likelihood": "medium", "fix": "Pinch or trim the tips to encourage bushier, fuller growth."}
+    ]
+  },
+  {
+    "symptom_key": "no_flowers_or_fruit",
+    "symptom_label": "Healthy looking plant but no flowers/fruit",
+    "causes": [
+      {"cause": "Too much nitrogen, not enough phosphorus/potassium", "likelihood": "high", "fix": "Switch to a bloom-boosting fertilizer (higher middle/last number, e.g. 10-30-20)."},
+      {"cause": "Not enough direct sun", "likelihood": "medium", "fix": "Most flowering/fruiting plants need 6+ hours of direct sun - check actual sun exposure, not just 'bright' light."},
+      {"cause": "Still too young / wrong season", "likelihood": "low", "fix": "Check the plant's typical days-to-maturity and planting season - it may simply not be time yet."}
+    ]
+  },
+  {
+    "symptom_key": "small_insects_on_leaves",
+    "symptom_label": "Small insects, webbing, or sticky residue on leaves",
+    "causes": [
+      {"cause": "Aphids or mealybugs", "likelihood": "high", "fix": "Spray with a mix of water + a few drops of dish soap, or wipe leaves with a cloth dipped in diluted neem oil. Repeat every few days."},
+      {"cause": "Spider mites (fine webbing, tiny dots)", "likelihood": "medium", "fix": "Increase humidity and wipe leaves down; mites thrive in dry conditions. Neem oil spray helps here too."}
+    ]
+  },
+  {
+    "symptom_key": "white_powder_on_leaves",
+    "symptom_label": "White powdery coating on leaves",
+    "causes": [
+      {"cause": "Powdery mildew (fungal)", "likelihood": "high", "fix": "Improve airflow around the plant, avoid wetting leaves when watering, and remove badly affected leaves. A diluted baking-soda spray can help mild cases."}
+    ]
+  },
+  {
+    "symptom_key": "holes_in_leaves",
+    "symptom_label": "Holes chewed in leaves",
+    "causes": [
+      {"cause": "Caterpillars or beetles", "likelihood": "high", "fix": "Inspect leaves (including undersides) at dusk/dawn and hand-pick visible pests. Neem oil spray as a deterrent."},
+      {"cause": "Slugs/snails", "likelihood": "medium", "fix": "Check soil surface at night. Copper tape around pots or a shallow dish of beer nearby can help trap them."}
+    ]
+  },
+  {
+    "symptom_key": "seeds_not_germinating",
+    "symptom_label": "Seeds not sprouting at all",
+    "causes": [
+      {"cause": "Wrong season / soil too cold or too hot", "likelihood": "high", "fix": "Check the plant's ideal sowing months - many vegetables simply won't germinate outside their temperature range."},
+      {"cause": "Soil too dry or waterlogged", "likelihood": "medium", "fix": "Keep soil consistently damp (not soaked) until germination - a covered tray or plastic wrap helps retain moisture."},
+      {"cause": "Old/expired seeds", "likelihood": "low", "fix": "Try a fresh seed packet from a different batch."}
+    ]
+  }
+]

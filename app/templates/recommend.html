@@ -1,0 +1,495 @@
+{% extends "base.html" %}
+
+{% block title %}What should I grow? — Hamara Bagh{% endblock %}
+{% block description %}Get a ranked list of plants that match your city's live weather, your sowing season and your skill level. Enter any city — Karachi, Lahore, Islamabad — and see the scores instantly.{% endblock %}
+{% block og_title %}What should I grow in my city?{% endblock %}
+{% block og_description %}Ranked plant picks from live weather, Rabi/Kharif season timing and air quality.{% endblock %}
+
+{% block content %}
+<section class="mx-auto max-w-6xl px-4 pt-10 sm:px-6">
+  <span class="chip bg-leaf-50 text-leaf-700"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"/></svg>The main event</span>
+  <h1 class="mt-4 font-display text-3xl font-semibold tracking-tight text-ink-900 sm:text-4xl">What should I grow?</h1>
+  <p class="mt-3 max-w-2xl leading-relaxed text-ink-500">
+    Enter your city — we'll check its live 16-day forecast, air quality and current sowing season,
+    then score every plant in our library for your exact conditions.
+    <span class="font-semibold text-leaf-700">Green = plant it.</span>
+    <span class="font-semibold text-blush-600">Pink = don't bother.</span>
+  </p>
+  <p class="mt-2 text-sm font-medium text-leaf-700">Dekhein, aapke shehar mein abhi kya ugane ka waqt hai.</p>
+
+  <!-- Controls -->
+  <form id="search-form" class="mt-8 rounded-3xl border border-leaf-100 bg-white p-5 shadow-sm sm:p-6">
+    <div class="grid gap-4 md:grid-cols-[1fr_auto] md:items-end">
+      <div>
+        <label for="city" class="text-sm font-medium text-ink-700">Your city</label>
+        <input id="city" type="text" value="Karachi" placeholder="e.g. Karachi"
+               class="input input-bordered mt-1 w-full rounded-xl border-leaf-200 bg-white focus:border-leaf-500">
+      </div>
+      <button id="search-btn" type="submit"
+              class="rounded-xl bg-leaf-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-leaf-700">
+        Get my plant list
+      </button>
+    </div>
+
+    <div class="mt-4 flex flex-wrap items-center gap-2">
+      <span class="text-xs font-medium uppercase tracking-wide text-ink-500">Quick picks</span>
+      <span id="city-chips" class="flex flex-wrap gap-2"></span>
+    </div>
+
+    <div class="mt-5 grid gap-4 border-t border-leaf-100 pt-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div>
+        <label for="category" class="text-sm font-medium text-ink-700">Category</label>
+        <select id="category" class="select select-bordered mt-1 w-full rounded-xl border-leaf-200 bg-white">
+          <option value="">All categories</option>
+        </select>
+      </div>
+      <label class="flex items-center gap-3 pt-1 sm:pt-6">
+        <input id="beginner" type="checkbox" class="checkbox checkbox-success checkbox-sm" checked>
+        <span class="text-sm text-ink-700">Beginner-friendly first</span>
+      </label>
+      <label class="flex items-center gap-3 pt-1 sm:pt-6" title="Scores everything for room conditions — warmer nights, cooler peaks, no rain or smog. Ideal for houseplants.">
+        <input id="indoor" type="checkbox" class="checkbox checkbox-success checkbox-sm">
+        <span class="flex items-center gap-1.5 text-sm text-ink-700"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-terra-600" aria-hidden="true"><path d="M3 9.5 12 2.5l9 7V20a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22v-9h6v9"/></svg>Indoor / window-sill</span>
+      </label>
+      <div>
+        <span class="text-sm font-medium text-ink-700">Language</span>
+        <div class="mt-1 inline-flex rounded-xl border border-leaf-200 p-0.5" role="group" aria-label="Language">
+          <button type="button" id="lang-en" class="rounded-[10px] px-3 py-1.5 text-sm font-semibold">English</button>
+          <button type="button" id="lang-ur" class="rounded-[10px] px-3 py-1.5 text-sm font-semibold font-urdu">اردو</button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <!-- States -->
+  <div id="status" class="mt-8 hidden items-center gap-3 rounded-3xl border border-leaf-100 bg-leaf-50 px-5 py-4 text-sm text-ink-700">
+    <span class="loading loading-spinner loading-sm text-leaf-600"></span>
+    <span id="status-text">Checking live weather…</span>
+  </div>
+  <div id="error-box" class="mt-8 hidden rounded-3xl border border-blush-200 bg-blush-100 px-5 py-4 text-sm text-blush-600"></div>
+
+  <!-- Results -->
+  <div id="results-section" class="hidden">
+    <div id="climate-cards" class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4"></div>
+    <div id="season-banner" class="mt-4"></div>
+    <div id="guide-section" class="mt-4 hidden"></div>
+
+    <div class="mt-10 flex flex-wrap items-center justify-between gap-2">
+      <h2 class="font-display text-2xl font-semibold tracking-tight text-ink-900">
+        Ranked for <span id="place-name" class="text-leaf-600"></span>
+      </h2>
+      <span id="results-count" class="text-sm text-ink-500"></span>
+    </div>
+    <div id="results" class="mt-5 grid gap-5 md:grid-cols-2 xl:grid-cols-3"></div>
+    <div id="no-results" class="mt-6 hidden rounded-3xl border border-dashed border-leaf-200 bg-leaf-50 p-10 text-center text-ink-500">
+      No plants matched that filter — try "All categories".
+    </div>
+  </div>
+</section>
+
+<!-- Compare modal -->
+<dialog id="compare-modal" class="modal">
+  <div class="modal-box max-w-xl rounded-3xl bg-white">
+    <h3 class="font-display text-lg font-semibold text-ink-900">
+      Compare <span id="cmp-plant-name" class="text-leaf-600"></span> in another city
+    </h3>
+    <p class="mt-1 text-sm text-ink-500">Same plant, two climates — see where it does better.</p>
+    <div class="mt-4 flex gap-2">
+      <input id="cmp-city" type="text" value="Islamabad" placeholder="e.g. Islamabad"
+             class="input input-bordered w-full rounded-xl border-leaf-200 bg-white">
+      <button id="cmp-run" type="button" class="shrink-0 rounded-xl bg-leaf-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-leaf-700">
+        Compare
+      </button>
+    </div>
+    <div id="cmp-result" class="mt-5"></div>
+  </div>
+  <form method="dialog" class="modal-backdrop">
+    <button>close</button>
+  </form>
+</dialog>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const state = { city: 'Karachi', lang: 'en', comparePlantId: null, comparePlantName: '' };
+  const $ = function (id) { return document.getElementById(id); };
+
+  // ---------------------------------------------------------------------
+  // Setup: quick picks, categories, language toggle, URL prefill
+  // ---------------------------------------------------------------------
+  async function loadCityChips() {
+    try {
+      const data = await api('/api/location/reference-cities');
+      const chips = $('city-chips');
+      chips.innerHTML = '';
+
+      Object.keys(data).forEach(function (key) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'chip border border-leaf-200 bg-white text-ink-700 hover:bg-leaf-50';
+        btn.textContent = key.charAt(0).toUpperCase() + key.slice(1);
+        btn.title = (data[key] && data[key].summary) || '';
+        btn.addEventListener('click', function () {
+          $('city').value = btn.textContent;
+          run();
+        });
+        chips.appendChild(btn);
+      });
+    } catch (err) {
+      /* quick picks are optional */
+    }
+  }
+
+  async function loadCategories() {
+    try {
+      const data = await api('/api/plants/categories');
+      const select = $('category');
+      data.categories.forEach(function (cat) {
+        const opt = document.createElement('option');
+        opt.value = cat;
+        opt.textContent = titleCase(cat);
+        select.appendChild(opt);
+      });
+    } catch (err) {
+      /* filter is optional */
+    }
+  }
+
+  function updateLangButtons() {
+    const active = 'bg-leaf-600 text-white';
+    const idle = 'bg-white text-ink-700 hover:bg-leaf-50';
+    $('lang-en').className = 'rounded-[10px] px-3 py-1.5 text-sm font-semibold ' + (state.lang === 'en' ? active : idle);
+    $('lang-ur').className = 'rounded-[10px] px-3 py-1.5 text-sm font-semibold font-urdu ' + (state.lang === 'ur' ? active : idle);
+  }
+
+  $('lang-en').addEventListener('click', function () { state.lang = 'en'; updateLangButtons(); run(); });
+  $('lang-ur').addEventListener('click', function () { state.lang = 'ur'; updateLangButtons(); run(); });
+
+  // ---------------------------------------------------------------------
+  // Main run
+  // ---------------------------------------------------------------------
+  async function run() {
+    state.city = $('city').value.trim() || 'Karachi';
+
+    $('status').classList.remove('hidden');
+    $('status').classList.add('flex');
+    $('status-text').textContent = 'Checking live weather for ' + state.city + '…';
+    $('error-box').classList.add('hidden');
+    $('results-section').classList.add('hidden');
+    $('guide-section').classList.add('hidden');
+
+    try {
+      const params = new URLSearchParams({ city: state.city, limit: '12' });
+      const category = $('category').value;
+      if (category) params.set('category', category);
+      if (!$('beginner').checked) params.set('beginner', '0');
+      if ($('indoor').checked) params.set('indoor', '1');
+      if (state.lang === 'ur') params.set('lang', 'ur');
+
+      const data = await api('/api/location/recommend?' + params.toString());
+      renderResults(data);
+
+      const place = (data.location && data.location.resolved_name) || state.city;
+      loadGrowingGuide(place);
+      setMeta(
+        'What to grow in ' + place + ' right now — Hamara Bagh',
+        'Ranked plants for ' + place + ' based on the live 16-day forecast, ' +
+        (data.agri_season ? data.agri_season.label : 'season') + ' timing and air quality.'
+      );
+      try { history.replaceState(null, '', '/recommend?city=' + encodeURIComponent(state.city)); } catch (err) { /* file:// */ }
+    } catch (err) {
+      $('error-box').innerHTML = '<span class="inline-flex items-center gap-2">' + iconSvg('alert', 'h-4 w-4 shrink-0') + esc(err.message) + '</span>';
+      $('error-box').classList.remove('hidden');
+    } finally {
+      $('status').classList.add('hidden');
+      $('status').classList.remove('flex');
+    }
+  }
+
+  // ---------------------------------------------------------------------
+  // Rendering
+  // ---------------------------------------------------------------------
+  function statCard(icon, label, value, sub) {
+    return '<div class="rounded-3xl border border-leaf-100 bg-white p-5 shadow-sm">' +
+      '<div class="flex items-center gap-1.5 text-xs font-medium uppercase tracking-wide text-ink-500">' + iconSvg(icon, 'h-3.5 w-3.5 text-leaf-600') + label + '</div>' +
+      '<div class="mt-1 font-display text-xl font-semibold text-ink-900">' + value + '</div>' +
+      '<div class="mt-1 text-xs text-ink-500">' + sub + '</div>' +
+      '</div>';
+  }
+
+  function aqiTone(level) {
+    if (level === 'good') return 'bg-leaf-500';
+    if (level === 'moderate') return 'bg-sun-400';
+    return 'bg-blush-500';
+  }
+
+  function renderResults(data) {
+    const isUr = state.lang === 'ur';
+    const urCls = isUr ? ' font-urdu' : '';
+    const dirAttr = isUr ? ' dir="auto"' : '';
+
+    // Climate tiles
+    const zone = data.zone || {};
+    const snap = data.snapshot || {};
+    const aq = data.air_quality || {};
+    const isIndoor = !!data.indoor;
+    const zoneLabel = isUr && zone.label_localized ? zone.label_localized : titleCase((zone.label || '—').replace(/_/g, ' '));
+
+    const cards = [];
+    cards.push(statCard('globe', 'Climate zone', esc(zoneLabel),
+      isIndoor ? 'Indoor comfort model — buffered from outdoor extremes'
+               : (zone.frost_risk ? 'Frost possible in the next 16 days' : 'No frost expected soon')));
+    cards.push(statCard('thermometer', 'Temperature', Math.round(snap.avg_max_temp_c) + '° / ' + Math.round(snap.avg_min_temp_c) + 'C',
+      (isIndoor ? 'Indoor-adjusted 16-day model · now ' : 'Avg high / low over 16 days · now ') + Math.round(snap.current_temp_c) + '°C'));
+    cards.push(statCard('droplet', isIndoor ? 'Indoor humidity' : 'Rain & humidity',
+      isIndoor ? Math.round(snap.avg_humidity_pct) + '%' : Math.round(snap.total_precip_mm_16d) + ' mm',
+      isIndoor ? 'Modeled indoor humidity · rainfall ignored'
+               : 'Rain forecast over 16 days · humidity ' + Math.round(snap.avg_humidity_pct) + '%'));
+    if (aq.us_aqi != null) {
+      cards.push(statCard('wind', 'Air quality', String(Math.round(aq.us_aqi)) + ' AQI',
+        '<span class="inline-flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-full ' + aqiTone(aq.level) + '"></span>' + esc(titleCase(aq.level)) + '</span>'));
+    } else {
+      cards.push(statCard('wind', 'Air quality', '—', isIndoor ? 'Not scored in indoor mode' : 'No reading available right now'));
+    }
+    $('climate-cards').innerHTML = cards.join('');
+
+    // Season banner
+    const season = data.agri_season || {};
+    const seasonLabel = isUr && season.label_localized ? season.label_localized : (season.label || '');
+    const seasonDesc = isUr && season.description_localized ? season.description_localized : (season.description || '');
+    $('season-banner').innerHTML =
+      '<div class="pattern-leaf flex flex-wrap items-center gap-4 rounded-3xl border border-leaf-100 bg-leaf-50 px-5 py-4">' +
+      '<span class="tile h-11 w-11 bg-white">' + iconSvg(seasonIcon(season.season), 'h-6 w-6 text-leaf-700') + '</span>' +
+      '<div' + dirAttr + ' class="min-w-0">' +
+      '<div class="font-semibold text-leaf-800' + urCls + '">' + esc(seasonLabel) + '</div>' +
+      '<div class="text-sm text-ink-500' + urCls + '">' + esc(seasonDesc) + '</div>' +
+      '</div></div>';
+
+    // Heading
+    const place = (data.location && data.location.resolved_name) || state.city;
+    $('place-name').textContent = place;
+    $('results-count').textContent = data.results.length + ' plant' + (data.results.length === 1 ? '' : 's') + ' scored';
+
+    // Cards
+    const resultsEl = $('results');
+    resultsEl.innerHTML = '';
+    $('no-results').classList.toggle('hidden', data.results.length > 0);
+
+    data.results.forEach(function (r) {
+      const plant = r.plant;
+      const meta = categoryMeta(plant.category);
+      const vm = verdictMeta(r.verdict);
+      const verdictLabel = r.verdict_label || vm.label;
+
+      const chips = [];
+      if (r.watering && r.watering.interval_days) {
+        chips.push(chip(iconSvg('droplet', 'h-3.5 w-3.5') + 'Water every ' + r.watering.interval_days + ' days', 'bg-sky-100 text-sky-600' + urCls));
+      }
+      if (plant.sunlight) chips.push(chip(iconSvg('sun', 'h-3.5 w-3.5') + (SUN_LABEL[plant.sunlight] || titleCase(plant.sunlight)), 'bg-sun-100 text-[#8a6d1f]'));
+      if (plant.ideal_temp_min_c != null && plant.ideal_temp_max_c != null) {
+        chips.push(chip(iconSvg('thermometer', 'h-3.5 w-3.5') + plant.ideal_temp_min_c + '–' + plant.ideal_temp_max_c + '°C ideal', 'bg-leaf-50 text-leaf-700'));
+      }
+      if (plant.container_friendly) chips.push(chip(iconSvg('pot', 'h-3.5 w-3.5') + 'Great in pots', 'bg-terra-100 text-terra-700'));
+      if (plant.pollution_tolerant) chips.push(chip(iconSvg('wind', 'h-3.5 w-3.5') + 'Smog-tolerant', 'bg-leaf-50 text-leaf-700'));
+      if (plant.toxic_to_pets) chips.push(chip(iconSvg('paw', 'h-3.5 w-3.5') + 'Toxic to pets', 'bg-blush-100 text-blush-600'));
+
+      const reasons = (r.reasons || []).map(function (reason) {
+        return '<li class="flex gap-2' + urCls + '"' + dirAttr + '><span class="text-leaf-400">•</span><span>' + esc(reason) + '</span></li>';
+      }).join('');
+
+      const card = document.createElement('article');
+      card.className = 'flex flex-col rounded-3xl border border-leaf-100 bg-white p-5 shadow-sm transition hover:shadow-md';
+      card.innerHTML =
+        '<div class="flex items-start justify-between gap-3">' +
+        '<div class="flex min-w-0 items-center gap-3">' +
+        '<span class="tile h-12 w-12 text-2xl ' + meta.tile + '">' + plantEmoji(plant) + '</span>' +
+        '<div class="min-w-0">' +
+        '<h3 class="font-display text-lg font-semibold leading-snug text-ink-900">' + esc(plant.common_name) + '</h3>' +
+        '<p class="truncate text-xs italic text-ink-500">' + esc(plant.scientific_name || '') + '</p>' +
+        '</div></div>' +
+        '<div class="text-right">' +
+        '<div class="font-display text-2xl font-semibold ' + vm.text + '">' + Math.round(r.score) +
+        '<span class="text-xs font-normal text-ink-500">/100</span></div>' +
+        '</div></div>' +
+        '<div class="mt-3 flex flex-wrap items-center gap-2">' +
+        '<span class="chip ' + vm.badge + urCls + '">' + esc(verdictLabel) + '</span>' +
+        (plant.difficulty ? chip(iconSvg('target', 'h-3.5 w-3.5') + (DIFFICULTY_LABEL[plant.difficulty] || esc(plant.difficulty)), DIFFICULTY_BADGE[plant.difficulty] || 'bg-leaf-50 text-leaf-700') : '') +
+        '</div>' +
+        '<div class="score-track mt-4"><div class="score-fill ' + vm.bar + '" style="width:' + Math.max(4, Math.round(r.score)) + '%"></div></div>' +
+        '<div class="mt-4 flex flex-wrap gap-2">' + chips.join('') + '</div>' +
+        (reasons ? '<ul class="mt-4 space-y-1.5 text-sm text-ink-700">' + reasons + '</ul>' : '') +
+        '<div class="mt-5 flex gap-2 border-t border-leaf-100 pt-4">' +
+        '<button type="button" data-action="details" data-id="' + plant.id + '" ' +
+        'class="inline-flex flex-1 items-center justify-center gap-1.5 rounded-xl border border-leaf-200 px-3 py-2 text-xs font-semibold text-leaf-700 transition hover:bg-leaf-50">Details</button>' +
+        '<button type="button" data-action="compare" data-id="' + plant.id + '" data-name="' + esc(plant.common_name) + '" ' +
+        'class="inline-flex flex-1 items-center justify-center gap-1.5 rounded-xl border border-leaf-200 px-3 py-2 text-xs font-semibold text-leaf-700 transition hover:bg-leaf-50">' + iconSvg('scales', 'h-3.5 w-3.5') + 'Compare cities</button>' +
+        '</div>';
+      resultsEl.appendChild(card);
+    });
+
+    $('results-section').classList.remove('hidden');
+  }
+
+  // One delegated listener for both card buttons
+  $('results').addEventListener('click', function (e) {
+    const btn = e.target.closest('button[data-action]');
+    if (!btn) return;
+    if (btn.dataset.action === 'details') openPlantModal(btn.dataset.id);
+    if (btn.dataset.action === 'compare') openCompare(btn.dataset.id, btn.dataset.name);
+  });
+
+  // ---------------------------------------------------------------------
+  // City growing guide (Rabi/Kharif notes, challenges, star plants)
+  // ---------------------------------------------------------------------
+  async function loadGrowingGuide(resolvedName) {
+    if (state.lang !== 'en') return;  // guide copy is English-only for now
+    try {
+      const data = await api('/api/location/growing-guide?city=' + encodeURIComponent(resolvedName || state.city));
+      renderGrowingGuide(resolvedName || state.city, data.guide);
+    } catch (err) {
+      /* cities outside the reference list simply don't get a guide */
+    }
+  }
+
+  function renderGrowingGuide(place, guide) {
+    if (!guide) return;
+    const notes = guide.growing_notes || {};
+    const best = guide.best_sowing_months || [];
+
+    const monthPills = MONTHS.map(function (name, index) {
+      const active = best.indexOf(index + 1) !== -1;
+      return '<span class="chip ' + (active ? 'bg-leaf-600 text-white' : 'border border-leaf-100 bg-white text-ink-500 opacity-50') + '">' + name.slice(0, 3) + '</span>';
+    }).join('');
+
+    function noteTile(icon, title, text) {
+      return '<div class="rounded-2xl border border-leaf-100 bg-white p-4">' +
+        '<div class="flex items-center gap-1.5 text-sm font-semibold text-leaf-800">' + iconSvg(icon, 'h-4 w-4 text-leaf-600') + title + '</div>' +
+        '<p class="mt-2 text-sm leading-relaxed text-ink-700">' + esc(text || '—') + '</p>' +
+        '</div>';
+    }
+
+    const challenges = (guide.challenges || []).map(function (item) {
+      return '<li class="flex gap-2 text-sm text-ink-700">' + iconSvg('alert', 'mt-0.5 h-4 w-4 shrink-0 text-[#8a6d1f]') + '<span>' + esc(item) + '</span></li>';
+    }).join('');
+
+    const stars = (guide.star_plants || []).map(function (name) {
+      return '<button type="button" class="chip border border-leaf-200 bg-white text-ink-700 hover:bg-leaf-50" ' +
+        'data-star="' + esc(name) + '">' + iconSvg('star', 'h-3.5 w-3.5 text-[#8a6d1f]') + esc(name) + '</button>';
+    }).join('');
+
+    $('guide-section').innerHTML =
+      '<div class="pattern-leaf rounded-3xl border border-leaf-100 bg-leaf-50 p-5 shadow-sm sm:p-6">' +
+      '<div class="flex flex-wrap items-start justify-between gap-3">' +
+      '<h2 class="flex items-center gap-2 font-display text-xl font-semibold text-ink-900">' + iconSvg('globe', 'h-5 w-5 text-leaf-600') + 'Growing in ' + esc(place) + '</h2>' +
+      '<div class="flex flex-wrap items-center gap-1.5">' +
+      '<span class="mr-1 text-xs font-medium uppercase tracking-wide text-ink-500">Best sowing months</span>' +
+      monthPills + '</div></div>' +
+      '<div class="mt-5 grid gap-4 lg:grid-cols-3">' +
+      noteTile('snow', 'Rabi (winter)', notes.rabi) +
+      noteTile('sun', 'Kharif (summer)', notes.kharif) +
+      noteTile('refresh', 'Shoulder season', notes.transition) +
+      '</div>' +
+      '<div class="mt-4 grid gap-4 lg:grid-cols-2">' +
+      '<div class="rounded-2xl border border-leaf-100 bg-white p-4">' +
+      '<div class="flex items-center gap-1.5 text-sm font-semibold text-leaf-800">' + iconSvg('alert', 'h-4 w-4 text-[#8a6d1f]') + 'Local challenges</div>' +
+      '<ul class="mt-2 space-y-1.5">' + challenges + '</ul></div>' +
+      '<div class="rounded-2xl border border-leaf-100 bg-white p-4">' +
+      '<div class="flex items-center gap-1.5 text-sm font-semibold text-leaf-800">' + iconSvg('star', 'h-4 w-4 text-[#8a6d1f]') + 'Star plants for this city</div>' +
+      '<div class="mt-2 flex flex-wrap gap-2">' + stars + '</div>' +
+      '<p class="mt-3 text-xs text-ink-500">Tap a star plant for full care details.</p></div>' +
+      '</div>' +
+      '<a href="/guides?city=' + encodeURIComponent(place) + '" class="group mt-4 flex items-center justify-between gap-3 rounded-2xl border border-leaf-100 bg-white p-3.5 text-sm transition hover:bg-leaf-50">' +
+      '<span class="font-semibold text-leaf-800">Browse growing guides for 115 cities</span>' +
+      iconSvg('arrowRight', 'h-4 w-4 text-leaf-600 transition group-hover:translate-x-0.5') +
+      '</a>' +
+      '</div>';
+    $('guide-section').classList.remove('hidden');
+  }
+
+  $('guide-section').addEventListener('click', async function (e) {
+    const btn = e.target.closest('button[data-star]');
+    if (!btn) return;
+    const id = await plantIdByName(btn.dataset.star);
+    if (id) openPlantModal(id);
+  });
+
+  // ---------------------------------------------------------------------
+  // Compare-two-cities modal
+  // ---------------------------------------------------------------------
+  function openCompare(plantId, plantName) {
+    state.comparePlantId = plantId;
+    state.comparePlantName = plantName;
+    $('cmp-plant-name').textContent = plantName;
+    $('cmp-result').innerHTML = '';
+    $('compare-modal').showModal();
+  }
+
+  $('cmp-run').addEventListener('click', async function () {
+    const cityB = $('cmp-city').value.trim();
+    if (!cityB) return;
+    $('cmp-result').innerHTML = '<div class="flex items-center gap-3 text-sm text-ink-500">' +
+      '<span class="loading loading-spinner loading-sm text-leaf-600"></span>Comparing…</div>';
+    try {
+      const params = new URLSearchParams({
+        plant_id: state.comparePlantId,
+        city_a: state.city,
+        city_b: cityB,
+      });
+      if ($('indoor').checked) params.set('indoor', '1');
+      const data = await api('/api/location/compare?' + params.toString());
+      renderComparison(data);
+    } catch (err) {
+      $('cmp-result').innerHTML = '<div class="rounded-2xl border border-blush-200 bg-blush-100 px-4 py-3 text-sm text-blush-600">' + esc(err.message) + '</div>';
+    }
+  });
+
+  function sideColumn(side, cityFallback) {
+    const vm = verdictMeta(side.result.verdict);
+    const reasons = (side.result.reasons || []).slice(0, 2).map(function (reason) {
+      return '<li class="flex gap-1.5 text-xs text-ink-500"><span>•</span><span>' + esc(reason) + '</span></li>';
+    }).join('');
+    return '<div class="rounded-2xl border border-leaf-100 p-4">' +
+      '<div class="text-xs font-medium uppercase tracking-wide text-ink-500">' +
+      esc((side.location && side.location.resolved_name) || cityFallback) + '</div>' +
+      '<div class="mt-1 font-display text-3xl font-semibold ' + vm.text + '">' + Math.round(side.result.score) + '<span class="text-sm font-normal text-ink-500">/100</span></div>' +
+      '<span class="chip mt-2 ' + vm.badge + '">' + esc(side.result.verdict_label || vm.label) + '</span>' +
+      (side.result.watering && side.result.watering.interval_days
+        ? '<div class="mt-3 flex items-center gap-1.5 text-xs text-ink-500">' + iconSvg('droplet', 'h-3.5 w-3.5 shrink-0 text-sky-600') + 'Water ~every ' + side.result.watering.interval_days + ' days</div>' : '') +
+      (side.zone ? '<div class="mt-1 flex items-center gap-1.5 text-xs text-ink-500">' + iconSvg('globe', 'h-3.5 w-3.5 shrink-0') + esc(side.zone.label) + '</div>' : '') +
+      (reasons ? '<ul class="mt-3 space-y-1">' + reasons + '</ul>' : '') +
+      '</div>';
+  }
+
+  function renderComparison(data) {
+    const verdict = {
+      a: iconSvg('award', 'h-4 w-4 shrink-0 text-leaf-600') + esc(data.a.location.resolved_name) + ' wins for this plant',
+      b: iconSvg('award', 'h-4 w-4 shrink-0 text-leaf-600') + esc(data.b.location.resolved_name) + ' wins for this plant',
+      tie: iconSvg('scales', 'h-4 w-4 shrink-0 text-leaf-600') + 'It\'s a tie — both cities work well',
+    }[data.better_location] || esc(data.comparison);
+    $('cmp-result').innerHTML =
+      '<div class="flex items-center gap-2 rounded-2xl bg-leaf-50 px-4 py-3 text-sm font-medium text-leaf-800">' + verdict + '</div>' +
+      '<div class="mt-3 grid grid-cols-2 gap-3">' +
+      sideColumn(data.a, state.city) +
+      sideColumn(data.b, $('cmp-city').value.trim()) +
+      '</div>';
+  }
+
+  // ---------------------------------------------------------------------
+  // Boot
+  // ---------------------------------------------------------------------
+  updateLangButtons();
+  loadCityChips();
+  loadCategories();
+  $('search-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    run();
+  });
+
+  (function () {
+    const params = new URLSearchParams(window.location.search);
+    const city = params.get('city');
+    if (city) $('city').value = city;
+    run();
+  })();
+</script>
+{% endblock %}

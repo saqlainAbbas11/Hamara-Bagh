@@ -1,0 +1,248 @@
+{% extends "base.html" %}
+
+{% block title %}Plant Doctor — troubleshoot what's wrong with your plant — Hamara Bagh{% endblock %}
+{% block description %}Yellow leaves, wilting, brown edges, insects? Tick the symptoms you can see and get ranked likely causes with fixes — built for real growing conditions in Pakistan, useful everywhere.{% endblock %}
+{% block og_title %}Plant Doctor — Hamara Bagh{% endblock %}
+{% block og_description %}Symptom checklist in, ranked causes with fixes out.{% endblock %}
+
+{% block content %}
+<section class="mx-auto max-w-5xl px-4 pt-10 sm:px-6">
+  <span class="chip bg-blush-100 text-blush-600"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5" aria-hidden="true"><path d="M22 12h-4l-3 8L9 4l-3 8H2"/></svg>Plant doctor</span>
+  <h1 class="mt-4 font-display text-3xl font-semibold tracking-tight text-ink-900 sm:text-4xl">What's wrong with my plant?</h1>
+  <p class="mt-3 max-w-2xl leading-relaxed text-ink-500">
+    Tick every symptom you can actually see — be honest,
+    <span class="font-semibold text-leaf-700">more clues means a better diagnosis</span>.
+    We'll <span class="font-semibold text-blush-600">rank the likely causes</span> and tell you what to do about each one.
+  </p>
+
+  <div class="mt-8 rounded-3xl border border-leaf-100 bg-white p-5 shadow-sm sm:p-6">
+    <h2 class="text-sm font-semibold uppercase tracking-wide text-ink-500">Step 1 · What do you see?</h2>
+    <div id="symptoms" class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3"></div>
+    <div class="mt-6 flex flex-wrap items-center gap-4 border-t border-leaf-100 pt-5">
+      <button id="diagnose" type="button" disabled
+              class="rounded-xl bg-leaf-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-leaf-700 disabled:cursor-not-allowed disabled:bg-leaf-200">
+        Diagnose my plant
+      </button>
+      <span id="picked" class="text-sm text-ink-500">Pick at least one symptom to start.</span>
+    </div>
+  </div>
+
+  <div id="results" class="mt-8 space-y-6"></div>
+  <div id="error-box" class="mt-6 hidden rounded-2xl border border-blush-200 bg-blush-100 px-5 py-4 text-sm text-blush-600"></div>
+
+  <div id="ai-box" class="mt-8 hidden rounded-3xl border border-leaf-100 bg-white p-5 shadow-sm sm:p-6">
+    <div class="flex items-start gap-3">
+      <span class="tile h-11 w-11 shrink-0 bg-leaf-50 text-leaf-600">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5" aria-hidden="true"><path d="M12 3l1.9 4.6 4.6 1.9-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9z"/><path d="M18.5 15.5l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9z"/></svg>
+      </span>
+      <div>
+        <h2 class="font-display text-xl font-semibold text-ink-900">Ask the AI plant doctor</h2>
+        <p class="mt-1 text-sm leading-relaxed text-ink-500">Rules se jawab nahi mila? Apna sawaal likhein — AI baghban aapki madad karega. Jo symptoms aapne tick kiye hain, woh bhi context ke liye bheje jayenge.</p>
+      </div>
+    </div>
+
+    <div class="mt-5 grid gap-4">
+      <div>
+        <label for="ai-plant" class="text-sm font-medium text-ink-700">Which plant? <span class="text-ink-300">(optional)</span></label>
+        <input id="ai-plant" type="text" dir="auto" maxlength="80" placeholder="e.g. Tomato, rose, mint"
+               class="input input-bordered mt-1 w-full rounded-xl border-leaf-200 bg-white">
+      </div>
+      <div>
+        <label for="ai-question" class="text-sm font-medium text-ink-700">Your question</label>
+        <textarea id="ai-question" dir="auto" rows="3" maxlength="600" placeholder="e.g. Meri tomato ke patte peelay ho rahe hain — kya karun?"
+                  class="textarea textarea-bordered mt-1 w-full rounded-xl border-leaf-200 bg-white"></textarea>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <button type="button" class="ai-suggest chip border border-leaf-200 bg-leaf-50 text-leaf-800 transition hover:bg-leaf-100">What should I fix first?</button>
+        <button type="button" class="ai-suggest chip border border-leaf-200 bg-leaf-50 text-leaf-800 transition hover:bg-leaf-100">Kya yeh paudha bach jayega?</button>
+        <button type="button" class="ai-suggest chip border border-leaf-200 bg-leaf-50 text-leaf-800 transition hover:bg-leaf-100">Paani zyada de raha hoon ya kam?</button>
+      </div>
+      <div class="flex flex-wrap items-center gap-4 border-t border-leaf-100 pt-5">
+        <button id="ai-ask" type="button"
+                class="rounded-xl bg-leaf-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-leaf-700 disabled:cursor-not-allowed disabled:bg-leaf-200">
+          Ask the AI
+        </button>
+        <span id="ai-status" class="hidden inline-flex items-center gap-2 text-sm text-ink-500">
+          <span class="loading loading-spinner loading-sm text-leaf-600"></span>AI soch raha hai…
+        </span>
+      </div>
+      <div id="ai-error" class="hidden rounded-2xl border border-blush-200 bg-blush-100 px-5 py-4 text-sm text-blush-600"></div>
+      <div id="ai-answer-wrap" class="hidden rounded-2xl border border-leaf-100 bg-leaf-50 p-5">
+        <div class="flex items-center gap-2 text-sm font-semibold text-leaf-800">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true"><path d="M12 3l1.9 4.6 4.6 1.9-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9z"/><path d="M18.5 15.5l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9z"/></svg>
+          AI ka jawab
+        </div>
+        <p id="ai-answer" dir="auto" class="mt-3 whitespace-pre-line text-sm leading-relaxed text-ink-700"></p>
+        <p id="ai-model" class="mt-4 border-t border-leaf-100 pt-3 text-xs text-ink-500"></p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const $ = function (id) { return document.getElementById(id); };
+  const SYMPTOM_EMOJI = {
+    yellow_leaves: '🍂',
+    wilting_despite_watering: '🥀',
+    brown_crispy_leaf_edges: '🔥',
+    leggy_stretched_growth: '📏',
+    no_flowers_or_fruit: '🌸',
+    small_insects_on_leaves: '🐛',
+    white_powder_on_leaves: '⚪',
+    holes_in_leaves: '🕳️',
+    seeds_not_germinating: '🌰',
+  };
+  const LIKELIHOOD_META = {
+    high: { label: 'most likely', cls: 'bg-blush-100 text-blush-600' },
+    medium: { label: 'possible', cls: 'bg-sun-100 text-[#8a6d1f]' },
+    low: { label: 'less likely', cls: 'border border-leaf-200 bg-white text-ink-500' },
+  };
+
+  async function loadSymptoms() {
+    const wrap = $('symptoms');
+    try {
+      const data = await api('/api/care/troubleshoot/symptoms');
+      wrap.innerHTML = '';
+      data.symptoms.forEach(function (s) {
+        const emoji = SYMPTOM_EMOJI[s.symptom_key] || '🔎';
+        const label = document.createElement('label');
+        label.className = 'cursor-pointer';
+        label.innerHTML =
+          '<input type="checkbox" value="' + esc(s.symptom_key) + '" class="peer sr-only">' +
+          '<span class="flex items-center gap-3 rounded-2xl border border-leaf-100 bg-white px-4 py-3 text-sm text-ink-700 transition hover:bg-leaf-50 ' + 'peer-checked:border-leaf-500 peer-checked:bg-leaf-50 peer-checked:font-semibold peer-checked:text-leaf-800">' +
+          '<span class="text-xl">' + emoji + '</span>' +
+          '<span class="min-w-0">' + esc(s.symptom_label) + '</span>' +
+          '<span class="ml-auto text-leaf-600 opacity-0 transition peer-checked:opacity-100">✓</span>' +
+          '</span>';
+        wrap.appendChild(label);
+      });
+    } catch (err) {
+      wrap.innerHTML = '<div class="col-span-full rounded-2xl border border-blush-200 bg-blush-100 px-4 py-3 text-sm text-blush-600">' + esc(err.message) + '</div>';
+    }
+  }
+
+  function updatePicked() {
+    const picked = Array.prototype.slice.call($('symptoms').querySelectorAll('input:checked'));
+    const count = picked.length;
+    $('diagnose').disabled = count === 0;
+    $('picked').textContent = count === 0
+      ? 'Pick at least one symptom to start.'
+      : count + ' symptom' + (count === 1 ? '' : 's') + ' selected — ready when you are.';
+  }
+
+  $('symptoms').addEventListener('change', updatePicked);
+
+  function renderDiagnosis(data) {
+    $('results').innerHTML = data.results.map(function (item) {
+      const emoji = SYMPTOM_EMOJI[item.symptom_key] || '🔎';
+      const causes = (item.causes || []).map(function (cause) {
+        const meta = LIKELIHOOD_META[cause.likelihood] || LIKELIHOOD_META.low;
+        return '<div class="rounded-2xl border border-leaf-100 bg-white p-4">' +
+          '<div class="flex flex-wrap items-center justify-between gap-2">' +
+          '<span class="text-sm font-semibold text-ink-900">' + esc(cause.cause) + '</span>' +
+          '<span class="chip ' + meta.cls + '">' + meta.label + '</span>' +
+          '</div>' +
+          '<p class="mt-2 text-sm leading-relaxed text-ink-500">💡 ' + esc(cause.fix) + '</p>' +
+          '</div>';
+      }).join('');
+
+      return '<article class="rounded-3xl border border-leaf-100 bg-leaf-50 p-5 sm:p-6">' +
+        '<div class="flex items-center gap-3">' +
+        '<span class="tile h-11 w-11 bg-white text-xl">' + emoji + '</span>' +
+        '<h2 class="font-display text-xl font-semibold text-ink-900">' + esc(item.symptom_label) + '</h2>' +
+        '</div>' +
+        '<div class="mt-4 space-y-3">' + causes + '</div>' +
+        '</article>';
+    }).join('');
+
+    if (data.results.length === 0) {
+      $('results').innerHTML =
+        '<div class="rounded-3xl border border-dashed border-leaf-200 bg-leaf-50 p-10 text-center text-ink-500">' +
+        'No matching causes in the knowledge base — try adding another symptom.</div>';
+    }
+  }
+
+  $('diagnose').addEventListener('click', async function () {
+    const symptoms = Array.prototype.slice.call($('symptoms').querySelectorAll('input:checked'))
+      .map(function (input) { return input.value; });
+    if (!symptoms.length) return;
+
+    $('error-box').classList.add('hidden');
+    $('results').innerHTML = '<div class="flex items-center gap-3 rounded-3xl border border-leaf-100 bg-leaf-50 px-5 py-4 text-sm text-ink-500">' +
+      '<span class="loading loading-spinner loading-sm text-leaf-600"></span>Playing plant detective…</div>';
+
+    try {
+      const data = await api('/api/care/troubleshoot/diagnose', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ symptoms: symptoms }),
+      });
+      renderDiagnosis(data);
+      $('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } catch (err) {
+      $('results').innerHTML = '';
+      $('error-box').innerHTML = '<span class="inline-flex items-center gap-2">' + iconSvg('alert', 'h-4 w-4 shrink-0') + esc(err.message) + '</span>';
+      $('error-box').classList.remove('hidden');
+    }
+  });
+
+  // ---- AI plant doctor (optional - only shown when a free HF token is configured) ----
+  async function checkAi() {
+    try {
+      const data = await api('/api/external/status');
+      if (data.huggingface && data.huggingface.enabled) {
+        $('ai-box').classList.remove('hidden');
+      }
+    } catch (err) {
+      // Status unreachable — leave the AI box hidden; the rules still work.
+    }
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('.ai-suggest'), function (chip) {
+    chip.addEventListener('click', function () {
+      $('ai-question').value = chip.textContent.trim();
+      $('ai-question').focus();
+    });
+  });
+
+  $('ai-ask').addEventListener('click', async function () {
+    const question = $('ai-question').value.trim();
+    if (!question) { $('ai-question').focus(); return; }
+
+    const symptoms = Array.prototype.slice.call($('symptoms').querySelectorAll('input:checked'))
+      .map(function (input) { return input.value; });
+
+    $('ai-error').classList.add('hidden');
+    $('ai-answer-wrap').classList.add('hidden');
+    $('ai-ask').disabled = true;
+    $('ai-status').classList.remove('hidden');
+
+    try {
+      const data = await api('/api/care/troubleshoot/ask', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          question: question,
+          plant: $('ai-plant').value.trim(),
+          symptoms: symptoms,
+        }),
+      });
+      $('ai-answer').textContent = data.answer;
+      $('ai-model').textContent = 'Answered by ' + (data.model || 'an open model') + ' — AI can be wrong; double-check before acting on it.';
+      $('ai-answer-wrap').classList.remove('hidden');
+      $('ai-answer-wrap').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } catch (err) {
+      $('ai-error').innerHTML = '<span class="inline-flex items-center gap-2">' + iconSvg('alert', 'h-4 w-4 shrink-0') + esc(err.message) + '</span>';
+      $('ai-error').classList.remove('hidden');
+    } finally {
+      $('ai-ask').disabled = false;
+      $('ai-status').classList.add('hidden');
+    }
+  });
+
+  loadSymptoms();
+  checkAi();
+</script>
+{% endblock %}

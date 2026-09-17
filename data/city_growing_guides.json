@@ -1,0 +1,3377 @@
+{
+  "provinces": {
+    "punjab": {
+      "name": "Punjab",
+      "name_ur": "پنجاب",
+      "cities": {
+        "attock": {
+          "growing_notes": {
+            "rabi": "Cooler conditions make autumn-to-winter suitable for peas, roots, brassicas and hardy leafy vegetables.",
+            "kharif": "Warm summer conditions allow okra, cucumber and other summer vegetables, although the growing season is somewhat shorter than in southern Punjab.",
+            "transition": "May-June is the main warm growing period before peak summer dryness, while August-September is suitable for preparing early Rabi crops."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "shorter frost-free period",
+            "summer water stress",
+            "winter cold and occasional frost"
+          ],
+          "star_plants": [
+            "Peas (Matar)",
+            "Carrot (Gajar)",
+            "Radish (Mooli)",
+            "Cabbage",
+            "Coriander (Dhania)",
+            "Dahlia"
+          ]
+        },
+        "bahawalnagar": {
+          "growing_notes": {
+            "rabi": "The cooler dry season is the main comfortable period for winter vegetables, with irrigation important in the arid southern plains.",
+            "kharif": "Very hot summers support heat-tolerant crops and vegetables, but summer gardening depends heavily on irrigation.",
+            "transition": "May-June is extremely hot and dry, while August-September is mainly used for preparing beds and nurseries for Rabi."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "extreme summer heat",
+            "water scarcity and irrigation dependence",
+            "salinity and moisture stress"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Pomegranate (Anaar)",
+            "Guava (Amrood)",
+            "Fennel (Saunf)",
+            "Carrot (Gajar)",
+            "Coriander (Dhania)"
+          ]
+        },
+        "bahawalpur": {
+          "growing_notes": {
+            "rabi": "The cooler months provide the main comfortable window for winter vegetables, with irrigation essential in the arid environment.",
+            "kharif": "Very hot dry conditions favour heat-tolerant crops, while summer gardening depends heavily on irrigation and protection from desiccating heat.",
+            "transition": "May-June is extremely hot and moisture-demanding, while August-September is mainly a preparation period before autumn and winter crops."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "extreme heat and aridity",
+            "water scarcity and irrigation demand",
+            "salinity and heat stress"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Pomegranate (Anaar)",
+            "Guava (Amrood)",
+            "Fennel (Saunf)",
+            "Fig (Anjeer)",
+            "Tulsi (Holy Basil)"
+          ]
+        },
+        "bhakkar": {
+          "growing_notes": {
+            "rabi": "Winter is the most favourable gardening season, with roots, peas and leafy vegetables grown after autumn temperatures fall.",
+            "kharif": "The hot arid summer favours drought- and heat-tolerant plants, while irrigation is essential for intensive vegetable production.",
+            "transition": "May-June is exceptionally hot and dry, while August-September is mainly used for preparing the next Rabi crop."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "extreme heat and aridity",
+            "water scarcity",
+            "sandy or moisture-deficient soils"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Pomegranate (Anaar)",
+            "Fennel (Saunf)",
+            "Carrot (Gajar)",
+            "Radish (Mooli)",
+            "Coriander (Dhania)"
+          ]
+        },
+        "chakwal": {
+          "growing_notes": {
+            "rabi": "The cooler season is important for winter crops, with peas, roots and brassicas suited to autumn and winter conditions.",
+            "kharif": "Summer vegetables can be grown after frost, but the relatively dry Potohar environment makes water conservation particularly valuable.",
+            "transition": "May-June is hot and increasingly dry, while August-September is useful for sowing ahead of the winter season when soil moisture permits."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "limited water and dry spells",
+            "summer heat",
+            "winter frost"
+          ],
+          "star_plants": [
+            "Peas (Matar)",
+            "Carrot (Gajar)",
+            "Radish (Mooli)",
+            "Cabbage",
+            "Coriander (Dhania)",
+            "Dahlia"
+          ]
+        },
+        "chiniot": {
+          "growing_notes": {
+            "rabi": "Cool-season vegetables are best established in September-November and grow through the winter period.",
+            "kharif": "Warm summers support okra, cucumber, gourds and other heat-loving vegetables with dependable irrigation.",
+            "transition": "May-June is hot and moisture-demanding, while August-September is useful for soil preparation and Rabi nursery work."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "summer heat",
+            "water management",
+            "winter fog"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Cucumber (Kheera)",
+            "Peas (Matar)",
+            "Radish (Mooli)",
+            "Carrot (Gajar)",
+            "Cabbage"
+          ]
+        },
+        "dera_ghazi_khan": {
+          "growing_notes": {
+            "rabi": "The cooler season is the main comfortable period for winter vegetables, especially where irrigation is available.",
+            "kharif": "Hot summer conditions favour Okra (Bhindi), Brinjal (Baingan) and other heat-tolerant crops, but irrigation becomes critical.",
+            "transition": "May-June is exceptionally hot and dry, while August-September is mainly used for heat management and preparation for autumn planting."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "extreme summer heat",
+            "water scarcity and irrigation dependence",
+            "salinity and moisture stress"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Pomegranate (Anaar)",
+            "Guava (Amrood)",
+            "Fennel (Saunf)",
+            "Fig (Anjeer)",
+            "Tulsi (Holy Basil)"
+          ]
+        },
+        "faisalabad": {
+          "growing_notes": {
+            "rabi": "Cool winters with dense fog support heavy-yielding brassicas and root vegetables across rooftop setups.",
+            "kharif": "Hot, semi-arid summer conditions demand careful watering schedules and shade cover during peak afternoon hours.",
+            "transition": "May-June dry heat dries out topsoil in hours, while late August humidity requires good plant spacing to prevent mildew."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "Heavy winter fog reducing light hours for winter flower blooms",
+            "Extreme summer temperatures scorching exposed rooftop pots",
+            "Groundwater brackishness in urban residential sectors"
+          ],
+          "star_plants": [
+            "Cauliflower (Phool Gobhi)",
+            "Radish (Mooli)",
+            "Okra (Bhindi)",
+            "Guava (Amrood)",
+            "Dahlia"
+          ]
+        },
+        "gujranwala": {
+          "growing_notes": {
+            "rabi": "September-November is the main period for sowing cool-season vegetables, followed by productive growth during winter.",
+            "kharif": "February-April planting supports Okra (Bhindi), Cucumber (Kheera), Brinjal (Baingan) and gourds during the hot season.",
+            "transition": "May-June becomes increasingly hot and humid, while August-September is a useful preparation period for winter vegetables."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "summer heat and humidity",
+            "winter fog and smog",
+            "waterlogging and fungal disease"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Cucumber (Kheera)",
+            "Peas (Matar)",
+            "Radish (Mooli)",
+            "Cabbage",
+            "Coriander (Dhania)"
+          ]
+        },
+        "gujrat": {
+          "growing_notes": {
+            "rabi": "Cool autumn and winter weather is suitable for peas, roots, leafy vegetables and brassicas, with sowing concentrated in September-November.",
+            "kharif": "Warm summers support okra, cucumber, gourds and other heat-loving vegetables where irrigation and drainage are adequate.",
+            "transition": "May-June is hot and increasingly moisture-demanding, while August-September is a useful period for preparing the Rabi garden."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "summer heat",
+            "monsoon waterlogging",
+            "humid conditions and fungal diseases"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Cucumber (Kheera)",
+            "Peas (Matar)",
+            "Radish (Mooli)",
+            "Cabbage",
+            "Coriander (Dhania)"
+          ]
+        },
+        "hafizabad": {
+          "growing_notes": {
+            "rabi": "The cool season is particularly suitable for roots, peas, brassicas and coriander, with sowing concentrated from September-November.",
+            "kharif": "Warm summers support rice-associated vegetable systems and heat-loving vegetables in irrigated gardens.",
+            "transition": "May-June is hot and water-demanding, while August-September is useful for preparing winter beds and managing Kharif crops."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "summer heat",
+            "waterlogging around irrigated rice areas",
+            "winter fog and fungal disease"
+          ],
+          "star_plants": [
+            "Cucumber (Kheera)",
+            "Okra (Bhindi)",
+            "Peas (Matar)",
+            "Radish (Mooli)",
+            "Cabbage",
+            "Coriander (Dhania)"
+          ]
+        },
+        "jhang": {
+          "growing_notes": {
+            "rabi": "The September-November window is productive for winter vegetables, with cool weather supporting peas, roots and brassicas.",
+            "kharif": "Hot summers favour okra, cucumber and gourds, especially in irrigated areas along the agricultural plain.",
+            "transition": "May-June is hot and rapidly dries soil, while August-September is mainly used for preparing the next cool-season crop."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "summer heat",
+            "irrigation and water management",
+            "winter fog"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Cucumber (Kheera)",
+            "Peas (Matar)",
+            "Carrot (Gajar)",
+            "Radish (Mooli)",
+            "Coriander (Dhania)"
+          ]
+        },
+        "jhelum": {
+          "growing_notes": {
+            "rabi": "Cool autumn and winter conditions favour peas, roots, brassicas and leafy vegetables.",
+            "kharif": "Summer vegetables grow well after frost, while rainfall can help but also requires good drainage.",
+            "transition": "May-June is warm and increasingly dry, while August-September is useful for starting Rabi crops before winter."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "summer heat and water stress",
+            "winter frost",
+            "heavy rain and drainage"
+          ],
+          "star_plants": [
+            "Peas (Matar)",
+            "Carrot (Gajar)",
+            "Radish (Mooli)",
+            "Cabbage",
+            "Coriander (Dhania)",
+            "Dahlia"
+          ]
+        },
+        "kasur": {
+          "growing_notes": {
+            "rabi": "Cool-season vegetables are generally sown from September-November and grow through winter into early spring.",
+            "kharif": "February-April is suitable for warm-season vegetables, followed by summer growth where irrigation is available.",
+            "transition": "May-June is dominated by heat and high water demand, while August-September is useful for preparing the next Rabi crop."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "summer heat",
+            "winter fog and air pollution",
+            "irrigation and drainage problems"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Cucumber (Kheera)",
+            "Radish (Mooli)",
+            "Carrot (Gajar)",
+            "Peas (Matar)",
+            "Coriander (Dhania)"
+          ]
+        },
+        "khanewal": {
+          "growing_notes": {
+            "rabi": "September-November is the main establishment period for winter vegetables, with cool weather supporting roots, peas and brassicas.",
+            "kharif": "Warm irrigated conditions support okra, cucumber, gourds and other summer vegetables.",
+            "transition": "May-June is hot and water-demanding, while August-September is useful for clearing summer crops and preparing Rabi beds."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "summer heat",
+            "irrigation demand",
+            "winter fog and disease pressure"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Cucumber (Kheera)",
+            "Peas (Matar)",
+            "Carrot (Gajar)",
+            "Radish (Mooli)",
+            "Coriander (Dhania)"
+          ]
+        },
+        "khushab": {
+          "growing_notes": {
+            "rabi": "Autumn and winter are well suited to roots, peas, brassicas and leafy vegetables, especially where irrigation is available.",
+            "kharif": "Hot dry summers favour heat-tolerant vegetables, with water availability determining how productive household gardens can be.",
+            "transition": "May-June is very hot and dry, while August-September is mainly used for preparing the next winter crop."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "summer heat and dryness",
+            "water scarcity",
+            "winter cold"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Peas (Matar)",
+            "Carrot (Gajar)",
+            "Radish (Mooli)",
+            "Coriander (Dhania)",
+            "Pomegranate (Anaar)"
+          ]
+        },
+        "lahore": {
+          "growing_notes": {
+            "rabi": "Cool, foggy winters produce prime leafy greens and root vegetables, though winter smog slows down photosynthesis.",
+            "kharif": "Extremely hot and humid monsoon summers accelerate leafy growth but trigger heavy insect and pest outbreaks.",
+            "transition": "May-June extreme dry heat requires twice-daily watering, while September post-monsoon is the ideal window for winter nursery preparation."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "Severe winter smog and dust coating foliage, restricting sunlight",
+            "Extreme May-June heatwaves exceeding 42°C in urban heat islands",
+            "Heavy soil compaction and poor drainage in urban clay soils"
+          ],
+          "star_plants": [
+            "Cauliflower (Phool Gobhi)",
+            "Mustard Greens (Sarson)",
+            "Chrysanthemum (Gul-e-Dawoodi)",
+            "Guava (Amrood)",
+            "Jasmine (Chambeli)"
+          ]
+        },
+        "layyah": {
+          "growing_notes": {
+            "rabi": "The cooler season is the main comfortable period for winter vegetables, with autumn sowing followed by winter growth.",
+            "kharif": "Hot dry summers favour okra, brinjal and other heat-tolerant vegetables where irrigation is available.",
+            "transition": "May-June is extremely hot and moisture-demanding, while August-September is primarily a preparation period for Rabi."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "extreme heat",
+            "water scarcity and irrigation demand",
+            "sandy soils and moisture loss"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Brinjal (Baingan)",
+            "Pomegranate (Anaar)",
+            "Fennel (Saunf)",
+            "Carrot (Gajar)",
+            "Coriander (Dhania)"
+          ]
+        },
+        "lodhran": {
+          "growing_notes": {
+            "rabi": "The mild winter supports vegetables and irrigated field crops, with autumn providing the main establishment window.",
+            "kharif": "Hot summers favour okra, brinjal, cucumber and other warm-season vegetables with reliable irrigation.",
+            "transition": "May-June is very hot and moisture-demanding, while August-September is mainly a preparation period for winter planting."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "summer heat",
+            "irrigation demand",
+            "salinity and waterlogging"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Brinjal (Baingan)",
+            "Cucumber (Kheera)",
+            "Guava (Amrood)",
+            "Pomegranate (Anaar)",
+            "Fennel (Saunf)"
+          ]
+        },
+        "mandi_bahauddin": {
+          "growing_notes": {
+            "rabi": "Cool autumn and winter weather favours peas, roots, brassicas and leafy vegetables planted from September-November.",
+            "kharif": "Warm summers support okra, cucumber and gourds where irrigation is available.",
+            "transition": "May-June is increasingly hot and dry, while August-September is a useful period for preparing the next winter crop."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "summer heat",
+            "winter fog",
+            "irrigation and drainage"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Cucumber (Kheera)",
+            "Peas (Matar)",
+            "Radish (Mooli)",
+            "Carrot (Gajar)",
+            "Cabbage"
+          ]
+        },
+        "mianwali": {
+          "growing_notes": {
+            "rabi": "The cooler dry season is the main period for winter vegetables and field crops, with irrigation important in drier tracts.",
+            "kharif": "Very hot summers favour okra and other heat-tolerant vegetables, but gardens require careful irrigation and shading during peak heat.",
+            "transition": "May-June is extremely hot and dry, while August-September is mainly a preparation period for autumn and winter planting."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "extreme summer heat",
+            "water scarcity",
+            "drying winds and moisture loss"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Pomegranate (Anaar)",
+            "Fennel (Saunf)",
+            "Coriander (Dhania)",
+            "Carrot (Gajar)",
+            "Radish (Mooli)"
+          ]
+        },
+        "multan": {
+          "growing_notes": {
+            "rabi": "Short, mild, sunny winters offer a productive but fast window for traditional cool-season crops.",
+            "kharif": "Sustained intense summer dry heat over 40°C halts growth in tender non-native crops.",
+            "transition": "May-June brings severe desert heat spikes requiring heavy shade, while September remains very hot with late Kharif sowing."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            10,
+            11
+          ],
+          "challenges": [
+            "Prolonged summer heat waves exceeding 45°C drying pots rapidly",
+            "Low atmospheric humidity causing flower drop and fruit burn",
+            "High soil alkalinity binding essential micronutrients"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Sunflower",
+            "Vinca (Sadabahar)",
+            "Pomegranate (Anaar)",
+            "Fennel (Saunf)"
+          ]
+        },
+        "murree": {
+          "growing_notes": {
+            "rabi": "Snowfall and freezing frost bring outdoor gardening to a complete halt except in protected greenhouses.",
+            "kharif": "Cool, pleasant summer monsoon climate creates an exceptional haven for temperate flowers and cool-weather crops.",
+            "transition": "April brings rapid spring snowmelt ideal for sowing, while October frost signals fast garden winterization."
+          },
+          "best_sowing_months": [
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "challenges": [
+            "Heavy snow and prolonged frost killing non-alpine plant species",
+            "Steep terraced topography causing rapid soil erosion during heavy rains",
+            "Shallow rocky mountain soil with limited depth for root tubers"
+          ],
+          "star_plants": [
+            "Peas (Matar)",
+            "Dahlia",
+            "Rosemary",
+            "Mulberry (Shahtoot)",
+            "Peace Lily"
+          ]
+        },
+        "muzaffargarh": {
+          "growing_notes": {
+            "rabi": "The relatively mild winter supports wheat, vegetables and orchards, with irrigated gardens able to maintain a useful cool-season crop cycle.",
+            "kharif": "Very hot summers favour okra, brinjal, cucumber and heat-tolerant fruit crops, but irrigation is critical.",
+            "transition": "May-June is extremely hot and dry, while August-September is mainly used for heat management and preparing Rabi beds."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "extreme heat",
+            "high irrigation demand",
+            "salinity and soil-moisture stress"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Brinjal (Baingan)",
+            "Pomegranate (Anaar)",
+            "Guava (Amrood)",
+            "Fennel (Saunf)",
+            "Papaya"
+          ]
+        },
+        "narowal": {
+          "growing_notes": {
+            "rabi": "The cool winter period supports peas, carrots, radish, brassicas and other Rabi vegetables.",
+            "kharif": "Warm humid summers allow okra, cucumber and gourds, with monsoon rainfall reducing irrigation needs but increasing drainage concerns.",
+            "transition": "May-June is warm and humid, while August-September is a good time to prepare winter beds provided excess rain is managed."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "monsoon waterlogging",
+            "humidity and fungal diseases",
+            "winter fog"
+          ],
+          "star_plants": [
+            "Peas (Matar)",
+            "Cabbage",
+            "Cauliflower (Phool Gobhi)",
+            "Cucumber (Kheera)",
+            "Radish (Mooli)",
+            "Coriander (Dhania)"
+          ]
+        },
+        "okara": {
+          "growing_notes": {
+            "rabi": "Autumn sowing gives winter vegetables a long cool period for roots, brassicas, peas and coriander.",
+            "kharif": "Warm irrigated conditions are favourable for okra, cucumber, gourds and other summer vegetables.",
+            "transition": "May-June is very hot and requires frequent irrigation, while August-September is a practical window for preparing the Rabi garden."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "summer heat",
+            "high irrigation demand",
+            "winter fog and disease pressure"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Cucumber (Kheera)",
+            "Carrot (Gajar)",
+            "Radish (Mooli)",
+            "Peas (Matar)",
+            "Cabbage"
+          ]
+        },
+        "pakpattan": {
+          "growing_notes": {
+            "rabi": "The cooler months are well suited to winter vegetables, with September-November providing the main establishment window.",
+            "kharif": "Hot summers support okra, cucumber, gourds and other warm-season crops in irrigated gardens.",
+            "transition": "May-June is hot and irrigation-intensive, while August-September is useful for clearing summer beds and preparing Rabi crops."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "summer heat",
+            "irrigation demand",
+            "winter fog and humidity-related disease"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Cucumber (Kheera)",
+            "Peas (Matar)",
+            "Radish (Mooli)",
+            "Carrot (Gajar)",
+            "Coriander (Dhania)"
+          ]
+        },
+        "rahim_yar_khan": {
+          "growing_notes": {
+            "rabi": "Winter is the main comfortable gardening season, with irrigated areas supporting vegetables and fruit production after the autumn heat declines.",
+            "kharif": "Very hot summers favour okra, brinjal, cucumber and tropical fruit, but water management is essential.",
+            "transition": "May-June is extremely hot and dry, while August-September is mainly used for heat management and preparing the Rabi cycle."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "extreme heat and aridity",
+            "high irrigation demand",
+            "salinity and heat stress"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Brinjal (Baingan)",
+            "Pomegranate (Anaar)",
+            "Guava (Amrood)",
+            "Papaya",
+            "Fennel (Saunf)"
+          ]
+        },
+        "rajanpur": {
+          "growing_notes": {
+            "rabi": "The mild southern winter supports vegetables and irrigated crops after the hottest part of autumn has passed.",
+            "kharif": "Extreme summer heat favours heat-tolerant vegetables and fruit crops, with irrigation essential in the cultivated belt.",
+            "transition": "May-June is exceptionally hot and dry, while August-September is mainly a preparation period for autumn planting."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "extreme summer heat",
+            "irrigation and water scarcity",
+            "salinity and moisture stress"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Brinjal (Baingan)",
+            "Pomegranate (Anaar)",
+            "Guava (Amrood)",
+            "Fennel (Saunf)",
+            "Papaya"
+          ]
+        },
+        "rawalpindi": {
+          "growing_notes": {
+            "rabi": "Cooler conditions allow peas, carrots, radish, cabbage and cauliflower to establish from late summer and autumn and grow through winter.",
+            "kharif": "Warm summers support vegetables and flowers, while summer rainfall can supplement irrigation but also increases disease and drainage problems.",
+            "transition": "May-June is a useful warm growing period before the heaviest rains, while August-September is suitable for starting the next winter crop."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "winter frost and cold snaps",
+            "monsoon waterlogging",
+            "humid weather and fungal diseases"
+          ],
+          "star_plants": [
+            "Peas (Matar)",
+            "Cabbage",
+            "Cauliflower (Phool Gobhi)",
+            "Carrot (Gajar)",
+            "Chrysanthemum (Gul-e-Dawoodi)",
+            "Dahlia"
+          ]
+        },
+        "sahiwal": {
+          "growing_notes": {
+            "rabi": "Autumn and winter provide a strong growing window for roots, brassicas, peas and leafy vegetables in irrigated gardens.",
+            "kharif": "Warm summers support Okra (Bhindi), Brinjal (Baingan), Cucumber (Kheera) and other Kharif vegetables with regular irrigation.",
+            "transition": "May-June is hot and moisture-demanding, while August-September is mainly useful for preparing winter beds and nurseries."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "summer heat and high evapotranspiration",
+            "winter fog and smog",
+            "irrigation and drainage management"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Cucumber (Kheera)",
+            "Peas (Matar)",
+            "Carrot (Gajar)",
+            "Cabbage",
+            "Coriander (Dhania)"
+          ]
+        },
+        "sargodha": {
+          "growing_notes": {
+            "rabi": "The cool season is well suited to roots, peas, leafy vegetables and brassicas, with autumn sowing followed by winter growth.",
+            "kharif": "Hot summers support warm-season vegetables, while irrigated horticulture is especially important in the region's established citrus-growing environment.",
+            "transition": "May-June brings strong heat and rising irrigation demand, while August-September is useful for preparing winter beds and managing perennial orchards."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "summer heat and high evapotranspiration",
+            "winter fog and smog",
+            "irrigation and citrus pest/disease management"
+          ],
+          "star_plants": [
+            "Coriander (Dhania)",
+            "Peas (Matar)",
+            "Carrot (Gajar)",
+            "Radish (Mooli)",
+            "Cabbage",
+            "Lemon Tree"
+          ]
+        },
+        "sheikhupura": {
+          "growing_notes": {
+            "rabi": "September-November is the main period for establishing winter vegetables, with cool weather supporting good root and brassica development.",
+            "kharif": "Warm-season vegetables are planted from February through spring and continue into summer under irrigation.",
+            "transition": "May-June is hot and dry, while August-September is useful for bed preparation and restarting winter vegetable nurseries."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "summer heat",
+            "winter fog and smog",
+            "heavy soils and drainage"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Radish (Mooli)",
+            "Carrot (Gajar)",
+            "Peas (Matar)",
+            "Cabbage",
+            "Coriander (Dhania)"
+          ]
+        },
+        "sialkot": {
+          "growing_notes": {
+            "rabi": "Cool and relatively humid winters are well suited to peas, brassicas, roots and leafy vegetables.",
+            "kharif": "Warm summers support okra, cucumber and gourds, although frequent rain can make drainage important.",
+            "transition": "May-June is warm and increasingly humid, while August-September is useful for winter-crop preparation but requires attention to excess moisture."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "high humidity and fungal disease",
+            "monsoon waterlogging",
+            "winter fog"
+          ],
+          "star_plants": [
+            "Peas (Matar)",
+            "Cabbage",
+            "Cauliflower (Phool Gobhi)",
+            "Cucumber (Kheera)",
+            "Radish (Mooli)",
+            "Coriander (Dhania)"
+          ]
+        },
+        "toba_tek_singh": {
+          "growing_notes": {
+            "rabi": "September-November is the principal winter-vegetable establishment period, followed by cool-season growth into early spring.",
+            "kharif": "Warm irrigated conditions support okra, cucumber, gourds and other summer vegetables.",
+            "transition": "May-June brings severe heat and rapid moisture loss, while August-September is useful for preparing winter beds."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "summer heat",
+            "irrigation demand",
+            "winter fog and soil drainage"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Cucumber (Kheera)",
+            "Carrot (Gajar)",
+            "Radish (Mooli)",
+            "Peas (Matar)",
+            "Coriander (Dhania)"
+          ]
+        },
+        "vehari": {
+          "growing_notes": {
+            "rabi": "Winter provides a productive window for vegetables, with September-November sowing followed by cool-season growth.",
+            "kharif": "Warm irrigated conditions suit okra, cucumber, gourds and other summer vegetables.",
+            "transition": "May-June is hot and rapidly dries the soil, while August-September is useful for preparing the next Rabi crop."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "summer heat",
+            "irrigation demand",
+            "salinity and moisture management"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Cucumber (Kheera)",
+            "Peas (Matar)",
+            "Carrot (Gajar)",
+            "Pomegranate (Anaar)",
+            "Guava (Amrood)"
+          ]
+        }
+      }
+    },
+    "sindh": {
+      "name": "Sindh",
+      "name_ur": "سندھ",
+      "cities": {
+        "badin": {
+          "growing_notes": {
+            "rabi": "Badin has a mild winter and supports wheat, pulses, mustard and winter vegetables, with sowing generally beginning later than in upper Sindh.",
+            "kharif": "Lower-Sindh heat supports rice, sugarcane and warm-season crops, but coastal and delta conditions make water quality and drainage especially important.",
+            "transition": "May-June is extremely hot and humid, while August-September remains warm and wet enough that drainage can be as important as irrigation."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            9,
+            10,
+            11,
+            12
+          ],
+          "challenges": [
+            "salinity and saline groundwater",
+            "waterlogging and poor drainage",
+            "high heat and humidity"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Brinjal (Baingan)",
+            "Cucumber (Kheera)",
+            "Onion (Pyaaz)",
+            "Papaya",
+            "Lemongrass"
+          ]
+        },
+        "dadu": {
+          "growing_notes": {
+            "rabi": "Dadu's dry central-Sindh climate supports wheat, oilseeds and winter vegetables where irrigation is available, while the Kacho areas have more rain-dependent production.",
+            "kharif": "Hot summers favour cotton, sorghum, millet, guar and other heat-tolerant crops, with irrigated gardens needing regular watering.",
+            "transition": "May-June is extremely hot and dry, while August-September can be used for preparing the next Rabi crop and taking advantage of any late monsoon moisture."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "challenges": [
+            "extreme heat and aridity",
+            "water scarcity outside irrigated areas",
+            "salinity and soil-management problems"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Brinjal (Baingan)",
+            "Pomegranate (Anaar)",
+            "Fennel (Saunf)",
+            "Guava (Amrood)",
+            "Lemongrass"
+          ]
+        },
+        "ghotki": {
+          "growing_notes": {
+            "rabi": "Ghotki's upper-Sindh winter supports wheat, mustard and winter vegetables where canal irrigation is available.",
+            "kharif": "Hot summers favour cotton, rice and other irrigated warm-season crops, while vegetable gardens need consistent water through the hottest months.",
+            "transition": "May-June is very hot and dry, while August-September is a high-demand Kharif period followed by preparation for Rabi."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            9,
+            10,
+            11,
+            12
+          ],
+          "challenges": [
+            "summer heat",
+            "irrigation and canal-water scheduling",
+            "salinity and pest pressure"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Brinjal (Baingan)",
+            "Onion (Pyaaz)",
+            "Fennel (Saunf)",
+            "Pomegranate (Anaar)",
+            "Guava (Amrood)"
+          ]
+        },
+        "hyderabad": {
+          "growing_notes": {
+            "rabi": "Very mild winter season acts as an extended spring, ideal for fast-cycling salad crops and warm perennials.",
+            "kharif": "Hot and dry summer breeze followed by humid monsoon spells creates fluctuating growing stress.",
+            "transition": "May heatwaves require daily deep soaking, while September brings high humidity ideal for vegetative propagation."
+          },
+          "best_sowing_months": [
+            1,
+            2,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "Strong hot dry summer winds desiccating tender young seedlings",
+            "Limited distinct cold period preventing winter dormancy in fruit trees",
+            "Soil salinity from canal and tubewell water in suburban plots"
+          ],
+          "star_plants": [
+            "Brinjal (Baingan)",
+            "Lemongrass",
+            "Papaya",
+            "Guava (Amrood)",
+            "Vinca (Sadabahar)"
+          ]
+        },
+        "jacobabad": {
+          "growing_notes": {
+            "rabi": "Jacobabad has a dry winter suitable for wheat, mustard and winter vegetables, with irrigation determining how intensive household gardening can be.",
+            "kharif": "The district becomes extremely hot in summer, favouring heat-tolerant irrigated crops but creating severe water and heat stress.",
+            "transition": "May-June is one of the most difficult gardening periods because of extreme heat, while August-September remains hot and is mainly for Kharif management and autumn preparation."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            9,
+            10,
+            11,
+            12
+          ],
+          "challenges": [
+            "extreme summer heat",
+            "high irrigation demand",
+            "salinity and soil-moisture stress"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Brinjal (Baingan)",
+            "Fennel (Saunf)",
+            "Pomegranate (Anaar)",
+            "Guava (Amrood)",
+            "Lemongrass"
+          ]
+        },
+        "jamshoro": {
+          "growing_notes": {
+            "rabi": "The dry cooler season is the most practical period for vegetables and other crops around irrigated settlements, while exposed western areas are more arid.",
+            "kharif": "Hot conditions favour drought- and heat-tolerant plants, but water availability varies greatly between irrigated areas and the Kirthar-side drylands.",
+            "transition": "May-June is extremely hot and dry, while August-September is mainly useful for preparing the next planting window and taking advantage of any monsoon moisture."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            9,
+            10,
+            11,
+            12
+          ],
+          "challenges": [
+            "extreme heat and aridity",
+            "limited water in dry western areas",
+            "salinity and poor soil moisture"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Pomegranate (Anaar)",
+            "Fennel (Saunf)",
+            "Lemongrass",
+            "Tulsi (Holy Basil)",
+            "Guava (Amrood)"
+          ]
+        },
+        "karachi": {
+          "growing_notes": {
+            "rabi": "Near-frostless, mild winters allow continuous warm-season and cool-season cropping with negligible dormancy.",
+            "kharif": "High coastal humidity combined with intense summer heat creates heavy fungal pressure and moisture stress.",
+            "transition": "May-June heatwaves require artificial shade cloth, while August-September monsoon brings root-rot risks during heavy downpours."
+          },
+          "best_sowing_months": [
+            1,
+            2,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "High soil and groundwater salinity in coastal municipal supplies",
+            "Severe coastal fungal diseases (powdery mildew, root rot) due to humidity",
+            "Scorching May heatwaves causing blossom drop and leaf burn"
+          ],
+          "star_plants": [
+            "Brinjal (Baingan)",
+            "Lemongrass",
+            "Papaya",
+            "Vinca (Sadabahar)",
+            "Spider Plant"
+          ]
+        },
+        "kashmore": {
+          "growing_notes": {
+            "rabi": "The upper-Sindh winter season supports wheat, mustard, vegetables and other cool-season crops under irrigation.",
+            "kharif": "Hot summers favour rice, cotton and heat-tolerant vegetables in irrigated tracts, while rain-dependent areas are more restricted.",
+            "transition": "May-June is extremely hot and irrigation-dependent, while August-September is still a demanding Kharif period before autumn cooling."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            9,
+            10,
+            11,
+            12
+          ],
+          "challenges": [
+            "extreme summer heat",
+            "irrigation dependence",
+            "salinity and water-management problems"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Brinjal (Baingan)",
+            "Onion (Pyaaz)",
+            "Fennel (Saunf)",
+            "Pomegranate (Anaar)",
+            "Guava (Amrood)"
+          ]
+        },
+        "khairpur": {
+          "growing_notes": {
+            "rabi": "The cooler dry season supports wheat, mustard, vegetables and other Rabi crops, with irrigated gardens remaining productive through winter.",
+            "kharif": "Hot conditions favour dates and other heat-tolerant horticultural crops, and Khairpur is a major date-growing centre with dedicated date-palm research.",
+            "transition": "May-June is extremely hot and irrigation-intensive, while August-September remains hot and is mainly a preparation period for the next cool-season crop."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            9,
+            10,
+            11,
+            12
+          ],
+          "challenges": [
+            "extreme heat",
+            "water scarcity and irrigation management",
+            "salinity and soil degradation"
+          ],
+          "star_plants": [
+            "Pomegranate (Anaar)",
+            "Okra (Bhindi)",
+            "Fennel (Saunf)",
+            "Lemongrass",
+            "Tulsi (Holy Basil)",
+            "Guava (Amrood)"
+          ]
+        },
+        "kunri": {
+          "growing_notes": {
+            "rabi": "The mild winter allows vegetables and winter field crops to be grown after the autumn heat, with irrigated fields supporting a longer season.",
+            "kharif": "Hot conditions favour chilli and other warm-season crops, and Kunri is specifically associated with chilli research and production.",
+            "transition": "May-June is very hot and irrigation-demanding, while August-September is an important period for establishing and managing warm-season chilli production."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "challenges": [
+            "extreme summer heat",
+            "irrigation and salinity",
+            "chilli and vegetable pest/disease pressure"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Brinjal (Baingan)",
+            "Cucumber (Kheera)",
+            "Tulsi (Holy Basil)",
+            "Pomegranate (Anaar)",
+            "Fennel (Saunf)"
+          ]
+        },
+        "larkana": {
+          "growing_notes": {
+            "rabi": "Larkana's winter is important for wheat, mustard, peas and vegetables, while rice-growing areas also make use of residual moisture for Dubari crops.",
+            "kharif": "Hot summers strongly favour rice and other warm-season irrigated crops, and Larkana has dedicated research infrastructure for rice and related cropping systems.",
+            "transition": "May-June is hot and irrigation-dependent, while August-September is a critical period for rice and for preparing crops that follow the Kharif harvest."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "challenges": [
+            "extreme summer heat",
+            "irrigation and canal-water scheduling",
+            "salinity and rice-related pest/disease pressure"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Onion (Pyaaz)",
+            "Peas (Matar)",
+            "Fennel (Saunf)",
+            "Pomegranate (Anaar)",
+            "Guava (Amrood)"
+          ]
+        },
+        "malir": {
+          "growing_notes": {
+            "rabi": "Malir's relatively mild winter supports a useful vegetable-growing season, and the area has a long-established tradition of vegetable and fruit gardens around Karachi.",
+            "kharif": "Hot weather favours warm-season vegetables and tropical fruit, although irrigation and soil quality are important constraints.",
+            "transition": "May-June is harsh for many vegetables, while August-September can be used for nursery raising and preparation for autumn planting."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "challenges": [
+            "heat and high evapotranspiration",
+            "salinity and irrigation-water quality",
+            "urban expansion and limited garden space"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Brinjal (Baingan)",
+            "Cucumber (Kheera)",
+            "Papaya",
+            "Guava (Amrood)",
+            "Lemongrass"
+          ]
+        },
+        "matiari": {
+          "growing_notes": {
+            "rabi": "Matiari's lower-central Sindh climate supports winter wheat, oilseeds and vegetables after the autumn heat subsides.",
+            "kharif": "Warm irrigated conditions favour cotton, sugarcane and other summer crops, with vegetable gardening practical where water and drainage are adequate.",
+            "transition": "May-June is very hot and water-demanding, while August-September is primarily a crop-transition and nursery period."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            9,
+            10,
+            11,
+            12
+          ],
+          "challenges": [
+            "summer heat",
+            "irrigation and drainage",
+            "salinity and pest pressure"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Brinjal (Baingan)",
+            "Cucumber (Kheera)",
+            "Pomegranate (Anaar)",
+            "Papaya",
+            "Fennel (Saunf)"
+          ]
+        },
+        "mirpurkhas": {
+          "growing_notes": {
+            "rabi": "The mild winter gives Mirpurkhas a long vegetable and horticultural window, with cool-season crops grown after the autumn heat subsides.",
+            "kharif": "Warm irrigated conditions strongly favour horticulture and summer crops, and the city is a major centre for fruit, vegetable and floriculture research.",
+            "transition": "May-June is hot and irrigation-intensive, while August-September is useful for nursery work and preparing autumn vegetables."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "challenges": [
+            "extreme summer heat",
+            "irrigation and salinity management",
+            "insect and disease pressure"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Brinjal (Baingan)",
+            "Cucumber (Kheera)",
+            "Papaya",
+            "Pomegranate (Anaar)",
+            "Chrysanthemum (Gul-e-Dawoodi)"
+          ]
+        },
+        "mithi": {
+          "growing_notes": {
+            "rabi": "Winter is the more manageable season for household gardens, but much of Thar remains constrained by sandy soils and limited reliable water.",
+            "kharif": "Rainfed Kharif gardening depends strongly on monsoon rainfall, with millet, guar, sesame and other drought-tolerant crops better suited than water-hungry vegetables.",
+            "transition": "May-June is extremely hot and generally poor for outdoor gardening without water, while August-September can become productive if monsoon rains arrive."
+          },
+          "best_sowing_months": [
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "severe water scarcity",
+            "extreme heat and aridity",
+            "sandy soils and dependence on monsoon rainfall"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Fennel (Saunf)",
+            "Tulsi (Holy Basil)",
+            "Pomegranate (Anaar)",
+            "Lemongrass",
+            "Cucumber (Kheera)"
+          ]
+        },
+        "naushehro_feroze": {
+          "growing_notes": {
+            "rabi": "The district's dry central-Sindh climate supports wheat, mustard, sunflower and winter vegetables during the cooler months.",
+            "kharif": "Hot summers favour irrigated cotton and warm-season crops, while reliable canal or groundwater access is important for gardens.",
+            "transition": "May-June is a high-heat, high-water-demand period, while August-September is mainly used to prepare for autumn sowing."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            9,
+            10,
+            11,
+            12
+          ],
+          "challenges": [
+            "summer heat and moisture loss",
+            "irrigation dependence",
+            "salinity and pest pressure"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Brinjal (Baingan)",
+            "Onion (Pyaaz)",
+            "Pomegranate (Anaar)",
+            "Fennel (Saunf)",
+            "Coriander (Dhania)"
+          ]
+        },
+        "nawabshah": {
+          "growing_notes": {
+            "rabi": "Nawabshah's dry warm winter supports wheat, mustard, sunflower and winter vegetables where irrigation is available.",
+            "kharif": "Hot summers favour cotton and other heat-tolerant irrigated crops, with vegetable production concentrated around reliable water supplies.",
+            "transition": "May-June is extremely hot and dry, while August-September is mainly a period for heat management and preparing the following Rabi crop."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            9,
+            10,
+            11,
+            12
+          ],
+          "challenges": [
+            "extreme heat",
+            "irrigation dependence",
+            "salinity and soil degradation"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Brinjal (Baingan)",
+            "Onion (Pyaaz)",
+            "Fennel (Saunf)",
+            "Pomegranate (Anaar)",
+            "Guava (Amrood)"
+          ]
+        },
+        "sanghar": {
+          "growing_notes": {
+            "rabi": "Sanghar has a warm but comparatively dry winter suitable for wheat, oilseeds and a range of winter vegetables where irrigation is available.",
+            "kharif": "Hot conditions support cotton, summer crops and irrigated vegetables, while groundnut is also specifically identified for the district.",
+            "transition": "May-June becomes very hot and moisture-demanding, while August-September is useful for late Kharif production and preparation for Rabi."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "challenges": [
+            "heat and evapotranspiration",
+            "irrigation and salinity",
+            "pest pressure in cotton and vegetable systems"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Brinjal (Baingan)",
+            "Cucumber (Kheera)",
+            "Onion (Pyaaz)",
+            "Pomegranate (Anaar)",
+            "Fennel (Saunf)"
+          ]
+        },
+        "shikarpur": {
+          "growing_notes": {
+            "rabi": "Cooler months support wheat, mustard, peas and winter vegetables, while rice-growing areas can use residual moisture for follow-on crops.",
+            "kharif": "Hot irrigated summers are especially suited to rice and warm-season vegetables, with the district forming part of Sindh's upper rice-growing belt.",
+            "transition": "May-June is very hot and water-demanding, while August-September is dominated by Kharif crop management and preparation for the winter cycle."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "challenges": [
+            "summer heat",
+            "irrigation and water scheduling",
+            "humidity and disease in rice-growing areas"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Peas (Matar)",
+            "Onion (Pyaaz)",
+            "Coriander (Dhania)",
+            "Pomegranate (Anaar)",
+            "Guava (Amrood)"
+          ]
+        },
+        "sujawal": {
+          "growing_notes": {
+            "rabi": "Sujawal's coastal-delta climate permits a mild winter growing period for vegetables, pulses and other cool-season crops without the hard frosts found in northern Pakistan.",
+            "kharif": "Warm humid conditions favour rice, sugarcane and heat-tolerant plants, but salt and excess water can be more limiting than temperature.",
+            "transition": "May-June is hot and humid with strong irrigation and drainage requirements, while August-September is mainly a warm-season and crop-transition period."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            9,
+            10,
+            11,
+            12
+          ],
+          "challenges": [
+            "salinity from the coastal/delta environment",
+            "waterlogging and drainage",
+            "high heat and humidity"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Brinjal (Baingan)",
+            "Cucumber (Kheera)",
+            "Papaya",
+            "Lemongrass",
+            "Coconut"
+          ]
+        },
+        "sukkur": {
+          "growing_notes": {
+            "rabi": "Sukkur has a dry warm winter suited to wheat, mustard, sunflower and winter vegetables, with irrigation making intensive gardening practical.",
+            "kharif": "Very hot summers favour heat-tolerant crops and irrigated horticulture, but gardeners must manage rapid evaporation and soil salinity.",
+            "transition": "May-June is exceptionally hot and water-demanding, while August-September remains hot but can be used to prepare for autumn and winter planting."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            9,
+            10,
+            11,
+            12
+          ],
+          "challenges": [
+            "extreme summer heat",
+            "high irrigation demand",
+            "salinity and alkaline soils"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Brinjal (Baingan)",
+            "Pomegranate (Anaar)",
+            "Fennel (Saunf)",
+            "Lemongrass",
+            "Tulsi (Holy Basil)"
+          ]
+        },
+        "tando_allahyar": {
+          "growing_notes": {
+            "rabi": "The lower-Sindh climate gives Tando Allahyar a relatively long mild winter suitable for wheat, vegetables and other cool-season crops.",
+            "kharif": "Warm conditions support irrigated horticulture and summer crops, with the official Sindh classification placing Tando Allahyar among the lower-Sindh areas suitable for cotton, wheat, sunflower, oilseeds and groundnut-type rotations.",
+            "transition": "May-June is dominated by heat and irrigation demand, while August-September is better for preparing the next crop than for cool-season vegetables."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            9,
+            10,
+            11,
+            12
+          ],
+          "challenges": [
+            "high summer temperatures",
+            "irrigation and drainage management",
+            "salinity and pest pressure"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Brinjal (Baingan)",
+            "Cucumber (Kheera)",
+            "Papaya",
+            "Pomegranate (Anaar)",
+            "Fennel (Saunf)"
+          ]
+        },
+        "tando_muhammad_khan": {
+          "growing_notes": {
+            "rabi": "The cooler season is suitable for wheat, vegetables and pulses, with planting generally concentrated after the hottest part of autumn.",
+            "kharif": "The district is in lower Sindh's warm irrigated belt, where sugarcane and rice are important and warm-season vegetables can be grown with irrigation.",
+            "transition": "May-June is very hot and water-demanding, while August-September is primarily a crop-transition and field-preparation period."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            9,
+            10,
+            11,
+            12
+          ],
+          "challenges": [
+            "summer heat",
+            "irrigation and drainage requirements",
+            "salinity and waterlogging"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Brinjal (Baingan)",
+            "Cucumber (Kheera)",
+            "Onion (Pyaaz)",
+            "Papaya",
+            "Lemongrass"
+          ]
+        },
+        "tandojam": {
+          "growing_notes": {
+            "rabi": "Tandojam has a mild winter and irrigated agricultural environment that supports winter vegetables, wheat, oilseeds and horticultural research.",
+            "kharif": "Warm summers support irrigated vegetables and fruit production, with the city serving as an important centre for Sindh agriculture research and extension.",
+            "transition": "May-June is hot and irrigation-intensive, while August-September is useful for nursery raising and preparing the next cool-season planting."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "challenges": [
+            "summer heat",
+            "irrigation and salinity management",
+            "insect and disease pressure"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Brinjal (Baingan)",
+            "Cucumber (Kheera)",
+            "Pomegranate (Anaar)",
+            "Papaya",
+            "Chrysanthemum (Gul-e-Dawoodi)"
+          ]
+        },
+        "tharparkar": {
+          "growing_notes": {
+            "rabi": "Rabi gardening is limited in rainfed parts of Thar because winter moisture is scarce, while irrigated settlements can grow a wider range of winter vegetables.",
+            "kharif": "Kharif is strongly tied to the monsoon, with millet, guar, sesame and other drought-tolerant crops thriving when seasonal rains arrive.",
+            "transition": "May-June is extremely hot and generally unsuitable for rainfed gardening, while July-September can provide the main opportunity for planting after useful monsoon rainfall."
+          },
+          "best_sowing_months": [
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "challenges": [
+            "extreme water scarcity",
+            "very high heat and evaporation",
+            "dependence on unreliable monsoon rainfall"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Fennel (Saunf)",
+            "Tulsi (Holy Basil)",
+            "Pomegranate (Anaar)",
+            "Lemongrass",
+            "Cucumber (Kheera)"
+          ]
+        },
+        "thatta": {
+          "growing_notes": {
+            "rabi": "The coastal climate keeps winters comparatively mild, allowing winter vegetables and crops such as barley, mustard and pulses to be grown without severe frost.",
+            "kharif": "Warm coastal conditions support rice, sugarcane and tropical plants, while irrigation and the delta environment strongly influence what can be grown.",
+            "transition": "May-June is hot and increasingly humid, while August-September is better suited to warm-season crops and preparing for the next winter cycle than to cool-season vegetables."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            9,
+            10,
+            11,
+            12
+          ],
+          "challenges": [
+            "coastal salinity and saline groundwater",
+            "heat and humidity",
+            "waterlogging and drainage in deltaic areas"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Brinjal (Baingan)",
+            "Cucumber (Kheera)",
+            "Papaya",
+            "Lemongrass",
+            "Coconut"
+          ]
+        },
+        "umerkot": {
+          "growing_notes": {
+            "rabi": "Umerkot has a dry mild winter suitable for wheat, oilseeds and winter vegetables where irrigation is available, while desert areas remain more dependent on rainfall.",
+            "kharif": "Hot conditions suit millet, guar, sesame and other drought-tolerant crops, with irrigated gardens able to grow more demanding vegetables.",
+            "transition": "May-June is severely hot and dry, while August-September is the key period when monsoon rainfall can determine what rainfed gardeners can establish."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "extreme heat and aridity",
+            "water scarcity outside irrigated areas",
+            "salinity and dependence on seasonal rainfall"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Pomegranate (Anaar)",
+            "Fennel (Saunf)",
+            "Lemongrass",
+            "Tulsi (Holy Basil)",
+            "Cucumber (Kheera)"
+          ]
+        }
+      }
+    },
+    "khyber_pakhtunkhwa": {
+      "name": "Khyber Pakhtunkhwa",
+      "name_ur": "خیبر پختونخوا",
+      "cities": {
+        "abbottabad": {
+          "growing_notes": {
+            "rabi": "Abbottabad's cool winter favours hardy vegetables and temperate horticulture, with frost protection needed for tender plants at higher elevations.",
+            "kharif": "The mild summer and monsoon climate support vegetables and fruit, with Hazara recognised for litchi, citrus, guava and loquat.",
+            "transition": "Spring is a strong growing period before monsoon conditions arrive, while August-September requires careful drainage and disease control."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "heavy monsoon rain and drainage",
+            "fungal diseases",
+            "winter frost and cold nights"
+          ],
+          "star_plants": [
+            "Litchi",
+            "Loquat",
+            "Citrus",
+            "Guava (Amrood)",
+            "Peas (Matar)",
+            "Cabbage"
+          ]
+        },
+        "bannu": {
+          "growing_notes": {
+            "rabi": "Bannu's mild winter and irrigated agricultural land favour wheat, mustard, vegetables and other Rabi crops.",
+            "kharif": "The very hot summer supports heat-loving crops including okra, brinjal, cucumber, gourds and melon where water is available.",
+            "transition": "March-April becomes increasingly hot and is the practical switch to Kharif planting, while August-September is a difficult but important preparation period for Rabi."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "extreme summer heat",
+            "high irrigation demand and water scarcity",
+            "wind, pests and heat stress"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Brinjal (Baingan)",
+            "Cucumber (Kheera)",
+            "Pomegranate (Anaar)",
+            "Guava (Amrood)",
+            "Fennel (Saunf)"
+          ]
+        },
+        "buner": {
+          "growing_notes": {
+            "rabi": "Buner's cooler upland climate supports winter vegetables and temperate orchard crops, with frost becoming stronger in elevated locations.",
+            "kharif": "Summer conditions suit apple, peach, plum, persimmon and other temperate fruits, which KP identifies among the main crops of the upper areas including Buner.",
+            "transition": "Spring is the major vegetable and orchard growth period, while August-September is useful for fruit development and preparing for autumn planting."
+          },
+          "best_sowing_months": [
+            3,
+            4,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "challenges": [
+            "winter frost",
+            "mountain terrain and irrigation access",
+            "monsoon fungal disease"
+          ],
+          "star_plants": [
+            "Apple",
+            "Peach",
+            "Plum",
+            "Persimmon",
+            "Peas (Matar)",
+            "Carrot (Gajar)"
+          ]
+        },
+        "charsadda": {
+          "growing_notes": {
+            "rabi": "The fertile irrigated plains support Rabi cereals and vegetables, with spinach, carrot, radish and cabbage fitting the cooler months.",
+            "kharif": "Warm weather supports maize, rice and summer vegetables, and Charsadda is also an active horticultural area with peach, plum and citrus production.",
+            "transition": "Spring is a productive changeover from winter vegetables to Kharif crops, while late summer is suitable for establishing the next winter vegetable cycle."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "summer heat and irrigation requirements",
+            "flooding or waterlogging in poorly drained areas",
+            "insect and fungal pressure"
+          ],
+          "star_plants": [
+            "Peach",
+            "Plum",
+            "Okra (Bhindi)",
+            "Cucumber (Kheera)",
+            "Carrot (Gajar)",
+            "Spinach"
+          ]
+        },
+        "chitral": {
+          "growing_notes": {
+            "rabi": "Chitral has a cold, dry winter with a short growing season, so hardy vegetables are grown during the frost-free period and protected cultivation can be valuable.",
+            "kharif": "The dry temperate summer is well suited to apricot, almond, apple and other temperate fruit crops, with KP specifically identifying Chitral for almonds and apricots.",
+            "transition": "May-June is the main establishment period after winter, while August-September is important for fruit harvest and preparing for the early onset of cold."
+          },
+          "best_sowing_months": [
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "challenges": [
+            "severe winter cold and frost",
+            "very short growing season",
+            "water availability and difficult mountain terrain"
+          ],
+          "star_plants": [
+            "Apricot",
+            "Almond",
+            "Apple",
+            "Peas (Matar)",
+            "Carrot (Gajar)",
+            "Radish (Mooli)"
+          ]
+        },
+        "dera_ismail_khan": {
+          "growing_notes": {
+            "rabi": "D.I. Khan's comparatively warm winter supports wheat, gram, mustard and a useful range of winter vegetables.",
+            "kharif": "Hot summers favour maize, rice, melon, guava, dates and heat-tolerant vegetables in irrigated areas, consistent with the subtropical southern KP horticultural zone.",
+            "transition": "May-June is already very hot and requires careful irrigation, while August-September is mainly a period of heat management and preparation for Rabi."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "extreme summer heat",
+            "water scarcity and high evaporation",
+            "salinity or drainage problems in irrigated land"
+          ],
+          "star_plants": [
+            "Guava (Amrood)",
+            "Okra (Bhindi)",
+            "Cucumber (Kheera)",
+            "Pomegranate (Anaar)",
+            "Onion (Pyaaz)",
+            "Fennel (Saunf)"
+          ]
+        },
+        "dir": {
+          "growing_notes": {
+            "rabi": "Dir's colder mountain climate favours hardy winter vegetables and temperate fruit systems, with frost increasingly limiting crops as elevation rises.",
+            "kharif": "Cool summers support apricot, almond and other temperate fruits, with the KP Agriculture Department specifically identifying Dir and Chitral for these crops.",
+            "transition": "Spring is the main active growing window after winter, while August-September is useful for fruit harvest and preparing gardens before the return of cold."
+          },
+          "best_sowing_months": [
+            3,
+            4,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "challenges": [
+            "frost and snow",
+            "short growing season",
+            "steep terrain and limited irrigation"
+          ],
+          "star_plants": [
+            "Apricot",
+            "Almond",
+            "Apple",
+            "Peas (Matar)",
+            "Carrot (Gajar)",
+            "Radish (Mooli)"
+          ]
+        },
+        "haripur": {
+          "growing_notes": {
+            "rabi": "Haripur's cooler, wetter conditions support winter vegetables and temperate-to-subtropical horticulture, with less severe summer heat than the southern districts.",
+            "kharif": "Warm monsoon weather supports vegetables and fruit, while Hazara is recognised for litchi, citrus, guava and loquat production.",
+            "transition": "Spring and early summer are productive for vegetables and fruit growth, while August-September's rainfall makes drainage and fungal-disease management especially important."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "monsoon rainfall and waterlogging",
+            "fungal diseases from humidity",
+            "winter cold at exposed sites"
+          ],
+          "star_plants": [
+            "Litchi",
+            "Loquat",
+            "Guava (Amrood)",
+            "Citrus",
+            "Cabbage",
+            "Coriander (Dhania)"
+          ]
+        },
+        "kohat": {
+          "growing_notes": {
+            "rabi": "Kohat's cooler season supports hardy winter vegetables and Rabi crops, although exposed sites can experience cold nights.",
+            "kharif": "Warm summers favour irrigated vegetables and subtropical fruit, while the southern parts of KP are particularly suited to guava, melon and other heat-tolerant fruit.",
+            "transition": "Spring is the main changeover from winter vegetables to warm-season crops, while late summer is useful for establishing cool-season vegetables."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "summer heat and water demand",
+            "dry periods and limited irrigation",
+            "pests and soil moisture stress"
+          ],
+          "star_plants": [
+            "Guava (Amrood)",
+            "Okra (Bhindi)",
+            "Cucumber (Kheera)",
+            "Carrot (Gajar)",
+            "Radish (Mooli)",
+            "Pomegranate (Anaar)"
+          ]
+        },
+        "lower_dir": {
+          "growing_notes": {
+            "rabi": "Lower Dir has a cool winter suitable for a broad range of Rabi vegetables, while its lower elevation gives a longer season than the upper valleys.",
+            "kharif": "Warm summers and monsoon rainfall support vegetables and fruit, with local agriculture including peach, plum, persimmon and subtropical crops.",
+            "transition": "Spring provides a strong changeover into summer vegetables, while August-September is suitable for establishing early Rabi crops but requires drainage and fungal-disease control."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "monsoon rain and drainage",
+            "fungal disease",
+            "winter frost in higher locations"
+          ],
+          "star_plants": [
+            "Peach",
+            "Plum",
+            "Okra (Bhindi)",
+            "Carrot (Gajar)",
+            "Cucumber (Kheera)",
+            "Coriander (Dhania)"
+          ]
+        },
+        "malakand": {
+          "growing_notes": {
+            "rabi": "Malakand's winter is suitable for hardy vegetables and Rabi field crops, while cooler upland areas support temperate horticulture.",
+            "kharif": "Warm summers support vegetables and fruit, with the wider upper Malakand zone particularly suited to apple, plum, peach, apricot, citrus, walnut, almond and persimmon.",
+            "transition": "Spring is productive for vegetables and orchard growth, while August-September is useful for fruit maturation and starting the next cool-season cycle."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "summer heat at lower elevations",
+            "winter frost at higher elevations",
+            "monsoon rainfall and fungal disease"
+          ],
+          "star_plants": [
+            "Apple",
+            "Peach",
+            "Plum",
+            "Apricot",
+            "Persimmon",
+            "Carrot (Gajar)"
+          ]
+        },
+        "mansehra": {
+          "growing_notes": {
+            "rabi": "Mansehra's cooler winter supports peas, cabbage, carrot, radish and other hardy vegetables, with frost risk increasing in elevated areas.",
+            "kharif": "Mild summers and monsoon rainfall suit vegetables and Hazara's established litchi, citrus, guava and loquat horticulture.",
+            "transition": "April-May is a productive spring growing period, while August-September is good for moisture-loving crops but requires drainage and fungal-disease management."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "monsoon waterlogging",
+            "fungal disease",
+            "winter frost at higher elevations"
+          ],
+          "star_plants": [
+            "Litchi",
+            "Loquat",
+            "Citrus",
+            "Guava (Amrood)",
+            "Peas (Matar)",
+            "Cabbage"
+          ]
+        },
+        "mardan": {
+          "growing_notes": {
+            "rabi": "Mardan has a mild-to-cool winter suitable for wheat, mustard and a wide range of winter vegetables, particularly carrot, radish, spinach and cabbage.",
+            "kharif": "Warm summers support maize, rice and a broad range of irrigated vegetables including okra, cucumber, gourds and brinjal.",
+            "transition": "March-April is the main shift into warm-season planting, while August-September is useful for starting the next cycle of cauliflower and other Rabi vegetables."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "summer heat and irrigation demand",
+            "winter fog and cold spells",
+            "pests, weeds and fungal diseases"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Cucumber (Kheera)",
+            "Carrot (Gajar)",
+            "Radish (Mooli)",
+            "Peach",
+            "Coriander (Dhania)"
+          ]
+        },
+        "nowshera": {
+          "growing_notes": {
+            "rabi": "Nowshera's relatively mild winter allows a useful range of winter vegetables, especially leafy greens and root crops, alongside the major Rabi field crops.",
+            "kharif": "Hot summers favour maize, rice and warm-season vegetables such as okra, cucumber and gourds where irrigation is available.",
+            "transition": "April marks the practical move toward Kharif planting, while August-September provides a useful window for establishing the coming Rabi vegetable crop."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "high summer temperatures",
+            "water management and occasional flooding",
+            "pest and disease pressure"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Cucumber (Kheera)",
+            "Radish (Mooli)",
+            "Carrot (Gajar)",
+            "Spinach",
+            "Peach"
+          ]
+        },
+        "peshawar": {
+          "growing_notes": {
+            "rabi": "Mild, sunlit winters with light frost allow excellent production of winter root vegetables and herbs.",
+            "kharif": "Hot, semi-arid summers require consistent irrigation and afternoon sun protection for balcony crops.",
+            "transition": "May is a rapid transition into scorching summer dry winds, while September offers ideal soil warmth for early Rabi sowing."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "Hot dry summer winds (Loo) dehydrating container plants quickly",
+            "Light winter frosts causing dieback in delicate summer perennials",
+            "Hard alkaline clay-loam soils requiring organic matter amendments"
+          ],
+          "star_plants": [
+            "Radish (Mooli)",
+            "Mustard Greens (Sarson)",
+            "Okra (Bhindi)",
+            "Fig (Anjeer)",
+            "Mulberry (Shahtoot)"
+          ]
+        },
+        "shangla": {
+          "growing_notes": {
+            "rabi": "Shangla's high, cold terrain requires hardy winter crops and gives gardens a relatively short frost-free period.",
+            "kharif": "Cool summers are suitable for temperate fruits such as apple, peach, plum and persimmon, consistent with KP's upper-area horticulture guidance.",
+            "transition": "May-June is the main period for active growth after winter, while August-September is useful for harvesting and preparing for the return of cold."
+          },
+          "best_sowing_months": [
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "challenges": [
+            "severe winter cold",
+            "short growing season",
+            "steep terrain and heavy-rain drainage"
+          ],
+          "star_plants": [
+            "Apple",
+            "Peach",
+            "Plum",
+            "Persimmon",
+            "Peas (Matar)",
+            "Radish (Mooli)"
+          ]
+        },
+        "swabi": {
+          "growing_notes": {
+            "rabi": "Swabi's irrigated plains are well suited to winter vegetables and field crops, with carrot, radish, spinach and cabbage among the practical cool-season choices.",
+            "kharif": "The warm season supports maize, rice and summer vegetables, while Swabi also has horticultural production including grapes and other fruit.",
+            "transition": "March-April is the main spring changeover to warm-season crops, while August-September is useful for preparing nurseries and beds for Rabi vegetables."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "summer heat",
+            "irrigation and drainage management",
+            "pests and crop diseases"
+          ],
+          "star_plants": [
+            "Grape",
+            "Okra (Bhindi)",
+            "Cucumber (Kheera)",
+            "Carrot (Gajar)",
+            "Radish (Mooli)",
+            "Coriander (Dhania)"
+          ]
+        },
+        "swat": {
+          "growing_notes": {
+            "rabi": "Swat's cold winter and temperate climate favour hardy winter vegetables and orchard crops, with frost and snow limiting exposed cultivation at higher elevations.",
+            "kharif": "The valley's summer climate is especially suited to apple, peach, plum, persimmon and other temperate fruits, which the KP Agriculture Department identifies as major crops of the upper areas.",
+            "transition": "Spring is the key period for orchard flowering and vegetable growth, while August-September supports fruit maturation and the beginning of preparations for cold weather."
+          },
+          "best_sowing_months": [
+            3,
+            4,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "challenges": [
+            "winter frost and snow",
+            "shorter growing season at elevation",
+            "hail, pests and monsoon-related fungal disease"
+          ],
+          "star_plants": [
+            "Apple",
+            "Peach",
+            "Plum",
+            "Persimmon",
+            "Peas (Matar)",
+            "Carrot (Gajar)"
+          ]
+        },
+        "tank": {
+          "growing_notes": {
+            "rabi": "Tank's relatively warm winter allows Rabi crops and winter vegetables to be grown without the severe frost found in northern KP.",
+            "kharif": "Very hot summers favour heat-tolerant vegetables and subtropical fruit, but successful gardening depends strongly on irrigation.",
+            "transition": "May-June is an intense heat period requiring shade and regular irrigation, while August-September is a difficult transition toward the cooler Rabi season."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "extreme summer heat",
+            "water scarcity and evaporation",
+            "heat-related pest and plant stress"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Brinjal (Baingan)",
+            "Cucumber (Kheera)",
+            "Guava (Amrood)",
+            "Pomegranate (Anaar)",
+            "Fennel (Saunf)"
+          ]
+        },
+        "upper_dir": {
+          "growing_notes": {
+            "rabi": "Upper Dir has cold winters and a short season, so hardy vegetables and protected cultivation are more practical than tender crops.",
+            "kharif": "Cool mountain summers support apricot, almond, apple and other temperate fruit crops in suitable valleys.",
+            "transition": "May-June is the main planting and growth period, while August-September is primarily for fruit harvest and preparing for early autumn cold."
+          },
+          "best_sowing_months": [
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "challenges": [
+            "frost and snow",
+            "short growing season",
+            "steep terrain and limited irrigation"
+          ],
+          "star_plants": [
+            "Apricot",
+            "Almond",
+            "Apple",
+            "Peas (Matar)",
+            "Carrot (Gajar)",
+            "Radish (Mooli)"
+          ]
+        }
+      }
+    },
+    "balochistan": {
+      "name": "Balochistan",
+      "name_ur": "بلوچستان",
+      "cities": {
+        "awaran": {
+          "growing_notes": {
+            "rabi": "Awaran's warm lowland climate allows winter vegetables and wheat where irrigation is available, with little frost risk.",
+            "kharif": "Hot dry summers favour heat-tolerant crops such as okra, onion and other irrigated vegetables.",
+            "transition": "May-June is extremely hot and moisture-demanding, while August-September is useful mainly where monsoon rainfall or irrigation provides sufficient moisture."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "water scarcity",
+            "extreme heat",
+            "irregular rainfall and soil salinity"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Onion (Pyaaz)",
+            "Pomegranate (Anaar)",
+            "Cucumber (Kheera)",
+            "Fennel (Saunf)",
+            "Lemongrass"
+          ]
+        },
+        "barkhan": {
+          "growing_notes": {
+            "rabi": "Cool winter weather supports wheat, pulses and hardy vegetables, especially where soil moisture or irrigation is available.",
+            "kharif": "Warm summers favour apricot, almond, pomegranate and other semi-arid fruit crops.",
+            "transition": "May-June is the principal growth period, while August-September is useful for fruit development and preparing for autumn crops."
+          },
+          "best_sowing_months": [
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "winter frost",
+            "limited irrigation",
+            "rugged terrain and variable rainfall"
+          ],
+          "star_plants": [
+            "Apricot",
+            "Almond",
+            "Pomegranate (Anaar)",
+            "Peas (Matar)",
+            "Carrot (Gajar)",
+            "Radish (Mooli)"
+          ]
+        },
+        "chagai": {
+          "growing_notes": {
+            "rabi": "The cool season permits limited winter vegetables and wheat where water is available, but the desert climate restricts intensive gardening.",
+            "kharif": "Very hot dry summers favour dates, onion and other drought- and heat-tolerant crops in irrigated oases.",
+            "transition": "May-June is extremely hot and dry, while August-September gardening depends heavily on irrigation and any useful monsoon rainfall."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "extreme aridity",
+            "severe water scarcity",
+            "salinity and heat stress"
+          ],
+          "star_plants": [
+            "Pomegranate (Anaar)",
+            "Onion (Pyaaz)",
+            "Okra (Bhindi)",
+            "Fennel (Saunf)",
+            "Cucumber (Kheera)",
+            "Tulsi (Holy Basil)"
+          ]
+        },
+        "dera_bugti": {
+          "growing_notes": {
+            "rabi": "The mild winter allows irrigated wheat, onions and vegetables, while frost is generally much less limiting than in northern Balochistan.",
+            "kharif": "Hot summers favour heat-tolerant crops and irrigated agriculture, with water availability remaining the key constraint.",
+            "transition": "May-June is extremely hot and dry, while August-September is useful for warm-season crops only where irrigation and drainage are reliable."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "challenges": [
+            "extreme heat",
+            "water scarcity",
+            "flooding and soil-salinity risks"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Brinjal (Baingan)",
+            "Onion (Pyaaz)",
+            "Pomegranate (Anaar)",
+            "Fennel (Saunf)",
+            "Cucumber (Kheera)"
+          ]
+        },
+        "gwadar": {
+          "growing_notes": {
+            "rabi": "Gwadar's nearly frost-free coastal winter permits limited vegetables and herbs, but poor rainfall means gardens depend heavily on supplied or stored water.",
+            "kharif": "Hot coastal conditions favour heat-tolerant plants, while salinity, wind and scarce freshwater make intensive summer gardening difficult.",
+            "transition": "May-June is particularly stressful because of heat and evaporation, while August-September is only productive where irrigation and wind protection are available."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            9,
+            10,
+            11,
+            12
+          ],
+          "challenges": [
+            "freshwater scarcity",
+            "coastal salinity and wind",
+            "extreme heat and evaporation"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Brinjal (Baingan)",
+            "Lemongrass",
+            "Tulsi (Holy Basil)",
+            "Pomegranate (Anaar)",
+            "Cucumber (Kheera)"
+          ]
+        },
+        "harnai": {
+          "growing_notes": {
+            "rabi": "Cool winter conditions favour hardy vegetables, wheat and onions, with frost protection needed for tender crops.",
+            "kharif": "The relatively cool highland summer supports fruit, vegetables and field crops where irrigation is available.",
+            "transition": "May-June is the main active growing period, while August-September is useful for harvesting and preparing gardens before colder weather."
+          },
+          "best_sowing_months": [
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "winter frost",
+            "limited irrigation",
+            "short growing season"
+          ],
+          "star_plants": [
+            "Peas (Matar)",
+            "Apple",
+            "Apricot",
+            "Carrot (Gajar)",
+            "Radish (Mooli)",
+            "Onion (Pyaaz)"
+          ]
+        },
+        "jaffarabad": {
+          "growing_notes": {
+            "rabi": "Jaffarabad has a mild winter that is well suited to wheat, onions and winter vegetables under irrigation.",
+            "kharif": "Hot summers support rice, onion, sunflower and heat-tolerant vegetables in the irrigated agricultural belt.",
+            "transition": "May-June is very hot and water-demanding, while August-September requires careful drainage because irrigation and monsoon rainfall can combine to cause waterlogging."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "challenges": [
+            "summer heat",
+            "waterlogging and flooding",
+            "salinity and irrigation management"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Brinjal (Baingan)",
+            "Onion (Pyaaz)",
+            "Cucumber (Kheera)",
+            "Pomegranate (Anaar)",
+            "Coriander (Dhania)"
+          ]
+        },
+        "jhal_magsi": {
+          "growing_notes": {
+            "rabi": "The warm winter supports wheat, onions and vegetables under irrigation, with little frost risk.",
+            "kharif": "Hot summers support rice, onion and heat-tolerant vegetables in irrigated areas.",
+            "transition": "May-June is very hot and irrigation-intensive, while August-September requires careful drainage during monsoon rainfall."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "challenges": [
+            "extreme summer heat",
+            "waterlogging and flooding",
+            "salinity"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Onion (Pyaaz)",
+            "Brinjal (Baingan)",
+            "Cucumber (Kheera)",
+            "Pomegranate (Anaar)",
+            "Coriander (Dhania)"
+          ]
+        },
+        "kalat": {
+          "growing_notes": {
+            "rabi": "Cold winters make hardy vegetables and onions practical, while frost limits tender plants during the coldest months.",
+            "kharif": "The cool dry summer supports potato, onion, cherry and apple production in suitable elevated sites.",
+            "transition": "May-June is the principal growing period after frost, while August-September is useful for fruit maturation and early autumn preparation."
+          },
+          "best_sowing_months": [
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "winter frost",
+            "short growing season",
+            "limited irrigation water"
+          ],
+          "star_plants": [
+            "Apple",
+            "Cherry",
+            "Potato",
+            "Onion (Pyaaz)",
+            "Peas (Matar)",
+            "Dahlia"
+          ]
+        },
+        "kharan": {
+          "growing_notes": {
+            "rabi": "Winter is the more manageable gardening season, with wheat, onions and hardy vegetables grown around irrigated settlements.",
+            "kharif": "Hot dry summers are especially suited to date palms and other heat-tolerant crops where groundwater or irrigation is available.",
+            "transition": "May-June is extremely hot and water-demanding, while August-September is mainly for maintaining irrigated crops and preparing the next winter cycle."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "extreme heat and aridity",
+            "water scarcity",
+            "salinity"
+          ],
+          "star_plants": [
+            "Pomegranate (Anaar)",
+            "Okra (Bhindi)",
+            "Onion (Pyaaz)",
+            "Fennel (Saunf)",
+            "Lemongrass",
+            "Tulsi (Holy Basil)"
+          ]
+        },
+        "khuzdar": {
+          "growing_notes": {
+            "rabi": "Khuzdar's elevated areas have cool winters suitable for hardy vegetables, potatoes and onions, while lower areas have a longer growing period.",
+            "kharif": "Warm dry summers support potatoes, onions, grapes and fruit crops where irrigation is dependable.",
+            "transition": "May-June is the main active growing period, while August-September is useful for summer crops and preparing for autumn planting."
+          },
+          "best_sowing_months": [
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "water scarcity",
+            "frost in higher areas",
+            "salinity and alkaline soils"
+          ],
+          "star_plants": [
+            "Potato",
+            "Onion (Pyaaz)",
+            "Pomegranate (Anaar)",
+            "Grape",
+            "Peas (Matar)",
+            "Carrot (Gajar)"
+          ]
+        },
+        "killa_abdullah": {
+          "growing_notes": {
+            "rabi": "Cool to cold winters support onions and hardy vegetables, but frost limits tender crops.",
+            "kharif": "The dry highland summer is well suited to apples, grapes, apricots and other temperate horticultural crops under irrigation.",
+            "transition": "May-June is a productive orchard and vegetable period, while August-September centres on fruit development and harvesting."
+          },
+          "best_sowing_months": [
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "winter frost",
+            "irrigation shortages",
+            "soil alkalinity and low organic matter"
+          ],
+          "star_plants": [
+            "Apple",
+            "Grape",
+            "Apricot",
+            "Onion (Pyaaz)",
+            "Peas (Matar)",
+            "Pomegranate (Anaar)"
+          ]
+        },
+        "killa_saifullah": {
+          "growing_notes": {
+            "rabi": "Cold conditions make hardy Rabi vegetables and onions more dependable than frost-sensitive crops.",
+            "kharif": "The dry highland summer supports apples, apricots, almonds, grapes and vegetables where irrigation is available.",
+            "transition": "May-June is the principal active growth period, while August-September is important for fruit maturation and preparing for autumn cooling."
+          },
+          "best_sowing_months": [
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "frost and cold",
+            "water scarcity",
+            "short growing season"
+          ],
+          "star_plants": [
+            "Apple",
+            "Apricot",
+            "Almond",
+            "Grape",
+            "Peas (Matar)",
+            "Onion (Pyaaz)"
+          ]
+        },
+        "kohlu": {
+          "growing_notes": {
+            "rabi": "The cooler season is suitable for wheat, pulses and hardy vegetables where moisture is available.",
+            "kharif": "Warm summers favour drought-tolerant crops and fruit such as pomegranate and apricot in suitable valleys.",
+            "transition": "May-June is the main active growth period, while August-September depends heavily on rainfall and local water availability."
+          },
+          "best_sowing_months": [
+            3,
+            4,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "limited water",
+            "variable rainfall",
+            "winter cold and difficult terrain"
+          ],
+          "star_plants": [
+            "Pomegranate (Anaar)",
+            "Apricot",
+            "Okra (Bhindi)",
+            "Peas (Matar)",
+            "Carrot (Gajar)",
+            "Coriander (Dhania)"
+          ]
+        },
+        "lasbela": {
+          "growing_notes": {
+            "rabi": "The mild coastal-to-lowland winter allows a relatively long period for vegetables, onions and wheat where irrigation is available.",
+            "kharif": "Hot summers support heat-tolerant vegetables and irrigated crops, although water quality and high evaporation are major constraints.",
+            "transition": "May-June is very hot and dry, while August-September is suitable for warm-season crops where drainage and irrigation are controlled."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "challenges": [
+            "heat and high evaporation",
+            "water scarcity",
+            "salinity and coastal influence"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Brinjal (Baingan)",
+            "Cucumber (Kheera)",
+            "Pomegranate (Anaar)",
+            "Lemongrass",
+            "Onion (Pyaaz)"
+          ]
+        },
+        "lehri": {
+          "growing_notes": {
+            "rabi": "The warm winter permits wheat, onions and vegetables under irrigation, with little frost limitation.",
+            "kharif": "Very hot summers favour heat-tolerant crops and irrigated vegetables, although water demand becomes high.",
+            "transition": "May-June is extremely hot and dry, while August-September requires careful management of both irrigation and occasional heavy rainfall."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "challenges": [
+            "extreme heat",
+            "water scarcity",
+            "flooding and drainage problems"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Brinjal (Baingan)",
+            "Onion (Pyaaz)",
+            "Cucumber (Kheera)",
+            "Pomegranate (Anaar)",
+            "Fennel (Saunf)"
+          ]
+        },
+        "loralai": {
+          "growing_notes": {
+            "rabi": "Cold winters favour hardy Rabi vegetables, wheat and onions, while frost can damage tender plants.",
+            "kharif": "The dry warm season supports almonds, apricots, pomegranates and other temperate or semi-arid fruit crops where water is available.",
+            "transition": "May-June is the principal growing period, while August-September is useful for fruit maturation and preparation for autumn planting."
+          },
+          "best_sowing_months": [
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "winter frost",
+            "water scarcity",
+            "short growing season"
+          ],
+          "star_plants": [
+            "Almond",
+            "Apricot",
+            "Pomegranate (Anaar)",
+            "Peas (Matar)",
+            "Carrot (Gajar)",
+            "Onion (Pyaaz)"
+          ]
+        },
+        "mastung": {
+          "growing_notes": {
+            "rabi": "Cold winters favour hardy winter vegetables and onions, with planting timed before severe frost and growth slowing substantially in midwinter.",
+            "kharif": "The dry warm season supports potato, onion, grapes and temperate fruit production where irrigation is reliable.",
+            "transition": "May-June is the main vegetable and orchard growth period, while August-September is useful for harvesting and preparing the autumn cycle."
+          },
+          "best_sowing_months": [
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "winter frost",
+            "water scarcity",
+            "alkaline and nutrient-poor soils"
+          ],
+          "star_plants": [
+            "Grape",
+            "Apple",
+            "Pomegranate (Anaar)",
+            "Potato",
+            "Onion (Pyaaz)",
+            "Peas (Matar)"
+          ]
+        },
+        "musakhel": {
+          "growing_notes": {
+            "rabi": "Cool winters support hardy vegetables and wheat, with frost limiting tender crops at higher elevations.",
+            "kharif": "Warm dry summers suit almond, apricot, pomegranate and other drought-tolerant fruit production where irrigation is available.",
+            "transition": "May-June is the main growth period, while August-September is useful for fruit development and preparing for the cooler season."
+          },
+          "best_sowing_months": [
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "winter frost",
+            "limited water",
+            "rugged terrain and difficult access to agricultural inputs"
+          ],
+          "star_plants": [
+            "Almond",
+            "Apricot",
+            "Pomegranate (Anaar)",
+            "Peas (Matar)",
+            "Carrot (Gajar)",
+            "Radish (Mooli)"
+          ]
+        },
+        "nasirabad": {
+          "growing_notes": {
+            "rabi": "The mild winter supports wheat, onions, vegetables and other irrigated Rabi crops with little frost risk.",
+            "kharif": "Hot summers are suited to rice, onion, sunflower and heat-tolerant vegetables in the irrigated plain.",
+            "transition": "May-June is very hot and irrigation-intensive, while August-September is dominated by Kharif crop management and preparation for the following season."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "challenges": [
+            "extreme summer heat",
+            "irrigation and drainage management",
+            "flooding and salinity"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Brinjal (Baingan)",
+            "Onion (Pyaaz)",
+            "Cucumber (Kheera)",
+            "Pomegranate (Anaar)",
+            "Coriander (Dhania)"
+          ]
+        },
+        "nushki": {
+          "growing_notes": {
+            "rabi": "The cool season is the most practical period for wheat, onions and limited vegetable gardening in irrigated areas.",
+            "kharif": "Very hot dry summers favour heat-tolerant crops, especially dates and onions where irrigation is available.",
+            "transition": "May-June is extremely hot and dry, while August-September remains challenging and depends on irrigation or useful rainfall."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "extreme aridity",
+            "water scarcity",
+            "salinity and heat stress"
+          ],
+          "star_plants": [
+            "Pomegranate (Anaar)",
+            "Okra (Bhindi)",
+            "Onion (Pyaaz)",
+            "Fennel (Saunf)",
+            "Lemongrass",
+            "Tulsi (Holy Basil)"
+          ]
+        },
+        "panjgur": {
+          "growing_notes": {
+            "rabi": "Panjgur's mild winter allows irrigated vegetables and wheat, with much less frost risk than the northern highlands.",
+            "kharif": "The hot dry climate is exceptionally suited to date palms, which form one of the district's defining horticultural systems.",
+            "transition": "May-June is very hot and irrigation-intensive, while August-September is important for date development and maintaining irrigated gardens."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "challenges": [
+            "extreme heat",
+            "water scarcity",
+            "salinity and traditional irrigation constraints"
+          ],
+          "star_plants": [
+            "Pomegranate (Anaar)",
+            "Okra (Bhindi)",
+            "Onion (Pyaaz)",
+            "Cucumber (Kheera)",
+            "Fennel (Saunf)",
+            "Lemongrass"
+          ]
+        },
+        "pishin": {
+          "growing_notes": {
+            "rabi": "Pishin's cold winter favours hardy Rabi vegetables and onions, while frost protection is needed for tender plants.",
+            "kharif": "The relatively dry warm season is highly suited to orchards, grapes, apples, apricots and vegetables where irrigation is available.",
+            "transition": "May-June is productive for orchard growth and summer vegetables, while August-September is dominated by fruit maturation and preparation for autumn crops."
+          },
+          "best_sowing_months": [
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "frost and winter cold",
+            "water scarcity",
+            "soil salinity and alkalinity"
+          ],
+          "star_plants": [
+            "Apple",
+            "Grape",
+            "Apricot",
+            "Peas (Matar)",
+            "Onion (Pyaaz)",
+            "Pomegranate (Anaar)"
+          ]
+        },
+        "quetta": {
+          "growing_notes": {
+            "rabi": "Freezing high-altitude winters force severe plant dormancy, requiring greenhouses for winter cropping.",
+            "kharif": "Warm, low-humidity summer days with cool nights create ideal growing conditions for temperate fruits and herbs.",
+            "transition": "April-May spring emergence is short and vibrant, while September-October brings rapid evening temperature drops."
+          },
+          "best_sowing_months": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "challenges": [
+            "Sub-zero winter temperatures freezing soil and killing non-temperate plants",
+            "Acute water scarcity demanding strict drip and mulch management",
+            "Intense high-altitude UV radiation scorching delicate foliage"
+          ],
+          "star_plants": [
+            "Pomegranate (Anaar)",
+            "Rosemary",
+            "Fennel (Saunf)",
+            "Fig (Anjeer)",
+            "Carrot (Gajar)"
+          ]
+        },
+        "sibi": {
+          "growing_notes": {
+            "rabi": "Sibi has a warm winter suitable for wheat, onions and winter vegetables, with a longer frost-free period than the highlands.",
+            "kharif": "Very hot summers favour heat-tolerant crops, rice, onion and other irrigated production, but extreme heat raises water demand sharply.",
+            "transition": "May-June is extremely hot and stressful for gardens, while August-September is suitable for warm-season crops where irrigation and drainage are adequate."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "challenges": [
+            "extreme summer heat",
+            "high irrigation demand",
+            "flooding or drainage problems after heavy rain"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Brinjal (Baingan)",
+            "Onion (Pyaaz)",
+            "Cucumber (Kheera)",
+            "Pomegranate (Anaar)",
+            "Fennel (Saunf)"
+          ]
+        },
+        "sohbatpur": {
+          "growing_notes": {
+            "rabi": "The mild winter is suitable for wheat, onions and winter vegetables in irrigated agricultural areas.",
+            "kharif": "Hot summers favour rice, onion, sunflower and heat-tolerant vegetables where irrigation is reliable.",
+            "transition": "May-June is very hot and water-demanding, while August-September requires careful irrigation and drainage because of monsoon rainfall."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "challenges": [
+            "extreme heat",
+            "flooding and drainage",
+            "salinity and irrigation management"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Onion (Pyaaz)",
+            "Brinjal (Baingan)",
+            "Cucumber (Kheera)",
+            "Pomegranate (Anaar)",
+            "Coriander (Dhania)"
+          ]
+        },
+        "turbat": {
+          "growing_notes": {
+            "rabi": "Turbat has a warm, nearly frost-free winter that permits vegetables, wheat and onions over a longer season than northern Balochistan.",
+            "kharif": "Extremely hot summers favour date palms and other heat-tolerant crops, with irrigated horticulture concentrated along the Kech River valley.",
+            "transition": "May-June is extremely hot and requires careful irrigation, while August-September remains suitable for heat-loving crops but is stressful for shallow-rooted vegetables."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "challenges": [
+            "extreme summer heat",
+            "water scarcity and irrigation dependence",
+            "salinity and pest pressure"
+          ],
+          "star_plants": [
+            "Okra (Bhindi)",
+            "Brinjal (Baingan)",
+            "Pomegranate (Anaar)",
+            "Onion (Pyaaz)",
+            "Fennel (Saunf)",
+            "Lemongrass"
+          ]
+        },
+        "washuk": {
+          "growing_notes": {
+            "rabi": "Cooler months are the practical period for vegetables and wheat in irrigated settlements, while exposed desert areas have a much shorter useful season.",
+            "kharif": "Very hot conditions strongly favour date-palm production, which is a major horticultural activity in the district.",
+            "transition": "May-June is extremely hot and dry, while August-September remains difficult without irrigation but can support crops after useful seasonal rainfall."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "severe water scarcity",
+            "extreme heat",
+            "salinity and irrigation-water quality"
+          ],
+          "star_plants": [
+            "Pomegranate (Anaar)",
+            "Okra (Bhindi)",
+            "Onion (Pyaaz)",
+            "Fennel (Saunf)",
+            "Lemongrass",
+            "Tulsi (Holy Basil)"
+          ]
+        },
+        "zhob": {
+          "growing_notes": {
+            "rabi": "Zhob's cool winters favour hardy vegetables, wheat and pulses, with frost limiting tender crops.",
+            "kharif": "The relatively cool dry summer supports apricot, almond, pomegranate and vegetables where water is available.",
+            "transition": "May-June is the main growing period after winter, while August-September is useful for fruit maturation and early autumn preparation."
+          },
+          "best_sowing_months": [
+            3,
+            4,
+            8,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "winter frost",
+            "water scarcity",
+            "short growing season"
+          ],
+          "star_plants": [
+            "Almond",
+            "Apricot",
+            "Pomegranate (Anaar)",
+            "Peas (Matar)",
+            "Carrot (Gajar)",
+            "Onion (Pyaaz)"
+          ]
+        },
+        "ziarat": {
+          "growing_notes": {
+            "rabi": "Ziarat has a severe cold winter, making hardy crops and protected gardening more practical than tender vegetables during the coldest months.",
+            "kharif": "The cool highland summer is particularly suitable for apples and other temperate fruits, with vegetables fitting the frost-free months.",
+            "transition": "May-June is the main active growing period after winter, while August-September is useful for fruit harvest and preparing gardens for the early return of cold."
+          },
+          "best_sowing_months": [
+            3,
+            4,
+            5,
+            8,
+            9,
+            10
+          ],
+          "challenges": [
+            "severe winter frost and snow",
+            "short growing season",
+            "low soil fertility and alkaline soils"
+          ],
+          "star_plants": [
+            "Apple",
+            "Apricot",
+            "Cherry",
+            "Peas (Matar)",
+            "Carrot (Gajar)",
+            "Dahlia"
+          ]
+        }
+      }
+    },
+    "gilgit_baltistan": {
+      "name": "Gilgit-Baltistan",
+      "name_ur": "گلگت بلتستان",
+      "cities": {
+        "gilgit": {
+          "growing_notes": {
+            "rabi": "Sub-zero mountain winter freezes ground solid, stopping all non-dormant plant activity outdoor.",
+            "kharif": "Arid, sunny mountain summer days provide ideal heat for fast-fruiting temperate orchards and crops.",
+            "transition": "April spring brings rapid snowmelt and planting fever, while September marks early autumn harvesting before cold arrives."
+          },
+          "best_sowing_months": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "challenges": [
+            "Extremely harsh, long sub-zero winters freezing pot root balls",
+            "Very low ambient rainfall creating complete dependency on glacial meltwater",
+            "High daily temperature fluctuations between mountain day and night"
+          ],
+          "star_plants": [
+            "Fig (Anjeer)",
+            "Pomegranate (Anaar)",
+            "Mulberry (Shahtoot)",
+            "Carrot (Gajar)",
+            "Rosemary"
+          ]
+        }
+      }
+    },
+    "islamabad_capital_territory": {
+      "name": "Islamabad Capital Territory",
+      "name_ur": "اسلام آباد",
+      "cities": {
+        "islamabad": {
+          "growing_notes": {
+            "rabi": "Subtropical winter with light morning frost demands cold protection for tender seedlings but yields exceptional brassicas.",
+            "kharif": "Abundant monsoon rainfall keeps summer gardens lush but increases soil erosion and fungal leaf spot.",
+            "transition": "May-June is dry and hot, ideal for harvesting garlic/onions, while September provides crisp transitional air for early winter seed beds."
+          },
+          "best_sowing_months": [
+            2,
+            3,
+            4,
+            9,
+            10,
+            11
+          ],
+          "challenges": [
+            "Occasional sharp winter night frosts damaging tropical foliage",
+            "Heavy monsoon downpours washing out nutrients from pot soil",
+            "Wild monkeys and urban pests raiding vegetable patches"
+          ],
+          "star_plants": [
+            "Peas (Matar)",
+            "Cucumber (Kheera)",
+            "Chrysanthemum (Gul-e-Dawoodi)",
+            "Jasmine (Chambeli)",
+            "Peace Lily"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,431 @@
+{% extends "base.html" %}
+{% block title %}City Growing Guides — Hamara Bagh{% endblock %}
+{% block description %}Growing guides for 115 cities across Pakistan — local sowing windows, Rabi/Kharif notes, honest challenges and star plants for Sindh, Punjab, KPK, Balochistan, Gilgit-Baltistan and Islamabad.{% endblock %}
+{% block og_title %}City growing guides for Pakistan{% endblock %}
+{% block og_description %}Sukkur's summer is not Quetta's summer — pick your city for local sowing months, season notes and star plants.{% endblock %}
+
+{% block content %}
+<!-- Hero -->
+<section class="hero-glow relative overflow-hidden">
+  <img src="{{ url_for('static', filename='img/succulent.svg') }}" alt="" aria-hidden="true" loading="lazy"
+       class="pointer-events-none absolute -right-4 top-8 hidden h-32 w-32 opacity-90 lg:block">
+  <img src="{{ url_for('static', filename='img/bloom.svg') }}" alt="" aria-hidden="true" loading="lazy"
+       class="pointer-events-none absolute bottom-0 right-44 hidden h-20 w-20 opacity-80 xl:block">
+  <div class="mx-auto max-w-6xl px-4 pb-12 pt-12 sm:px-6 sm:pt-16">
+    <span class="chip bg-leaf-50 text-leaf-700">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5" aria-hidden="true"><path d="M2 3.5h6a4 4 0 0 1 4 4V21a3 3 0 0 0-3-3H2z"/><path d="M22 3.5h-6a4 4 0 0 0-4 4V21a3 3 0 0 1 3-3h7z"/></svg>
+      City growing guides
+    </span>
+    <h1 class="mt-4 font-display text-3xl font-semibold tracking-tight text-ink-900 sm:text-4xl">
+      Grow the right thing, <span class="text-leaf-600">where you are</span>
+    </h1>
+    <p class="mt-3 max-w-2xl leading-relaxed text-ink-500">
+      <span class="font-semibold text-terra-700">Sukkur's summer is not Quetta's summer.</span>
+      Pick your city for local sowing windows, Rabi/Kharif notes, honest challenges and the
+      <span class="font-semibold text-leaf-700">star plants that actually thrive there</span>.
+    </p>
+    <p class="mt-2 font-urdu text-lg text-leaf-700" dir="rtl">اپنے شہر کے موسم کے مطابق بونے کی رہنمائی</p>
+    <p class="mt-1 text-sm font-medium text-leaf-700">Karachi ho ya Quetta — har shehar ka apna bagh!</p>
+  </div>
+</section>
+
+<section class="mx-auto max-w-6xl px-4 sm:px-6">
+  <!-- Stats (filled by JS) -->
+  <div id="guide-stats" class="grid gap-3 sm:grid-cols-3"></div>
+
+  <!-- Smart filters -->
+  <div class="mt-6 rounded-3xl border border-leaf-100 bg-white p-4 shadow-sm sm:p-5">
+    <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+      <label for="guide-search" class="flex w-full items-center gap-2.5 rounded-2xl border border-leaf-200 bg-white px-3.5 py-2.5 transition focus-within:border-leaf-600 lg:max-w-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 shrink-0 text-ink-300" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-3.8-3.8"/></svg>
+        <input id="guide-search" type="search" placeholder="Search your city — e.g. Sukkur" autocomplete="off"
+               class="grow bg-transparent text-sm text-ink-900 outline-none placeholder:text-ink-300">
+      </label>
+      <button id="sowing-now" type="button" aria-pressed="false"
+              class="press flex w-fit shrink-0 cursor-pointer items-center gap-1.5 rounded-full border border-leaf-200 bg-white px-3.5 py-2 text-xs font-semibold text-ink-700 transition hover:border-leaf-300 hover:bg-leaf-50">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2.5"/><path d="M16 2.5v4M8 2.5v4M3 9.5h18"/></svg>
+        <span id="sowing-label">Sowing this month</span>
+      </button>
+    </div>
+    <div id="province-pills" class="mt-4 flex flex-wrap gap-2" role="group" aria-label="Filter by province"></div>
+    <div class="mt-4 flex items-center justify-between gap-3 border-t border-leaf-100 pt-3">
+      <span id="guide-count" class="text-xs text-ink-500">Loading city guides…</span>
+      <button id="guide-clear" type="button" class="hidden text-xs font-semibold text-leaf-700 hover:underline">Clear filters</button>
+    </div>
+  </div>
+
+  <!-- Loading skeletons -->
+  <div id="guide-loading" class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="animate-pulse rounded-3xl border border-leaf-100 bg-white p-5">
+      <div class="h-4 w-24 rounded-full bg-leaf-50"></div>
+      <div class="mt-4 h-5 w-32 rounded-lg bg-leaf-50"></div>
+      <div class="mt-4 h-3 w-full rounded bg-leaf-50"></div>
+      <div class="mt-4 h-3 w-2/3 rounded bg-leaf-50"></div>
+    </div>
+    <div class="animate-pulse rounded-3xl border border-leaf-100 bg-white p-5">
+      <div class="h-4 w-24 rounded-full bg-leaf-50"></div>
+      <div class="mt-4 h-5 w-32 rounded-lg bg-leaf-50"></div>
+      <div class="mt-4 h-3 w-full rounded bg-leaf-50"></div>
+      <div class="mt-4 h-3 w-2/3 rounded bg-leaf-50"></div>
+    </div>
+    <div class="hidden animate-pulse rounded-3xl border border-leaf-100 bg-white p-5 sm:block">
+      <div class="h-4 w-24 rounded-full bg-leaf-50"></div>
+      <div class="mt-4 h-5 w-32 rounded-lg bg-leaf-50"></div>
+      <div class="mt-4 h-3 w-full rounded bg-leaf-50"></div>
+      <div class="mt-4 h-3 w-2/3 rounded bg-leaf-50"></div>
+    </div>
+  </div>
+
+  <!-- City grid (filled by JS) -->
+  <div id="guide-grid" class="mt-6 hidden grid gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
+
+  <!-- Empty state -->
+  <div id="guide-empty" class="mt-6 hidden rounded-3xl border border-dashed border-leaf-200 bg-leaf-50/60 px-6 py-14 text-center">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mx-auto h-12 w-12 text-leaf-200" aria-hidden="true"><path d="M12 21v-7.5"/><path d="M12 13.5c0-4 3-7.2 8-7.2-.4 4.6-3.2 7.2-8 7.2z"/><path d="M12 13.5c0-3.4-2.5-6-7-6 .4 4 2.8 6 7 6z"/></svg>
+    <h3 class="mt-4 font-display text-xl font-semibold text-ink-900">No cities match that</h3>
+    <p class="mx-auto mt-1 max-w-md text-sm text-ink-500">Try a different spelling, another province, or clear the filters to see every guide.</p>
+    <button id="guide-empty-clear" type="button" class="press mt-5 rounded-xl bg-leaf-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-leaf-700">Show all cities</button>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="mx-auto mt-16 max-w-6xl px-4 sm:px-6">
+  <div class="pattern-leaf flex flex-col items-start justify-between gap-5 rounded-3xl border border-leaf-100 bg-leaf-50 p-6 sm:flex-row sm:items-center sm:p-8">
+    <div>
+      <h2 class="font-display text-xl font-semibold text-ink-900 sm:text-2xl">Still not sure which plants suit your city?</h2>
+      <p class="mt-1 max-w-xl text-sm leading-relaxed text-ink-500">Run the climate match — live weather, current sowing season and your skill level — and get a ranked plant list in seconds.</p>
+    </div>
+    <a href="/recommend" class="press inline-flex shrink-0 items-center gap-2 rounded-xl bg-leaf-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-leaf-700">
+      Find my plants
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- City guide modal -->
+<dialog id="guide-modal" class="modal">
+  <div class="modal-box max-w-4xl rounded-3xl bg-white p-0">
+    <div class="pattern-leaf flex items-start justify-between gap-3 rounded-t-3xl border-b border-leaf-100 bg-leaf-50 px-5 py-4 sm:px-6">
+      <div class="min-w-0">
+        <p id="gm-province" class="text-xs font-semibold uppercase tracking-wide text-leaf-700"></p>
+        <h3 id="gm-title" class="font-display text-2xl font-semibold leading-snug text-ink-900"></h3>
+      </div>
+      <form method="dialog">
+        <button class="btn btn-sm btn-ghost rounded-xl text-ink-500" aria-label="Close">✕</button>
+      </form>
+    </div>
+    <div id="gm-body" class="max-h-[72vh] overflow-y-auto px-5 py-5 sm:px-6"></div>
+  </div>
+  <form method="dialog" class="modal-backdrop">
+    <button>close</button>
+  </form>
+</dialog>
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function () {
+  'use strict';
+  const $ = function (id) { return document.getElementById(id); };
+  const currentMonth = new Date().getMonth() + 1;
+  const state = { provinces: [], cities: [], province: 'all', q: '', sowing: false, detailCache: {} };
+
+  // ---------------------------------------------------------------------
+  // Stat strip — totals straight from the guide index
+  // ---------------------------------------------------------------------
+  function renderStats() {
+    const sowingCount = state.cities.filter(function (c) {
+      return c.best_sowing_months.indexOf(currentMonth) !== -1;
+    }).length;
+    function tile(icon, value, label) {
+      return '<div class="flex items-center gap-3 rounded-2xl border border-leaf-100 bg-white p-4">' +
+        '<span class="tile h-11 w-11 bg-leaf-50">' + iconSvg(icon, 'h-5 w-5 text-leaf-600') + '</span>' +
+        '<div><p class="font-display text-xl font-semibold leading-tight text-ink-900">' + value + '</p>' +
+        '<p class="text-xs text-ink-500">' + label + '</p></div></div>';
+    }
+    $('guide-stats').innerHTML =
+      tile('mapPin', state.cities.length, 'city guides') +
+      tile('compass', state.provinces.length, 'provinces & regions') +
+      tile('calendar', sowingCount, 'sowing in ' + MONTHS[currentMonth - 1]);
+  }
+
+  // ---------------------------------------------------------------------
+  // Province pills (with live counts)
+  // ---------------------------------------------------------------------
+  function renderPills() {
+    const counts = {};
+    state.cities.forEach(function (c) { counts[c.province] = (counts[c.province] || 0) + 1; });
+    function pill(slug, label, count, urdu) {
+      const active = state.province === slug;
+      return '<button type="button" data-province="' + slug + '"' + (urdu ? ' title="' + esc(urdu) + '"' : '') +
+        ' class="chip press cursor-pointer border transition ' + (active ? 'border-leaf-600 bg-leaf-600 text-white' : 'border-leaf-200 bg-white text-ink-700 hover:border-leaf-300 hover:bg-leaf-50') + '">' +
+        esc(label) + ' <span class="' + (active ? 'text-leaf-100' : 'text-ink-300') + '">' + count + '</span></button>';
+    }
+    let html = pill('all', 'All', state.cities.length, '');
+    state.provinces.forEach(function (p) { html += pill(p.slug, p.name, counts[p.slug] || 0, p.name_ur); });
+    $('province-pills').innerHTML = html;
+  }
+
+  // ---------------------------------------------------------------------
+  // Filtering + grid
+  // ---------------------------------------------------------------------
+  function filtered() {
+    return state.cities.filter(function (c) {
+      if (state.province !== 'all' && c.province !== state.province) return false;
+      if (state.q && c.name.toLowerCase().indexOf(state.q) === -1) return false;
+      if (state.sowing && c.best_sowing_months.indexOf(currentMonth) === -1) return false;
+      return true;
+    });
+  }
+
+  function monthDots(months) {
+    return MONTHS.map(function (name, i) {
+      const active = months.indexOf(i + 1) !== -1;
+      const now = i + 1 === currentMonth;
+      return '<span class="inline-block h-1.5 w-1.5 rounded-full ' + (active ? 'bg-leaf-600' : 'bg-leaf-100') + (now ? ' ring-2 ring-leaf-300' : '') + '" title="' + name + (active ? ' — good sowing month' : '') + '"></span>';
+    }).join('');
+  }
+
+  function starPreview(plants) {
+    const names = plants || [];
+    const shown = names.slice(0, 3).map(function (name) {
+      const emoji = plantEmoji({ common_name: name, category: 'other' });
+      return '<span class="chip max-w-[11rem] border border-leaf-100 bg-leaf-50/70 text-[11px] text-ink-700">' +
+        emoji + ' <span class="truncate">' + esc(name) + '</span></span>';
+    }).join('');
+    const extra = names.length > 3
+      ? '<span class="chip bg-white text-[11px] text-ink-300">+' + (names.length - 3) + ' more</span>'
+      : '';
+    return shown + extra;
+  }
+
+  function card(c, index) {
+    const sowingNow = c.best_sowing_months.indexOf(currentMonth) !== -1;
+    return '<article role="button" tabindex="0" data-slug="' + c.slug + '" aria-label="Open the ' + esc(c.name) + ' growing guide"' +
+      ' class="lift group cursor-pointer rounded-3xl border border-leaf-100 bg-white p-4 sm:p-5">' +
+      '<div class="flex items-center justify-between gap-2">' +
+      '<span class="chip border border-leaf-100 bg-leaf-50 text-[11px] text-leaf-700">' + esc(c.province_name) + '</span>' +
+      (sowingNow ? '<span class="chip bg-leaf-600 text-[11px] text-white">' + iconSvg('calendar', 'h-3 w-3') + 'Sowing now</span>' : '') +
+      '</div>' +
+      '<div class="mt-3 flex items-center justify-between gap-2">' +
+      '<h3 class="font-display text-lg font-semibold text-ink-900">' + esc(c.name) + '</h3>' +
+      iconSvg('arrowRight', 'h-4 w-4 shrink-0 text-leaf-600 opacity-0 transition duration-300 group-hover:opacity-100') +
+      '</div>' +
+      '<div class="mt-2 flex flex-wrap items-center gap-1.5">' + starPreview(c.star_plants) + '</div>' +
+      '<div class="mt-3 flex items-center justify-between gap-2 border-t border-leaf-100 pt-3">' +
+      '<span class="text-[11px] font-medium uppercase tracking-wide text-ink-500">Sowing months</span>' +
+      '<span class="flex items-center gap-[3px]">' + monthDots(c.best_sowing_months) + '</span>' +
+      '</div></article>';
+  }
+
+  function renderGrid() {
+    const list = filtered();
+    const active = state.province !== 'all' || state.q || state.sowing;
+    $('guide-clear').classList.toggle('hidden', !active);
+    $('guide-loading').classList.add('hidden');
+
+    const provName = state.province === 'all' ? '' : (state.provinces.filter(function (p) {
+      return p.slug === state.province;
+    })[0] || {}).name;
+
+    let countText = '<b class="font-semibold text-ink-700">' + list.length + '</b> city guide' + (list.length === 1 ? '' : 's');
+    if (provName) countText += ' in ' + esc(provName);
+    if (state.sowing) countText += state.province === 'all' ? ' sowing in ' + MONTHS[currentMonth - 1] : ' · sowing now';
+    if (state.q) countText += ' matching "' + esc(state.q) + '"';
+    $('guide-count').innerHTML = countText;
+
+    if (!list.length) {
+      $('guide-grid').classList.add('hidden');
+      $('guide-empty').classList.remove('hidden');
+      return;
+    }
+    $('guide-empty').classList.add('hidden');
+    $('guide-grid').classList.remove('hidden');
+    $('guide-grid').innerHTML = list.map(card).join('');
+  }
+
+  // ---------------------------------------------------------------------
+  // Detail modal
+  // ---------------------------------------------------------------------
+  async function openGuide(slug) {
+    const modal = $('guide-modal');
+    $('gm-province').textContent = '';
+    $('gm-title').textContent = '';
+    $('gm-body').innerHTML = '<div class="flex items-center gap-3 py-6 text-sm text-ink-500">' +
+      '<span class="loading loading-spinner loading-sm text-leaf-600"></span>Loading guide…</div>';
+    if (!modal.open) modal.showModal();
+
+    try {
+      let data = state.detailCache[slug];
+      if (!data) {
+        data = await api('/api/location/growing-guide?city=' + encodeURIComponent(slug));
+        state.detailCache[slug] = data;
+      }
+      await renderDetail(data);
+    } catch (err) {
+      $('gm-body').innerHTML = '<div class="rounded-2xl border border-blush-200 bg-blush-100 px-4 py-3 text-sm text-blush-600">' +
+        esc(err.message) + '</div>';
+    }
+  }
+
+  async function renderDetail(data) {
+    const guide = data.guide || {};
+    const notes = guide.growing_notes || {};
+    const best = guide.best_sowing_months || [];
+    const cityName = data.city_name || data.city;
+    $('gm-province').textContent = (data.province_name || '') + ' · city guide';
+    $('gm-title').textContent = cityName;
+
+    const monthPills = MONTHS.map(function (name, index) {
+      const active = best.indexOf(index + 1) !== -1;
+      const now = index + 1 === currentMonth;
+      return '<span title="' + name + (now ? ' — this month' : '') + '" class="chip ' + (active ? 'bg-leaf-600 text-white' : 'border border-leaf-100 bg-white text-ink-300') + (now ? ' ring-2 ring-leaf-300' : '') + '">' + name.slice(0, 3) + '</span>';
+    }).join('');
+
+    function noteTile(icon, title, text) {
+      return '<div class="rounded-2xl border border-leaf-100 bg-white p-4">' +
+        '<div class="flex items-center gap-1.5 text-sm font-semibold text-leaf-800">' + iconSvg(icon, 'h-4 w-4 text-leaf-600') + title + '</div>' +
+        '<p class="mt-2 text-sm leading-relaxed text-ink-700">' + esc(text || '—') + '</p></div>';
+    }
+
+    const challenges = (guide.challenges || []).map(function (item) {
+      return '<li class="flex gap-2 text-sm text-ink-700">' + iconSvg('alert', 'mt-0.5 h-4 w-4 shrink-0 text-[#8a6d1f]') +
+        '<span>' + esc(item) + '</span></li>';
+    }).join('');
+
+    // Split star plants into library plants (tap = care card) and reference-only ones
+    const names = guide.star_plants || [];
+    const ids = await Promise.all(names.map(function (n) { return plantIdByName(n); }));
+    const stars = names.map(function (name, i) {
+      const emoji = plantEmoji({ common_name: name, category: 'other' });
+      if (ids[i]) {
+        return '<button type="button" data-star="' + esc(name) + '" class="chip cursor-pointer border border-leaf-200 bg-white text-ink-700 transition hover:border-leaf-300 hover:bg-leaf-50">' +
+          emoji + ' ' + esc(name) + '</button>';
+      }
+      return '<span class="chip border border-leaf-100 bg-leaf-50/60 text-ink-500" title="Not in the plant library yet">' +
+        emoji + ' <span>' + esc(name) + '</span></span>';
+    }).join('');
+
+    $('gm-body').innerHTML =
+      '<div class="flex flex-wrap items-center gap-x-3 gap-y-2">' +
+      '<span class="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-ink-500">' +
+      iconSvg('calendar', 'h-4 w-4 text-leaf-600') + 'Best sowing months</span>' +
+      '<div class="flex flex-wrap gap-1.5">' + monthPills + '</div></div>' +
+      '<div class="mt-5 grid gap-3 sm:grid-cols-3">' +
+      noteTile('snow', 'Rabi (winter)', notes.rabi) +
+      noteTile('sun', 'Kharif (summer)', notes.kharif) +
+      noteTile('refresh', 'Shoulder season', notes.transition) +
+      '</div>' +
+      '<div class="mt-4 grid gap-3 sm:grid-cols-2">' +
+      '<div class="rounded-2xl border border-leaf-100 bg-white p-4">' +
+      '<div class="flex items-center gap-1.5 text-sm font-semibold text-leaf-800">' + iconSvg('alert', 'h-4 w-4 text-[#8a6d1f]') + 'Local challenges</div>' +
+      '<ul class="mt-2 space-y-1.5">' + challenges + '</ul></div>' +
+      '<div class="rounded-2xl border border-leaf-100 bg-white p-4">' +
+      '<div class="flex items-center gap-1.5 text-sm font-semibold text-leaf-800">' + iconSvg('star', 'h-4 w-4 text-[#8a6d1f]') + 'Star plants here</div>' +
+      '<div class="mt-2 flex flex-wrap gap-1.5">' + stars + '</div>' +
+      '<p class="mt-3 text-xs text-ink-500">Tap a plant to open its care card.</p></div>' +
+      '</div>' +
+      '<a href="/recommend?city=' + encodeURIComponent(cityName) + '" class="group mt-5 flex items-center justify-between gap-3 rounded-2xl border border-leaf-100 bg-leaf-50 p-4 transition hover:bg-leaf-100">' +
+      '<span class="text-sm font-semibold text-leaf-800">See which plants match ' + esc(cityName) + ' right now</span>' +
+      iconSvg('arrowRight', 'h-4 w-4 text-leaf-600 transition group-hover:translate-x-0.5') +
+      '</a>';
+  }
+
+  // ---------------------------------------------------------------------
+  // Wiring
+  // ---------------------------------------------------------------------
+  function resetFilters() {
+    state.province = 'all';
+    state.q = '';
+    state.sowing = false;
+    $('guide-search').value = '';
+    syncSowingBtn();
+    renderPills();
+    renderGrid();
+  }
+
+  function syncSowingBtn() {
+    const btn = $('sowing-now');
+    btn.setAttribute('aria-pressed', String(state.sowing));
+    btn.classList.toggle('border-leaf-600', state.sowing);
+    btn.classList.toggle('bg-leaf-600', state.sowing);
+    btn.classList.toggle('text-white', state.sowing);
+    btn.classList.toggle('bg-white', !state.sowing);
+    btn.classList.toggle('text-ink-700', !state.sowing);
+  }
+
+  $('guide-search').addEventListener('input', function (e) {
+    state.q = e.target.value.trim().toLowerCase();
+    renderGrid();
+  });
+
+  $('sowing-now').addEventListener('click', function () {
+    state.sowing = !state.sowing;
+    syncSowingBtn();
+    renderGrid();
+  });
+
+  $('province-pills').addEventListener('click', function (e) {
+    const btn = e.target.closest('button[data-province]');
+    if (!btn) return;
+    state.province = btn.dataset.province;
+    renderPills();
+    renderGrid();
+  });
+
+  $('guide-grid').addEventListener('click', function (e) {
+    const cardEl = e.target.closest('[data-slug]');
+    if (cardEl) openGuide(cardEl.dataset.slug);
+  });
+
+  $('guide-grid').addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    const cardEl = e.target.closest('[data-slug]');
+    if (cardEl) {
+      e.preventDefault();
+      openGuide(cardEl.dataset.slug);
+    }
+  });
+
+  $('gm-body').addEventListener('click', async function (e) {
+    const btn = e.target.closest('button[data-star]');
+    if (!btn) return;
+    const id = await plantIdByName(btn.dataset.star);
+    if (id) openPlantModal(id);
+  });
+
+  $('guide-clear').addEventListener('click', resetFilters);
+  $('guide-empty-clear').addEventListener('click', resetFilters);
+
+  // ---------------------------------------------------------------------
+  // Boot — load the index, then honour ?city= / ?province= deep links
+  // ---------------------------------------------------------------------
+  $('sowing-label').textContent = 'Sowing in ' + MONTHS[currentMonth - 1];
+
+  (async function init() {
+    try {
+      const data = await api('/api/location/growing-guides');
+      state.provinces = data.provinces || [];
+      state.cities = data.cities || [];
+
+      const params = new URLSearchParams(window.location.search);
+      const prov = params.get('province');
+      if (prov && state.provinces.some(function (p) { return p.slug === prov; })) state.province = prov;
+
+      renderStats();
+      renderPills();
+      renderGrid();
+
+      const rawCity = params.get('city');
+      if (rawCity) {
+        const slug = rawCity.toLowerCase().split(',')[0].trim().replace(/[\s-]+/g, '_');
+        if (state.cities.some(function (c) { return c.slug === slug; })) openGuide(slug);
+      }
+    } catch (err) {
+      $('guide-loading').classList.add('hidden');
+      $('guide-count').innerHTML = '<span class="text-blush-600">Could not load guides: ' + esc(err.message) + '</span>';
+    }
+  })();
+})();
+</script>
+{% endblock %}

@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en" data-theme="emerald">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Hamara Bagh — know what grows where you live{% endblock %}</title>
+  <meta name="description" content="{% block description %}Hamara Bagh tells you exactly which plants to grow in your city right now — climate-matched recommendations, a Rabi/Kharif sowing calendar, watering reminders and a plant troubleshooter built for Pakistan and beyond.{% endblock %}">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="author" content="Saqlain Abbas">
+
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='img/seedling.svg') }}">
+
+  <meta property="og:site_name" content="Hamara Bagh">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{% block og_title %}Hamara Bagh — know what grows where you live{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}Climate-matched plant recommendations for your city, right now. Free, open source, no account needed.{% endblock %}">
+  <meta property="og:image" content="{{ url_for('static', filename='og-cover.png', _external=True) }}">
+  <meta name="twitter:card" content="summary_large_image">
+  {% block head_extra %}{% endblock %}
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;600&display=swap" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4/dist/full.min.css" rel="stylesheet" type="text/css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            display: ['Fraunces', 'ui-serif', 'Georgia', 'serif'],
+          },
+          colors: {
+            leaf: { 50: '#f3f9f0', 100: '#e5f1de', 200: '#cbe3bf', 300: '#a6cf92', 400: '#7db664', 500: '#5a9a42', 600: '#467a33', 700: '#38612a', 800: '#2f4d25', 900: '#284020' },
+            terra: { 100: '#fbeee6', 200: '#f3d9c6', 300: '#e8b898', 500: '#c97b4a', 600: '#b06639', 700: '#9a5730' },
+            sun: { 100: '#fdf7e4', 200: '#f9ecc0', 300: '#f2dd93', 400: '#edc65f', 600: '#c79a2e' },
+            sky: { 100: '#e9f4f8', 200: '#cfe8f1', 300: '#a7d3e4', 500: '#5da7c4', 600: '#478ea9' },
+            blush: { 100: '#fcf0f2', 200: '#f7dde2', 300: '#f0b9c4', 500: '#d97a92', 600: '#c25f79' },
+            ink: { 300: '#93a397', 500: '#5b6b5e', 700: '#33463a', 900: '#1f2b22' },
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="min-h-screen bg-white font-sans text-ink-900 antialiased">
+  {% set nav_items = [
+    ('/', 'Home'),
+    ('/recommend', 'What to Grow'),
+    ('/plants', 'Plant Library'),
+    ('/flowers', 'Flowers'),
+    ('/match', 'Matchmaker'),
+    ('/calendar', 'Calendar'),
+    ('/guides', 'City Guides'),
+    ('/troubleshoot', 'Troubleshoot'),
+    ('/journal', 'My Journal'),
+  ] %}
+
+  <header class="sticky top-0 z-40 border-b border-leaf-100 bg-white/95 backdrop-blur">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <!-- Row 1: menu button (mobile), brand and the main CTA -->
+      <div class="flex h-14 items-center justify-between gap-3">
+        <div class="flex items-center gap-1.5">
+          <button id="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"
+                  class="rounded-xl border border-leaf-100 bg-white p-2 text-ink-700 transition hover:border-leaf-200 hover:bg-leaf-50 xl:hidden">
+            <svg id="nav-icon-open" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" class="h-5 w-5" aria-hidden="true"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></svg>
+            <svg id="nav-icon-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" class="hidden h-5 w-5" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg>
+          </button>
+          <a href="/" class="group flex items-center gap-2 px-1">
+            <span class="tile h-9 w-9 bg-leaf-100 transition-colors duration-300 group-hover:bg-leaf-200">
+              <img src="{{ url_for('static', filename='img/seedling.svg') }}" alt="" class="h-5 w-5">
+            </span>
+            <span class="whitespace-nowrap font-display text-xl font-semibold tracking-tight text-ink-900">Hamara <span class="text-leaf-600">Bagh</span></span>
+          </a>
+        </div>
+        <a href="/recommend" class="hidden whitespace-nowrap rounded-xl bg-leaf-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-leaf-700 sm:inline-flex">Find my plants</a>
+      </div>
+      <!-- Row 2: nav links on their own full-width rounded rail (big screens only) -->
+      <div class="hidden xl:block">
+        <div class="pb-2 pt-2">
+          <ul class="flex items-center justify-center gap-0.5 rounded-full border border-leaf-100 bg-leaf-50/80 p-1 text-sm font-medium">
+            {% for path, label in nav_items %}
+            <li>
+              <a href="{{ path }}" class="block whitespace-nowrap rounded-full px-3 py-1.5 {% if request.path == path %}bg-white font-semibold text-leaf-700 shadow-sm{% else %}text-ink-700 hover:bg-white/70 hover:text-leaf-700{% endif %}">{{ label }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- Mobile menu panel -->
+    <div id="mobile-menu" class="absolute left-0 right-0 top-full hidden max-h-[calc(100vh-3.5rem)] overflow-y-auto border-t border-leaf-100 bg-white shadow-xl xl:hidden">
+      <nav class="mx-auto max-w-6xl px-4 py-4 sm:px-6">
+        <p class="px-1 pb-2 text-xs font-semibold uppercase tracking-wide text-ink-500">Explore</p>
+        <ul class="grid grid-cols-2 gap-2">
+          {% for path, label in nav_items %}
+          <li{% if loop.last %} class="col-span-2"{% endif %}>
+            <a href="{{ path }}" class="block rounded-2xl border px-3.5 py-3 text-sm font-medium transition {% if request.path == path %}border-leaf-200 bg-leaf-50 text-leaf-800{% else %}border-leaf-100 text-ink-700 hover:border-leaf-200 hover:bg-leaf-50{% endif %}">{{ label }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+        <a href="/recommend" class="mt-4 flex w-full items-center justify-center rounded-2xl bg-leaf-600 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-leaf-700">Find my plants</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>{% block content %}{% endblock %}</main>
+
+  <footer class="pattern-leaf mt-20 border-t border-leaf-100 bg-leaf-50">
+    <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+      <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="tile h-9 w-9 bg-white">
+              <img src="{{ url_for('static', filename='img/seedling.svg') }}" alt="" class="h-5 w-5">
+            </span>
+            <span class="font-display text-lg font-semibold text-ink-900">Hamara <span class="text-leaf-600">Bagh</span></span>
+          </div>
+          <p class="mt-3 max-w-xs text-sm leading-relaxed text-ink-500">
+            Plant knowledge and location-based growing advice — built for Pakistan's climate,
+            useful anywhere. Free, open source, no signup.
+          </p>
+          <p class="mt-2 font-urdu text-sm text-leaf-700" dir="rtl">پاکستان کا گارڈننگ ساتھی</p>
+          <p class="mt-1 text-xs font-medium text-leaf-700">Har Shehar. Har Mausam. Har Paudha.</p>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold uppercase tracking-wide text-ink-500">Explore</h3>
+          <ul class="mt-3 space-y-2 text-sm">
+            {% for path, label in nav_items[1:] %}
+            <li><a href="{{ path }}" class="text-ink-700 hover:text-leaf-700">{{ label }}</a></li>
+            {% endfor %}
+            <li><a href="/api/health" class="text-ink-700 hover:text-leaf-700">API health check</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold uppercase tracking-wide text-ink-500">Powered by</h3>
+          <ul class="mt-3 space-y-2 text-sm text-ink-500">
+            <li>Live weather — Open-Meteo (no key needed)</li>
+            <li>Plant data curated by hand, cross-checked with GBIF, iNaturalist and Wikipedia</li>
+            <li>Community results reported by growers like you</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold uppercase tracking-wide text-ink-500">Connect</h3>
+          <p class="mt-3 text-sm leading-relaxed text-ink-500">
+            Designed &amp; built by <span class="font-semibold text-ink-700">Saqlain Abbas</span>
+          </p>
+          <p class="font-urdu text-base text-leaf-700" dir="rtl">ثقلین عباس</p>
+          <a href="https://www.linkedin.com/in/saqlainabbas11" target="_blank" rel="noopener"
+             class="mt-3 inline-flex items-center gap-2 rounded-xl border border-leaf-200 bg-white px-3.5 py-2 text-sm font-semibold text-[#0a66c2] shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-leaf-300 hover:shadow-md">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            Connect on LinkedIn
+          </a>
+        </div>
+      </div>
+      <div class="mt-10 flex flex-col gap-3 border-t border-leaf-200/60 pt-6 text-xs text-ink-500 sm:flex-row sm:items-center sm:justify-between">
+        <p>Open source · Your journal lives in your browser — no account, ever.</p>
+        <p class="flex items-center gap-1.5">
+          Made with
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#c25f79" class="h-3.5 w-3.5" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          in Pakistan · © {{ 2026 }} Hamara Bagh
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Shared plant detail modal (filled by script.js) -->
+  <dialog id="plant-detail-modal" class="modal">
+    <div class="modal-box max-w-2xl rounded-3xl bg-white p-0">
+      <div class="flex items-center justify-between border-b border-leaf-100 px-6 py-4">
+        <h3 class="font-display text-lg font-semibold text-ink-900">Plant details</h3>
+        <form method="dialog">
+          <button class="btn btn-sm btn-ghost rounded-xl text-ink-500" aria-label="Close">✕</button>
+        </form>
+      </div>
+      <div id="pd-loading" class="p-10 text-center text-sm text-ink-500">
+        <span class="loading loading-spinner loading-sm text-leaf-600"></span>
+        <span class="ml-2">Fetching plant details…</span>
+      </div>
+      <div id="pd-error" class="m-6 hidden rounded-2xl border border-blush-200 bg-blush-100 px-4 py-3 text-sm text-blush-600"></div>
+      <div id="pd-content" class="hidden max-h-[75vh] overflow-y-auto px-6 py-5">
+        <div class="flex items-start gap-4">
+          <div id="pd-emoji" class="tile h-16 w-16 bg-leaf-50 text-3xl">🌱</div>
+          <div class="min-w-0 flex-1">
+            <h3 id="pd-name" class="font-display text-2xl font-semibold leading-snug text-ink-900"></h3>
+            <p id="pd-sci" class="text-sm italic text-ink-500"></p>
+            <div id="pd-badges" class="mt-2 flex flex-wrap gap-2"></div>
+          </div>
+        </div>
+        <p id="pd-desc" class="mt-4 text-sm leading-relaxed text-ink-700"></p>
+        <div id="pd-facts" class="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3"></div>
+        <div id="pd-tips-wrap" class="mt-5 hidden rounded-2xl bg-leaf-50 p-4">
+          <h4 class="flex items-center gap-1.5 text-sm font-semibold text-leaf-800"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-leaf-600" aria-hidden="true"><path d="M12 21v-7.5"/><path d="M12 13.5c0-4 3-7.2 8-7.2-.4 4.6-3.2 7.2-8 7.2z"/><path d="M12 13.5c0-3.4-2.5-6-7-6 .4 4 2.8 6 7 6z"/></svg>Care tips</h4>
+          <p id="pd-tips" class="mt-1 text-sm leading-relaxed text-ink-700"></p>
+        </div>
+        <div id="pd-community-wrap" class="mt-5 rounded-2xl border border-leaf-100 p-4"></div>
+        <div id="pd-wiki-wrap" class="mt-5 hidden border-t border-leaf-100 pt-5"></div>
+      </div>
+    </div>
+    <form method="dialog" class="modal-backdrop">
+      <button>close</button>
+    </form>
+  </dialog>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <script>
+    // Mobile menu: instant show/hide, closes on link tap, Escape or outside click.
+    (function () {
+      var toggle = document.getElementById('nav-toggle');
+      var panel = document.getElementById('mobile-menu');
+      if (!toggle || !panel) return;
+      function setOpen(open) {
+        panel.classList.toggle('hidden', !open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        document.getElementById('nav-icon-open').classList.toggle('hidden', open);
+        document.getElementById('nav-icon-close').classList.toggle('hidden', !open);
+      }
+      toggle.addEventListener('click', function () { setOpen(panel.classList.contains('hidden')); });
+      panel.addEventListener('click', function (e) { if (e.target.closest('a')) setOpen(false); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+      document.addEventListener('click', function (e) {
+        if (panel.classList.contains('hidden')) return;
+        if (e.target.closest('#mobile-menu') || e.target.closest('#nav-toggle')) return;
+        setOpen(false);
+      });
+    })();
+  </script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

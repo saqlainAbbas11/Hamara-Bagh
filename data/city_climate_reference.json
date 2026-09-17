@@ -1,0 +1,64 @@
+{
+  "karachi": {
+    "lat": 24.8607, "lon": 67.0011,
+    "climate_type": "hot_arid_coastal",
+    "summary": "Hot and humid most of the year, very mild winters, minimal rainfall. High humidity from the coast but low actual rain.",
+    "avg_summer_max_c": 34, "avg_winter_min_c": 13, "typical_humidity": "high", "typical_rainfall": "very_low"
+  },
+  "lahore": {
+    "lat": 31.5497, "lon": 74.3436,
+    "climate_type": "semi_arid_continental",
+    "summary": "Hot summers, cool foggy winters, monsoon rain in July-August. Wide temperature swing across the year.",
+    "avg_summer_max_c": 40, "avg_winter_min_c": 5, "typical_humidity": "medium", "typical_rainfall": "medium"
+  },
+  "islamabad": {
+    "lat": 33.6844, "lon": 73.0479,
+    "climate_type": "humid_subtropical",
+    "summer_max_c": 35,
+    "climate_type_2": "moderate_with_monsoon",
+    "summary": "Milder than the plains, good monsoon rainfall, cooler winters with occasional light frost. Best climate in Pakistan for roses and temperate flowers.",
+    "avg_summer_max_c": 35, "avg_winter_min_c": 2, "typical_humidity": "medium", "typical_rainfall": "high"
+  },
+  "peshawar": {
+    "lat": 34.0151, "lon": 71.5249,
+    "climate_type": "semi_arid_continental",
+    "summary": "Hot dry summers, cold winters, low rainfall overall.",
+    "avg_summer_max_c": 39, "avg_winter_min_c": 4, "typical_humidity": "low", "typical_rainfall": "low"
+  },
+  "quetta": {
+    "lat": 30.1798, "lon": 66.9750,
+    "climate_type": "cold_semi_arid_highland",
+    "summary": "High altitude - cool summers, cold winters with frost/snow possible. Very different from the rest of Pakistan; good for fruit trees like apples, grapes.",
+    "avg_summer_max_c": 32, "avg_winter_min_c": -3, "typical_humidity": "low", "typical_rainfall": "low"
+  },
+  "multan": {
+    "lat": 30.1575, "lon": 71.5249,
+    "climate_type": "hot_arid_continental",
+    "summary": "One of the hottest cities in Pakistan in summer, very dry, mild winters. Needs heat and drought tolerant plants.",
+    "avg_summer_max_c": 42, "avg_winter_min_c": 6, "typical_humidity": "low", "typical_rainfall": "very_low"
+  },
+  "faisalabad": {
+    "lat": 31.4504, "lon": 73.1350,
+    "climate_type": "semi_arid_continental",
+    "summary": "Hot summers, cool winters, similar to Lahore but slightly drier.",
+    "avg_summer_max_c": 40, "avg_winter_min_c": 5, "typical_humidity": "medium", "typical_rainfall": "medium"
+  },
+  "hyderabad": {
+    "lat": 25.3960, "lon": 68.3578,
+    "climate_type": "hot_arid",
+    "summary": "Very hot summers, dry, mild winters.",
+    "avg_summer_max_c": 40, "avg_winter_min_c": 11, "typical_humidity": "medium", "typical_rainfall": "low"
+  },
+  "murree": {
+    "lat": 33.9070, "lon": 73.3943,
+    "climate_type": "cold_temperate_highland",
+    "summary": "Hill station climate - cool summers, snowy winters. Suited to temperate plants that fail elsewhere in Pakistan.",
+    "avg_summer_max_c": 24, "avg_winter_min_c": -2, "typical_humidity": "high", "typical_rainfall": "high"
+  },
+  "gilgit": {
+    "lat": 35.9208, "lon": 74.3144,
+    "climate_type": "cold_arid_mountain",
+    "summary": "Cold high-altitude desert climate. Very different plant palette - stone fruit and cold-hardy species do well.",
+    "avg_summer_max_c": 33, "avg_winter_min_c": -6, "typical_humidity": "low", "typical_rainfall": "very_low"
+  }
+}

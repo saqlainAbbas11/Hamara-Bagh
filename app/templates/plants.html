@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+
+{% block title %}Plant Library — every plant in Hamara Bagh{% endblock %}
+{% block description %}Browse the Hamara Bagh plant library — vegetables, herbs, flowers, trees and houseplants, each tagged with temperature range, water needs, sunlight and season. Tap any plant for care details.{% endblock %}
+{% block og_title %}Plant Library — Hamara Bagh{% endblock %}
+{% block og_description %}Browse every plant in the curated dataset with temperatures, watering and season tags.{% endblock %}
+
+{% block content %}
+<section class="mx-auto max-w-6xl px-4 pt-10 sm:px-6">
+  <span class="chip bg-leaf-50 text-leaf-700"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5" aria-hidden="true"><path d="M12 21v-7.5"/><path d="M12 13.5c0-4 3-7.2 8-7.2-.4 4.6-3.2 7.2-8 7.2z"/><path d="M12 13.5c0-3.4-2.5-6-7-6 .4 4 2.8 6 7 6z"/></svg>{{ plant_count or 51 }} hand-curated plants</span>
+  <h1 class="mt-4 font-display text-3xl font-semibold tracking-tight text-ink-900 sm:text-4xl">Plant library</h1>
+  <p class="mt-3 max-w-2xl leading-relaxed text-ink-500">
+    Every plant Hamara Bagh knows — each one tagged with the temperatures, water needs and season
+    <span class="font-semibold text-leaf-700">it actually wants</span>. Tap any card for care tips,
+    ideal ranges and <span class="font-semibold text-sky-600">what other growers report</span>.
+  </p>
+
+  <!-- Filters -->
+  <div class="mt-8 rounded-3xl border border-leaf-100 bg-white p-5 shadow-sm sm:p-6">
+    <div class="grid gap-4 md:grid-cols-[1fr_auto] md:items-end">
+      <div>
+        <label for="q" class="text-sm font-medium text-ink-700">Search</label>
+        <input id="q" type="search" placeholder="Tomato, mint, neem…"
+               class="input input-bordered mt-1 w-full rounded-xl border-leaf-200 bg-white focus:border-leaf-500">
+      </div>
+      <div>
+        <label for="difficulty" class="text-sm font-medium text-ink-700">Difficulty</label>
+        <select id="difficulty" class="select select-bordered mt-1 w-full rounded-xl border-leaf-200 bg-white md:w-48">
+          <option value="">Any difficulty</option>
+          <option value="very_easy">Beginner-proof</option>
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Challenging</option>
+        </select>
+      </div>
+    </div>
+    <div id="category-chips" class="mt-4 flex flex-wrap gap-2"></div>
+  </div>
+
+  <div class="mt-6 flex flex-wrap items-center justify-between gap-2">
+    <span id="count" class="text-sm text-ink-500"></span>
+    <span class="text-xs text-ink-500">Tap a card for full care details</span>
+  </div>
+
+  <div id="plant-grid" class="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"></div>
+
+  <div id="empty" class="mt-6 hidden rounded-3xl border border-dashed border-leaf-200 bg-leaf-50 p-10 text-center text-ink-500">
+    No plants matched — try a different search or category.
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const state = { q: '', category: '', difficulty: '' };
+  const $ = function (id) { return document.getElementById(id); };
+  const CHIP_ACTIVE = 'chip bg-leaf-600 text-white';
+  const CHIP_IDLE = 'chip border border-leaf-200 bg-white text-ink-700 hover:bg-leaf-50';
+
+  async function loadCategories() {
+    try {
+      const data = await api('/api/plants/categories');
+
+      const chips = $('category-chips');
+      chips.innerHTML = '';
+      const all = document.createElement('button');
+      all.type = 'button';
+      all.textContent = 'All plants';
+      all.dataset.category = '';
+      all.className = CHIP_ACTIVE;
+      chips.appendChild(all);
+
+      data.categories.forEach(function (cat) {
+        const meta = categoryMeta(cat);
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.dataset.category = cat;
+        btn.className = CHIP_IDLE;
+        btn.textContent = meta.emoji + ' ' + titleCase(cat);
+        chips.appendChild(btn);
+      });
+
+      chips.addEventListener('click', function (e) {
+        const btn = e.target.closest('button[data-category]');
+        if (!btn) return;
+        state.category = btn.dataset.category;
+        chips.querySelectorAll('button').forEach(function (b) {
+          b.className = b.dataset.category === state.category ? CHIP_ACTIVE : CHIP_IDLE;
+        });
+        run();
+      });
+    } catch (err) {
+      /* chips are optional */
+    }
+  }
+
+  function cardHtml(plant, index) {
+    const meta = categoryMeta(plant.category);
+    const chips = [];
+    chips.push(chip(meta.emoji + ' ' + titleCase(plant.category || 'other'), meta.tile + ' ' + meta.text));
+    if (plant.difficulty) {
+      chips.push(chip(iconSvg('target', 'h-3.5 w-3.5') + (DIFFICULTY_LABEL[plant.difficulty] || esc(plant.difficulty)), DIFFICULTY_BADGE[plant.difficulty] || 'bg-leaf-50 text-leaf-700'));
+    }
+    if (plant.water_need) chips.push(chip(iconSvg('droplet', 'h-3.5 w-3.5') + (WATER_LABEL[plant.water_need] || titleCase(plant.water_need)) + ' water', 'bg-sky-100 text-sky-600'));
+    if (plant.sunlight) chips.push(chip(iconSvg('sun', 'h-3.5 w-3.5') + (SUN_LABEL[plant.sunlight] || titleCase(plant.sunlight)), 'bg-sun-100 text-[#8a6d1f]'));
+    if (plant.pollution_tolerant) chips.push(chip(iconSvg('wind', 'h-3.5 w-3.5') + 'Smog-tolerant', 'bg-leaf-50 text-leaf-700'));
+
+    return '<article class="flex flex-col rounded-3xl border border-leaf-100 bg-white p-5 shadow-sm transition hover:shadow-md">' +
+      '<div class="flex items-center gap-3">' +
+      '<span class="tile h-12 w-12 text-2xl ' + meta.tile + '">' + plantEmoji(plant) + '</span>' +
+      '<div class="min-w-0">' +
+      '<h3 class="font-display text-lg font-semibold leading-snug text-ink-900">' + esc(plant.common_name) + '</h3>' +
+      '<p class="truncate text-xs italic text-ink-500">' + esc(plant.scientific_name || '') + '</p>' +
+      '</div></div>' +
+      '<p class="mt-3 line-clamp-2 text-sm leading-relaxed text-ink-500">' + esc(plant.description || '') + '</p>' +
+      '<div class="mt-3 flex flex-wrap gap-2">' + chips.join('') + '</div>' +
+      '<div class="mt-5 border-t border-leaf-100 pt-4">' +
+      '<button type="button" data-id="' + plant.id + '" ' +
+      'class="w-full rounded-xl border border-leaf-200 px-3 py-2 text-xs font-semibold text-leaf-700 transition hover:bg-leaf-50">' +
+      'View details →</button>' +
+      '</div></article>';
+  }
+
+  async function run() {
+    const params = new URLSearchParams({ max_results: '200' });
+    if (state.q) params.set('q', state.q);
+    if (state.category) params.set('category', state.category);
+    if (state.difficulty) params.set('difficulty', state.difficulty);
+
+    const grid = $('plant-grid');
+    grid.innerHTML = '<div class="col-span-full py-10 text-center text-sm text-ink-500">' +
+      '<span class="loading loading-spinner loading-sm text-leaf-600"></span> Loading plants…</div>';
+
+    try {
+      const data = await api('/api/plants?' + params.toString());
+      grid.innerHTML = data.results.map(cardHtml).join('');
+      $('count').textContent = data.results.length + ' plant' + (data.results.length === 1 ? '' : 's') + ' shown';
+      $('empty').classList.toggle('hidden', data.results.length > 0);
+    } catch (err) {
+      grid.innerHTML = '';
+      $('empty').innerHTML = '<span class="inline-flex items-center gap-2">' + iconSvg('alert', 'h-4 w-4 shrink-0') + esc(err.message) + '</span>';
+      $('empty').classList.remove('hidden');
+    }
+  }
+
+  $('plant-grid').addEventListener('click', function (e) {
+    const btn = e.target.closest('button[data-id]');
+    if (btn) openPlantModal(btn.dataset.id);
+  });
+
+  let searchTimer = null;
+  $('q').addEventListener('input', function () {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(function () {
+      state.q = $('q').value.trim();
+      run();
+    }, 300);
+  });
+  $('difficulty').addEventListener('change', function () {
+    state.difficulty = $('difficulty').value;
+    run();
+  });
+
+  loadCategories();
+  run();
+</script>
+{% endblock %}

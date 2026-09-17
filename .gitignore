@@ -1,0 +1,21 @@
+# Secrets and local data (never commit)
+.env
+.env.*
+!.env.example
+instance/
+*.db
+
+# Local tooling
+venv/
+.venv/
+__pycache__/
+*.pyc
+.idea/
+
+# Raw downloaded illustrations (processed copies live in app/static/img)
+svgs/
+
+# Throwaway dev scripts and logs
+_tmp_*
+*.log
+.DS_Store

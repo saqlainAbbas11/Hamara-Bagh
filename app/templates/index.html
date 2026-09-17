@@ -1,0 +1,735 @@
+{% extends "base.html" %}
+
+{% block title %}Hamara Bagh — what to grow in your city, right now{% endblock %}
+{% block description %}Climate-matched planting for every city in Pakistan — 83 curated plants, a 273-flower atlas with bloom calendars, 115 hand-written city growing guides and a 60-second matchmaker. Free, open source, made for Rabi and Kharif.{% endblock %}
+{% block og_title %}What should I grow? Hamara Bagh knows.{% endblock %}
+{% block og_description %}Enter your city and get a ranked plant list built on live weather, your sowing season and your space — or let the 60-second matchmaker pick for you.{% endblock %}
+
+{% block content %}
+<!-- Hero -->
+<section class="hero-glow border-b border-leaf-100">
+  <div class="mx-auto grid max-w-6xl items-center gap-12 px-4 py-14 sm:px-6 lg:grid-cols-2 lg:py-20">
+    <div class="">
+      <span class="chip border border-leaf-100 bg-white text-leaf-700">
+        <img src="{{ url_for('static', filename='img/seedling.svg') }}" alt="" class="h-3.5 w-3.5">
+        Assalam-o-Alaikum, Baghban
+      </span>
+      <h1 class="mt-5 font-display text-4xl font-semibold leading-tight tracking-tight text-ink-900 sm:text-5xl">
+        Know exactly what to grow, <span class="text-leaf-600">where you live.</span>
+      </h1>
+      <p class="mt-5 max-w-lg text-lg leading-relaxed text-ink-500">
+        Karachi's coastal humidity, Islamabad's frost, Multan's 45°C summers — every city grows
+        different plants. Hamara Bagh checks your local weather and season, then tells you what
+        will actually survive and thrive.
+      </p>
+
+      <p class="mt-4 font-urdu text-lg leading-loose text-leaf-700" dir="rtl">آئیے، جانیے — آپ کے شہر میں کیا اُگتا ہے؟</p>
+
+      <form id="hero-form" class="mt-8 flex max-w-md gap-2">
+        <input id="hero-city" type="text" placeholder="Enter your city — e.g. Karachi"
+               class="input input-bordered w-full rounded-xl border-leaf-200 bg-white focus:border-leaf-500"
+               aria-label="Your city">
+        <button type="submit" class="press shrink-0 rounded-xl bg-leaf-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-leaf-700">
+          Show me →
+        </button>
+      </form>
+
+      <div class="mt-4 flex flex-wrap items-center gap-2 text-sm text-ink-500">
+        <span>Popular:</span>
+        <button class="quick-city chip border border-leaf-200 bg-white text-ink-700 hover:bg-leaf-50" data-city="Karachi">Karachi</button>
+        <button class="quick-city chip border border-leaf-200 bg-white text-ink-700 hover:bg-leaf-50" data-city="Lahore">Lahore</button>
+        <button class="quick-city chip border border-leaf-200 bg-white text-ink-700 hover:bg-leaf-50" data-city="Islamabad">Islamabad</button>
+        <button class="quick-city chip border border-leaf-200 bg-white text-ink-700 hover:bg-leaf-50" data-city="Multan">Multan</button>
+        <button class="quick-city chip border border-leaf-200 bg-white text-ink-700 hover:bg-leaf-50" data-city="Quetta">Quetta</button>
+      </div>
+
+      <dl class="mt-10 grid max-w-md grid-cols-3 gap-4">
+        <div class="rounded-2xl border border-leaf-100 bg-leaf-50 px-4 py-3">
+          <dt class="text-xs text-ink-500">Curated plants</dt>
+          <dd class="font-display text-2xl font-semibold text-leaf-700">{{ plant_count or 51 }}</dd>
+        </div>
+        <div class="rounded-2xl border border-leaf-100 bg-sky-100 px-4 py-3">
+          <dt class="text-xs text-ink-500">Live forecast</dt>
+          <dd class="font-display text-2xl font-semibold text-sky-600">16d</dd>
+        </div>
+        <div class="rounded-2xl border border-leaf-100 bg-sun-100 px-4 py-3">
+          <dt class="text-xs text-ink-500">Sowing seasons</dt>
+          <dd class="font-display text-2xl font-semibold text-[#8a6d1f]">2</dd>
+        </div>
+      </dl>
+
+      <p class="mt-6 text-sm font-semibold text-leaf-700">Apna shehar. Apna mausam. Apna bagh.</p>
+    </div>
+
+    <div class="relative hidden lg:block">
+      <!-- Photo: Markus Spiske on Unsplash (unsplash.com/photos/bk11wZwb9F4) - free under the Unsplash License -->
+      <div class="relative overflow-hidden rounded-[2rem] border border-leaf-100 shadow-[0_32px_64px_-36px_rgba(31,43,34,0.5)]">
+        <img src="https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=1300&q=80"
+             alt="A wooden raised garden bed overflowing with fresh lettuce, chives and herbs"
+             class="h-[30rem] w-full object-cover xl:h-[33rem]"
+             loading="eager" fetchpriority="high">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Most plants die for three boring reasons — editorial split -->
+<section class="pattern-leaf border-b border-leaf-100 bg-leaf-50">
+  <div class="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-14">
+    <div class="lg:sticky lg:top-32 lg:self-start">
+      <span class="chip border border-leaf-100 bg-white text-leaf-700">Why plants fail</span>
+      <h2 class="mt-4 font-display text-3xl font-semibold tracking-tight text-ink-900">Most plants die for three boring reasons</h2>
+      <p class="mt-3 max-w-md leading-relaxed text-ink-500">
+        None of them are "you don't have a green thumb". Each one is a question with an answer —
+        and every answer starts with where you live.
+      </p>
+      <p class="mt-4 font-urdu text-lg leading-loose text-leaf-700" dir="rtl">صحیح پودا، صحیح موسم، صحیح جگہ</p>
+    </div>
+
+    <div class="space-y-4">
+      <div class="lift flex flex-col gap-4 rounded-3xl border border-leaf-100 bg-white p-5 sm:flex-row sm:items-start sm:p-6">
+        <span class="tile h-12 w-12 bg-sun-100 text-[#8a6d1f]">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6" aria-hidden="true"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>
+        </span>
+        <div class="min-w-0 flex-1">
+          <div class="flex flex-wrap items-center gap-2">
+            <h3 class="font-display text-lg font-semibold text-ink-900">The wrong plant for the climate</h3>
+            <span class="chip bg-sun-100 text-[11px] font-semibold text-[#8a6d1f]">Reason 1</span>
+          </div>
+          <p class="mt-1.5 text-sm leading-relaxed text-ink-500">
+            A plant that loves cool mountain air will sulk through a Karachi summer no matter how much
+            you water it. Every plant is scored against your city's real temperatures, humidity and rainfall.
+          </p>
+          <a href="/recommend" class="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-leaf-700 transition hover:text-leaf-800">
+            See what suits your city
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5" aria-hidden="true"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="lift flex flex-col gap-4 rounded-3xl border border-leaf-100 bg-white p-5 sm:flex-row sm:items-start sm:p-6">
+        <span class="tile h-12 w-12 bg-terra-100 text-terra-700">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2.5"/><path d="M16 2.5v4M8 2.5v4M3 9.5h18"/></svg>
+        </span>
+        <div class="min-w-0 flex-1">
+          <div class="flex flex-wrap items-center gap-2">
+            <h3 class="font-display text-lg font-semibold text-ink-900">The wrong season</h3>
+            <span class="chip bg-terra-100 text-[11px] font-semibold text-terra-700">Reason 2</span>
+          </div>
+          <p class="mt-1.5 text-sm leading-relaxed text-ink-500">
+            Pakistan's growing year runs on Rabi (winter) and Kharif (summer) seasons. Tomatoes planted
+            in June and spinach planted in April are doomed from day one.
+          </p>
+          <a href="/calendar" class="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-leaf-700 transition hover:text-leaf-800">
+            Check the sowing calendar
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5" aria-hidden="true"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="lift flex flex-col gap-4 rounded-3xl border border-leaf-100 bg-white p-5 sm:flex-row sm:items-start sm:p-6">
+        <span class="tile h-12 w-12 bg-sky-100 text-sky-600">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6" aria-hidden="true"><path d="M12 2.7l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+        </span>
+        <div class="min-w-0 flex-1">
+          <div class="flex flex-wrap items-center gap-2">
+            <h3 class="font-display text-lg font-semibold text-ink-900">Watering guesswork</h3>
+            <span class="chip bg-sky-100 text-[11px] font-semibold text-sky-600">Reason 3</span>
+          </div>
+          <p class="mt-1.5 text-sm leading-relaxed text-ink-500">
+            Too much water kills more houseplants than drought. The journal tracks a watering rhythm
+            per plant, tuned to your climate instead of a generic schedule.
+          </p>
+          <a href="/journal" class="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-leaf-700 transition hover:text-leaf-800">
+            Start a smart journal
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5" aria-hidden="true"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- The toolbox — bento grid -->
+<section class="border-b border-leaf-100 bg-white">
+  <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+    <div class="max-w-2xl">
+      <span class="chip border border-leaf-100 bg-leaf-50 text-leaf-700">The toolbox</span>
+      <h2 class="mt-4 font-display text-3xl font-semibold tracking-tight text-ink-900">The whole bagh, in one place</h2>
+      <p class="mt-3 text-ink-500">No account, no app, no ads — every tool below is free for every baghban.</p>
+    </div>
+
+    <div class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <!-- Matchmaker — feature tile -->
+      <a href="/match" class="lift group flex flex-col rounded-3xl bg-leaf-50 p-5 sm:p-6 lg:col-span-2">
+        <div class="flex items-start justify-between gap-3">
+          <span class="tile h-11 w-11 bg-white text-leaf-700">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15.7 8.3-2.1 5.3-5.3 2.1 2.1-5.3z"/></svg>
+          </span>
+          <span class="chip bg-leaf-600 text-white">New</span>
+        </div>
+        <h3 class="mt-4 font-display text-lg font-semibold text-ink-900">The matchmaker</h3>
+        <p class="mt-1.5 max-w-xl text-sm leading-relaxed text-ink-500">
+          Eight honest questions — the space, the sunlight, how often you'll really water — and the
+          engine ranks every plant for your city and season. Tick "pets" and toxic plants are dropped
+          automatically.
+        </p>
+        <div class="mt-4 flex flex-wrap gap-1.5">
+          <span class="chip bg-white text-ink-700">🪟 Balcony</span>
+          <span class="chip bg-white text-ink-700">🌇 Rooftop</span>
+          <span class="chip bg-white text-ink-700">🌳 Garden bed</span>
+          <span class="chip bg-white text-ink-700">🏠 Indoors</span>
+        </div>
+        <span class="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-semibold text-leaf-700">
+          Take the 60-second match <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+        </span>
+      </a>
+
+      <!-- Calendar -->
+      <a href="/calendar" class="lift group flex flex-col rounded-3xl bg-sun-100 p-5 sm:p-6">
+        <span class="tile h-11 w-11 bg-white text-[#8a6d1f]">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2.5"/><path d="M16 2.5v4M8 2.5v4M3 9.5h18"/></svg>
+        </span>
+        <h3 class="mt-4 font-display text-lg font-semibold text-ink-900">Sowing calendar</h3>
+        <p class="mt-1.5 text-sm leading-relaxed text-ink-500">Twelve months of Rabi, Kharif and the tricky handover weeks between them — with your city's notes baked in.</p>
+        <span class="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-semibold text-leaf-700">
+          Open the calendar <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+        </span>
+      </a>
+
+      <!-- Flower atlas — feature tile -->
+      <a href="/flowers" class="lift group flex flex-col rounded-3xl bg-blush-100 p-5 sm:p-6 lg:col-span-2">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="tile h-11 w-11 bg-white text-xl">🌷</span>
+          <span class="tile h-8 w-8 bg-white text-base">🌹</span>
+          <span class="tile h-8 w-8 bg-white text-base">🌼</span>
+          <span class="tile h-8 w-8 bg-white text-base">🌺</span>
+          <span class="tile h-8 w-8 bg-white text-base">🌻</span>
+          <span class="tile h-8 w-8 bg-white text-base">🌴</span>
+          <span class="tile h-8 w-8 bg-white text-base">🌵</span>
+        </div>
+        <h3 class="mt-4 font-display text-lg font-semibold text-ink-900">The flower atlas</h3>
+        <p class="mt-1.5 max-w-xl text-sm leading-relaxed text-ink-500">
+          Not just vegetables — roses, bulbs, mogra, bougainvillea, palms, cacti and succulents. Each
+          flower carries a bloom calendar, water needs and the honest truth about life in a pot.
+        </p>
+        <div class="mt-4 flex flex-wrap gap-1.5">
+          <span class="chip bg-white text-ink-700">273 flowers</span>
+          <span class="chip bg-white text-ink-700">12 plant groups</span>
+          <span class="chip bg-white text-ink-700">Bloom calendars</span>
+        </div>
+        <span class="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-semibold text-leaf-700">
+          Open the flower atlas <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+        </span>
+      </a>
+
+      <!-- Journal -->
+      <a href="/journal" class="lift group flex flex-col rounded-3xl bg-sky-100 p-5 sm:p-6">
+        <span class="tile h-11 w-11 bg-white text-sky-600">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5" aria-hidden="true"><path d="M12 2.7l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+        </span>
+        <h3 class="mt-4 font-display text-lg font-semibold text-ink-900">My Journal</h3>
+        <p class="mt-1.5 text-sm leading-relaxed text-ink-500">A no-login plant journal — watering reminders, growth photos and notes for every pot you own.</p>
+        <div class="mt-4 flex flex-wrap gap-1.5">
+          <span class="chip bg-white text-ink-700">Watering reminders</span>
+          <span class="chip bg-white text-ink-700">Growth photos</span>
+        </div>
+        <span class="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-semibold text-leaf-700">
+          Start a journal <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+        </span>
+      </a>
+
+      <!-- City guides — feature tile -->
+      <a href="/guides" class="lift group flex flex-col rounded-3xl bg-terra-100 p-5 sm:p-6 lg:col-span-2">
+        <span class="tile h-11 w-11 bg-white text-terra-700">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5" aria-hidden="true"><path d="M2 3.5h6a4 4 0 0 1 4 4V21a3 3 0 0 0-3-3H2z"/><path d="M22 3.5h-6a4 4 0 0 0-4 4V21a3 3 0 0 1 3-3h7z"/></svg>
+        </span>
+        <h3 class="mt-4 font-display text-lg font-semibold text-ink-900">City growing guides</h3>
+        <p class="mt-1.5 max-w-xl text-sm leading-relaxed text-ink-500">
+          Hand-written guides for 115 cities — local sowing windows, Rabi/Kharif notes, the challenges
+          that really show up there, and the star plants that thrive anyway.
+        </p>
+        <div class="mt-4 flex flex-wrap gap-1.5">
+          <span class="chip bg-white text-ink-700">115 city guides</span>
+          <span class="chip bg-white text-ink-700">6 provinces &amp; regions</span>
+          <span class="chip bg-white text-ink-700">Sukkur ≠ Quetta</span>
+        </div>
+        <span class="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-semibold text-leaf-700">
+          Explore the guides <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+        </span>
+      </a>
+
+      <!-- Plant library -->
+      <a href="/plants" class="lift group flex flex-col rounded-3xl bg-leaf-100 p-5 sm:p-6">
+        <span class="tile h-11 w-11 bg-white text-leaf-800">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5" aria-hidden="true"><path d="M12 21v-7.5"/><path d="M12 13.5c0-4 3-7.2 8-7.2-.4 4.6-3.2 7.2-8 7.2z"/><path d="M12 13.5c0-3.4-2.5-6-7-6 .4 4 2.8 6 7 6z"/></svg>
+        </span>
+        <h3 class="mt-4 font-display text-lg font-semibold text-ink-900">Plant library</h3>
+        <p class="mt-1.5 text-sm leading-relaxed text-ink-500">Care sheets for {{ plant_count or 83 }} curated plants — sun, water, soil, pests — with real grower results from your city.</p>
+        <div class="mt-4 flex flex-wrap gap-1.5">
+          <span class="chip bg-white text-ink-700">Full care cards</span>
+          <span class="chip bg-white text-ink-700">City results</span>
+        </div>
+        <span class="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-semibold text-leaf-700">
+          Browse the library <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+        </span>
+      </a>
+
+      <!-- Plant doctor -->
+      <a href="/troubleshoot" class="lift group flex flex-col rounded-3xl bg-blush-100 p-5 sm:p-6">
+        <span class="tile h-11 w-11 bg-white text-blush-600">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5" aria-hidden="true"><path d="M22 12h-4l-3 8L9 4l-3 8H2"/></svg>
+        </span>
+        <h3 class="mt-4 font-display text-lg font-semibold text-ink-900">Plant doctor</h3>
+        <p class="mt-1.5 text-sm leading-relaxed text-ink-500">Something wrong? Tick what you see and get ranked likely causes with fixes — instantly.</p>
+        <div class="mt-4 flex flex-wrap gap-1.5">
+          <span class="chip bg-white text-ink-700">🍂 Yellow leaves</span>
+          <span class="chip bg-white text-ink-700">🥀 Wilting</span>
+          <span class="chip bg-white text-ink-700">Leaf spots</span>
+        </div>
+        <span class="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-semibold text-leaf-700">
+          Diagnose a plant <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+        </span>
+      </a>
+
+      <!-- Compare — mirrored feature tile -->
+      <a href="/recommend" class="lift group flex flex-col rounded-3xl bg-sky-100 p-5 sm:p-6 lg:col-span-2">
+        <div class="flex items-center justify-between gap-3">
+          <span class="tile h-11 w-11 bg-white text-sky-600">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5" aria-hidden="true"><path d="M12 4v17"/><path d="M5 21h14"/><path d="M12 6L5 7l-2 5a3.2 3.2 0 0 0 6.4 0z"/><path d="M12 6l7 1 2 5a3.2 3.2 0 0 1-6.4 0z"/></svg>
+          </span>
+          <span class="flex items-center gap-1.5 text-xs font-semibold text-ink-500">
+            <span class="chip bg-white text-ink-700">Karachi · 61</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5 text-ink-300" aria-hidden="true"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg>
+            <span class="chip bg-white text-ink-700">Lahore · 84</span>
+          </span>
+        </div>
+        <h3 class="mt-4 font-display text-lg font-semibold text-ink-900">Compare two cities</h3>
+        <p class="mt-1.5 max-w-xl text-sm leading-relaxed text-ink-500">
+          Same plant, two climates — see where it grows better, side by side. Moving, visiting family,
+          or just curious about why nani's plants do better than yours.
+        </p>
+        <span class="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-semibold text-leaf-700">
+          Run a comparison <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- How the matchmaker works -->
+<section class="border-b border-leaf-100 bg-white">
+  <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+    <div class="pattern-leaf overflow-hidden rounded-[2.5rem] border border-leaf-100 bg-leaf-50 p-6 sm:p-10">
+      <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
+        <div>
+          <span class="chip border border-leaf-100 bg-white text-leaf-700">The matchmaker</span>
+          <h2 class="mt-4 font-display text-3xl font-semibold tracking-tight text-ink-900">How the 60-second match works</h2>
+          <p class="mt-3 max-w-lg leading-relaxed text-ink-500">
+            Skip the endless scrolling. Answer eight quick questions and the engine does the rest —
+            weighing the live forecast, the sowing season and the honest details most guides leave out.
+          </p>
+          <ol class="mt-6 space-y-4">
+            <li class="flex gap-4">
+              <span class="tile h-9 w-9 bg-white font-display text-base font-semibold text-leaf-700">1</span>
+              <div>
+                <h3 class="font-semibold text-ink-900">Eight honest questions</h3>
+                <p class="mt-1 text-sm leading-relaxed text-ink-500">Your city, the space, the sunlight, your watering routine — plus pets, experience and what you're dreaming of.</p>
+              </div>
+            </li>
+            <li class="flex gap-4">
+              <span class="tile h-9 w-9 bg-white font-display text-base font-semibold text-leaf-700">2</span>
+              <div>
+                <h3 class="font-semibold text-ink-900">The engine weighs everything</h3>
+                <p class="mt-1 text-sm leading-relaxed text-ink-500">Every plant is scored against your city's 16-day forecast and the current Rabi/Kharif window. Tick "pets" and toxic plants are dropped automatically.</p>
+              </div>
+            </li>
+            <li class="flex gap-4">
+              <span class="tile h-9 w-9 bg-white font-display text-base font-semibold text-leaf-700">3</span>
+              <div>
+                <h3 class="font-semibold text-ink-900">A ranked shortlist, with reasons</h3>
+                <p class="mt-1 text-sm leading-relaxed text-ink-500">Match scores you can act on — why each plant fits, what to watch for, and a separate "lovely, but not for you" pile.</p>
+              </div>
+            </li>
+          </ol>
+          <a href="/match" class="press mt-7 inline-flex items-center gap-2 rounded-xl bg-leaf-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-leaf-700">
+            Take the 60-second match
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg>
+          </a>
+        </div>
+
+        <div>
+          <!-- Sample result card -->
+          <div class="rounded-[2rem] border border-leaf-100 bg-white p-5 shadow-[0_24px_48px_-32px_rgba(31,43,34,0.4)] sm:p-6">
+            <div class="flex items-center justify-between gap-3">
+              <div class="min-w-0">
+                <p class="text-xs font-semibold uppercase tracking-wide text-ink-500">Your matches</p>
+                <p class="mt-0.5 font-display text-lg font-semibold leading-snug text-ink-900">Lahore · rooftop · full sun</p>
+              </div>
+              <span class="chip shrink-0 bg-leaf-600 text-white">Pets filter on</span>
+            </div>
+            <div class="mt-4 space-y-3">
+              <div class="rounded-2xl border border-leaf-100 p-3.5">
+                <div class="flex items-center justify-between gap-2">
+                  <p class="text-sm font-semibold text-ink-900">🍅 Tomato <span class="font-normal text-ink-300">· Rabi</span></p>
+                  <span class="chip bg-leaf-100 font-semibold text-leaf-800">92</span>
+                </div>
+                <div class="score-track mt-2"><div class="score-fill bg-leaf-600" style="width: 92%"></div></div>
+                <p class="mt-2 text-xs leading-relaxed text-ink-500">Sowing window is open — Rabi fits Lahore's frost-free weeks.</p>
+              </div>
+              <div class="rounded-2xl border border-leaf-100 p-3.5">
+                <div class="flex items-center justify-between gap-2">
+                  <p class="text-sm font-semibold text-ink-900">🥬 Spinach <span class="font-normal text-ink-300">· Rabi</span></p>
+                  <span class="chip bg-leaf-100 font-semibold text-leaf-800">88</span>
+                </div>
+                <div class="score-track mt-2"><div class="score-fill bg-leaf-600" style="width: 88%"></div></div>
+                <p class="mt-2 text-xs leading-relaxed text-ink-500">Cool nights ahead — this is exactly its season.</p>
+              </div>
+              <div class="rounded-2xl border border-leaf-100 p-3.5">
+                <div class="flex items-center justify-between gap-2">
+                  <p class="text-sm font-semibold text-ink-900">🌼 Marigold <span class="font-normal text-ink-300">· Kharif</span></p>
+                  <span class="chip bg-leaf-100 font-semibold text-leaf-800">84</span>
+                </div>
+                <div class="score-track mt-2"><div class="score-fill bg-leaf-600" style="width: 84%"></div></div>
+                <p class="mt-2 text-xs leading-relaxed text-ink-500">Full sun, pest-repelling, flowers until spring.</p>
+              </div>
+            </div>
+            <p class="mt-4 text-center text-xs text-ink-300">What a result card looks like — every match opens a full care sheet.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Flower atlas showcase -->
+<section class="border-b border-leaf-100 bg-blush-100">
+  <div class="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-2 lg:items-center">
+    <div>
+      <span class="chip border border-blush-200 bg-white text-blush-600">🌷 Flower atlas</span>
+      <h2 class="mt-4 font-display text-3xl font-semibold tracking-tight text-ink-900">273 flowers — not just vegetables</h2>
+      <p class="mt-3 max-w-lg leading-relaxed text-ink-500">
+        Roses, bulbs, mogra, bougainvillea, palms, cacti and succulents — catalogued with bloom
+        calendars, water needs and pot-friendly truths. Filter by bloom month, plant group or care
+        level, and find flowers that fit the garden you actually have.
+      </p>
+      <div class="mt-5 flex flex-wrap gap-2">
+        <span class="chip border border-blush-200 bg-white text-ink-700">🌸 12 plant groups</span>
+        <span class="chip border border-blush-200 bg-white text-ink-700">🌼 43 seasonal bloomers</span>
+        <span class="chip border border-blush-200 bg-white text-ink-700">🌹 16 roses and climbing favourites</span>
+      </div>
+      <a href="/flowers" class="press mt-7 inline-flex items-center gap-2 rounded-xl bg-leaf-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-leaf-700">
+        Open the flower atlas
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="flex flex-wrap gap-2 lg:justify-end">
+      <span class="chip border border-blush-200 bg-white text-ink-700">🌼 Seasonal flowers <span class="text-ink-300">43</span></span>
+      <span class="chip border border-blush-200 bg-white text-ink-700">🌸 Garden perennials <span class="text-ink-300">27</span></span>
+      <span class="chip border border-blush-200 bg-white text-ink-700">🌹 Roses <span class="text-ink-300">16</span></span>
+      <span class="chip border border-blush-200 bg-white text-ink-700">🌷 Bulbs &amp; corms <span class="text-ink-300">24</span></span>
+      <span class="chip border border-blush-200 bg-white text-ink-700">💮 Fragrant &amp; climbers <span class="text-ink-300">24</span></span>
+      <span class="chip border border-blush-200 bg-white text-ink-700">🌴 Palms <span class="text-ink-300">14</span></span>
+      <span class="chip border border-blush-200 bg-white text-ink-700">🫴 Indoor favourites <span class="text-ink-300">24</span></span>
+      <span class="chip border border-blush-200 bg-white text-ink-700">🌵 Cacti <span class="text-ink-300">25</span></span>
+      <span class="chip border border-blush-200 bg-white text-ink-700">🍃 Succulents <span class="text-ink-300">25</span></span>
+      <span class="chip border border-blush-200 bg-white text-ink-700">🌳 Flowering trees <span class="text-ink-300">19</span></span>
+      <span class="chip border border-blush-200 bg-white text-ink-700">🍋 Fruit &amp; orchard <span class="text-ink-300">23</span></span>
+      <span class="chip border border-blush-200 bg-white text-ink-700">🇵🇰 Wild &amp; native <span class="text-ink-300">9</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- City guides showcase -->
+<section class="border-b border-leaf-100 bg-white">
+  <div class="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-2 lg:items-center">
+    <div>
+      <span class="chip border border-sky-200 bg-sky-100 text-sky-600">City growing guides</span>
+      <h2 class="mt-4 font-display text-3xl font-semibold tracking-tight text-ink-900">115 cities. 115 different gardens.</h2>
+      <p class="mt-3 max-w-lg leading-relaxed text-ink-500">
+        Sukkur's summer is not Quetta's summer. Every guide carries its city's sowing windows,
+        Rabi/Kharif notes, the challenges that actually show up there — and the star plants that
+        thrive anyway.
+      </p>
+      <div class="mt-5 flex flex-wrap gap-2">
+        <span class="chip border border-leaf-100 bg-leaf-50 text-ink-700">Punjab <span class="font-semibold text-leaf-700">36</span></span>
+        <span class="chip border border-leaf-100 bg-leaf-50 text-ink-700">Balochistan <span class="font-semibold text-leaf-700">30</span></span>
+        <span class="chip border border-leaf-100 bg-leaf-50 text-ink-700">Sindh <span class="font-semibold text-leaf-700">27</span></span>
+        <span class="chip border border-leaf-100 bg-leaf-50 text-ink-700">Khyber Pakhtunkhwa <span class="font-semibold text-leaf-700">20</span></span>
+        <span class="chip border border-leaf-100 bg-leaf-50 text-ink-700">Gilgit-Baltistan <span class="font-semibold text-leaf-700">1</span></span>
+        <span class="chip border border-leaf-100 bg-leaf-50 text-ink-700">Islamabad <span class="font-semibold text-leaf-700">1</span></span>
+      </div>
+      <a href="/guides" class="press mt-7 inline-flex items-center gap-2 rounded-xl bg-leaf-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-leaf-700">
+        Explore your city's guide
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg>
+      </a>
+    </div>
+
+    <div class="rounded-[2rem] border border-leaf-100 bg-leaf-50 px-6 py-7 sm:px-8">
+      <p class="text-xs font-semibold uppercase tracking-wide text-ink-500">Same seed, different city</p>
+      <div class="mt-4 grid gap-3 sm:grid-cols-2">
+        <div class="rounded-2xl border border-sun-200 bg-white p-4">
+          <div class="flex items-center gap-2.5">
+            <span class="tile h-9 w-9 bg-sun-100 text-[#8a6d1f]">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.8v2M12 19.2v2M2.8 12h2M19.2 12h2M5.5 5.5l1.4 1.4M17.1 17.1l1.4 1.4M18.5 5.5l-1.4 1.4M6.9 17.1l-1.4 1.4"/></svg>
+            </span>
+            <div>
+              <p class="font-display text-lg font-semibold leading-tight text-ink-900">Multan</p>
+              <p class="text-xs text-ink-500">Hot arid plains</p>
+            </div>
+          </div>
+          <dl class="mt-3 space-y-1.5 text-sm">
+            <div class="flex items-center justify-between gap-2"><dt class="text-ink-500">Summer peak</dt><dd class="font-semibold text-ink-900">42°C</dd></div>
+            <div class="flex items-center justify-between gap-2"><dt class="text-ink-500">Winter low</dt><dd class="font-semibold text-ink-900">6°C</dd></div>
+            <div class="flex items-center justify-between gap-2"><dt class="text-ink-500">Rainfall</dt><dd class="font-semibold text-ink-900">Very low</dd></div>
+          </dl>
+        </div>
+        <div class="rounded-2xl border border-sky-200 bg-white p-4">
+          <div class="flex items-center gap-2.5">
+            <span class="tile h-9 w-9 bg-sky-100 text-sky-600">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true"><path d="M12 2.5v19"/><path d="M4.2 7l15.6 9M19.8 7L4.2 16"/><path d="M9.2 4.8L12 7.5l2.8-2.7M9.2 19.2L12 16.5l2.8 2.7"/></svg>
+            </span>
+            <div>
+              <p class="font-display text-lg font-semibold leading-tight text-ink-900">Quetta</p>
+              <p class="text-xs text-ink-500">Cool highlands</p>
+            </div>
+          </div>
+          <dl class="mt-3 space-y-1.5 text-sm">
+            <div class="flex items-center justify-between gap-2"><dt class="text-ink-500">Summer peak</dt><dd class="font-semibold text-ink-900">32°C</dd></div>
+            <div class="flex items-center justify-between gap-2"><dt class="text-ink-500">Winter low</dt><dd class="font-semibold text-ink-900">−3°C</dd></div>
+            <div class="flex items-center justify-between gap-2"><dt class="text-ink-500">Rainfall</dt><dd class="font-semibold text-ink-900">Low</dd></div>
+          </dl>
+        </div>
+      </div>
+      <p class="mt-4 text-sm leading-relaxed text-ink-500">
+        The plant that sulks through Multan's June can fruit all summer in Quetta. Each guide is
+        written for its own city — never copy-pasted.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Pakistan's growing year — month ribbon -->
+<section class="border-b border-leaf-100 bg-sun-100">
+  <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+    <div class="max-w-2xl">
+      <span class="chip border border-sun-300 bg-white text-[#8a6d1f]">🌾 Rabi &amp; Kharif</span>
+      <h2 class="mt-4 font-display text-3xl font-semibold tracking-tight text-ink-900">Pakistan's growing year, decoded</h2>
+      <p class="mt-3 text-ink-500">
+        Planting dates aren't random — they follow two seasons. Get the season right and half the
+        battle is already won before a single seed goes in.
+      </p>
+    </div>
+
+    <div class="mt-8 grid grid-cols-6 gap-1.5 sm:grid-cols-12">
+      <div class="rounded-xl border border-sky-200 bg-white px-1 py-2.5 text-center">
+        <p class="text-sm font-semibold text-ink-900">Jan</p>
+        <p class="mt-0.5 text-[10px] font-semibold uppercase tracking-wide text-sky-600">Rabi</p>
+      </div>
+      <div class="rounded-xl border border-sky-200 bg-white px-1 py-2.5 text-center">
+        <p class="text-sm font-semibold text-ink-900">Feb</p>
+        <p class="mt-0.5 text-[10px] font-semibold uppercase tracking-wide text-sky-600">Rabi</p>
+      </div>
+      <div class="rounded-xl border border-sky-200 bg-white px-1 py-2.5 text-center">
+        <p class="text-sm font-semibold text-ink-900">Mar</p>
+        <p class="mt-0.5 text-[10px] font-semibold uppercase tracking-wide text-sky-600">Rabi</p>
+      </div>
+      <div class="rounded-xl border border-leaf-200 bg-white px-1 py-2.5 text-center">
+        <p class="text-sm font-semibold text-ink-900">Apr</p>
+        <p class="mt-0.5 text-[10px] font-semibold uppercase tracking-wide text-leaf-600">Kharif</p>
+      </div>
+      <div class="rounded-xl border border-leaf-200 bg-white px-1 py-2.5 text-center">
+        <p class="text-sm font-semibold text-ink-900">May</p>
+        <p class="mt-0.5 text-[10px] font-semibold uppercase tracking-wide text-leaf-600">Kharif</p>
+      </div>
+      <div class="rounded-xl border border-leaf-200 bg-white px-1 py-2.5 text-center">
+        <p class="text-sm font-semibold text-ink-900">Jun</p>
+        <p class="mt-0.5 text-[10px] font-semibold uppercase tracking-wide text-leaf-600">Kharif</p>
+      </div>
+      <div class="rounded-xl border border-sky-400 bg-sky-100 px-1 py-2.5 text-center">
+        <p class="text-sm font-semibold text-ink-900">Jul</p>
+        <p class="mt-0.5 text-[10px] font-semibold uppercase tracking-wide text-sky-600">Monsoon</p>
+      </div>
+      <div class="rounded-xl border border-sky-400 bg-sky-100 px-1 py-2.5 text-center">
+        <p class="text-sm font-semibold text-ink-900">Aug</p>
+        <p class="mt-0.5 text-[10px] font-semibold uppercase tracking-wide text-sky-600">Monsoon</p>
+      </div>
+      <div class="rounded-xl border border-leaf-200 bg-white px-1 py-2.5 text-center">
+        <p class="text-sm font-semibold text-ink-900">Sep</p>
+        <p class="mt-0.5 text-[10px] font-semibold uppercase tracking-wide text-leaf-600">Kharif</p>
+      </div>
+      <div class="rounded-xl border border-sky-200 bg-white px-1 py-2.5 text-center">
+        <p class="text-sm font-semibold text-ink-900">Oct</p>
+        <p class="mt-0.5 text-[10px] font-semibold uppercase tracking-wide text-sky-600">Rabi</p>
+      </div>
+      <div class="rounded-xl border border-sky-200 bg-white px-1 py-2.5 text-center">
+        <p class="text-sm font-semibold text-ink-900">Nov</p>
+        <p class="mt-0.5 text-[10px] font-semibold uppercase tracking-wide text-sky-600">Rabi</p>
+      </div>
+      <div class="rounded-xl border border-sky-200 bg-white px-1 py-2.5 text-center">
+        <p class="text-sm font-semibold text-ink-900">Dec</p>
+        <p class="mt-0.5 text-[10px] font-semibold uppercase tracking-wide text-sky-600">Rabi</p>
+      </div>
+    </div>
+
+    <div class="mt-6 flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+      <div class="flex flex-wrap gap-2">
+        <span class="chip border border-sky-200 bg-white text-sky-600">Rabi · cool season, sow Oct–Mar</span>
+        <span class="chip border border-leaf-200 bg-white text-leaf-700">Kharif · heat season, sow Apr–Sep</span>
+        <span class="chip border border-sky-400 bg-sky-100 text-sky-600">Monsoon · plant at the first rains</span>
+        <span class="chip border border-sun-300 bg-white text-[#8a6d1f]">Handover weeks · Sep &amp; Mar</span>
+      </div>
+      <a href="/calendar" class="press inline-flex w-fit shrink-0 items-center gap-2 rounded-xl bg-leaf-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-leaf-700">
+        See what to sow this month
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg>
+      </a>
+    </div>
+    <p class="mt-4 max-w-3xl text-sm leading-relaxed text-ink-500">
+      Frost in the north, smog in Punjab, sea breeze in Karachi — pick your city on the calendar and
+      the month notes change with it.
+    </p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="border-b border-leaf-100 bg-white">
+  <div class="mx-auto max-w-3xl px-4 py-14 sm:px-6">
+    <span class="chip border border-leaf-100 bg-leaf-50 text-leaf-700">FAQ</span>
+    <h2 class="mt-4 font-display text-3xl font-semibold tracking-tight text-ink-900">Questions, answered honestly</h2>
+    <p class="mt-3 text-ink-500">The boring-but-true details — cost, accounts, AI, and why your city matters more than any generic list.</p>
+
+    <div class="mt-8 space-y-3">
+      <div class="collapse collapse-arrow rounded-2xl border border-leaf-100 bg-white">
+        <input type="checkbox">
+        <div class="collapse-title text-base font-semibold text-ink-900">Is Hamara Bagh really free?</div>
+        <div class="collapse-content">
+          <p class="text-sm leading-relaxed text-ink-500">Yes — free and open source, with no ads and no paid tier. No signup, no app to install, no newsletter pop-ups. Type your city and start growing.</p>
+        </div>
+      </div>
+
+      <div class="collapse collapse-arrow rounded-2xl border border-leaf-100 bg-white">
+        <input type="checkbox">
+        <div class="collapse-title text-base font-semibold text-ink-900">Do I need an account to use the journal?</div>
+        <div class="collapse-content">
+          <p class="text-sm leading-relaxed text-ink-500">No. Your journal, watering reminders and photos are tied to a private ID stored in your own browser — no email, no password. The trade-off: clearing your browser data clears the journal, so keep it on the device you garden with.</p>
+        </div>
+      </div>
+
+      <div class="collapse collapse-arrow rounded-2xl border border-leaf-100 bg-white">
+        <input type="checkbox">
+        <div class="collapse-title text-base font-semibold text-ink-900">Does it work outside Pakistan?</div>
+        <div class="collapse-content">
+          <p class="text-sm leading-relaxed text-ink-500">The recommendation engine works for any city worldwide — it geocodes your location and pulls a live forecast. The hand-written layer is Pakistan-first though: 115 city guides, Rabi/Kharif timing, smog and frost notes, and Urdu touches throughout.</p>
+        </div>
+      </div>
+
+      <div class="collapse collapse-arrow rounded-2xl border border-leaf-100 bg-white">
+        <input type="checkbox">
+        <div class="collapse-title text-base font-semibold text-ink-900">What are Rabi and Kharif?</div>
+        <div class="collapse-content">
+          <p class="text-sm leading-relaxed text-ink-500">
+            Pakistan's two growing seasons. Rabi is the cool season — sown roughly October to March:
+            wheat, peas, spinach, coriander, most salad greens. Kharif is the hot season with the
+            monsoon — April to September: okra, chillies, melons, maize, most flowering annuals.
+            Planting in the wrong season is the single most common reason seeds fail.
+            <a href="/calendar" class="font-semibold text-leaf-700 hover:underline">See the sowing calendar →</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="collapse collapse-arrow rounded-2xl border border-leaf-100 bg-white">
+        <input type="checkbox">
+        <div class="collapse-title text-base font-semibold text-ink-900">I searched "what to grow in Karachi in October" — will this help?</div>
+        <div class="collapse-content">
+          <p class="text-sm leading-relaxed text-ink-500">That's exactly the question this site was built around. Instead of a generic list written for another country, Hamara Bagh checks your city's live forecast, the current season and your space, then ranks plants 0–100 with a plain-English reason for every score.</p>
+        </div>
+      </div>
+
+      <div class="collapse collapse-arrow rounded-2xl border border-leaf-100 bg-white">
+        <input type="checkbox">
+        <div class="collapse-title text-base font-semibold text-ink-900">What about the AI plant doctor?</div>
+        <div class="collapse-content">
+          <p class="text-sm leading-relaxed text-ink-500">The symptom checker is a rule-based diagnosis engine — instant, private and available with zero AI. When a free Hugging Face token is set on the server, an optional AI layer adds a conversational second opinion on top. With it switched off, everything else works exactly the same.</p>
+        </div>
+      </div>
+
+      <div class="collapse collapse-arrow rounded-2xl border border-leaf-100 bg-white">
+        <input type="checkbox">
+        <div class="collapse-title text-base font-semibold text-ink-900">Where do the plant and flower details come from?</div>
+        <div class="collapse-content">
+          <p class="text-sm leading-relaxed text-ink-500">From a curated dataset built specifically for Pakistani growing conditions — 83 full care sheets and a 273-flower atlas — cross-checked against Open-Meteo climate records, Wikipedia, GBIF and iNaturalist. Where a plant is fussy, the care sheet says so instead of pretending it's easy.</p>
+        </div>
+      </div>
+
+      <div class="collapse collapse-arrow rounded-2xl border border-leaf-100 bg-white">
+        <input type="checkbox">
+        <div class="collapse-title text-base font-semibold text-ink-900">Is there an Urdu version?</div>
+        <div class="collapse-content">
+          <p class="text-sm leading-relaxed text-ink-500">The recommendation wizard switches between English and اردو. The rest of the site is English with Roman Urdu sprinkled in — because "apna shehar, apna mausam" says it better anyway.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+  <div class="pattern-leaf relative overflow-hidden rounded-3xl border border-leaf-100 bg-leaf-50 px-8 py-12 text-center">
+    <img src="{{ url_for('static', filename='img/watermelon.svg') }}" alt=""
+         class="absolute -right-2 -top-3 hidden h-16 opacity-95 sm:block sm:h-20 md:right-10 md:top-6">
+    <img src="{{ url_for('static', filename='img/bloom.svg') }}" alt=""
+         class="absolute -left-1 bottom-4 hidden h-12 opacity-95 sm:block sm:h-16 md:left-12 md:bottom-8">
+    <h2 class="font-display text-3xl font-semibold tracking-tight text-ink-900">Ready to stop guessing?</h2>
+    <p class="mx-auto mt-3 max-w-xl text-ink-500">Two clicks, no signup — your first ranked planting list is 30 seconds away.</p>
+    <p class="mx-auto mt-1 font-urdu text-base text-leaf-700" dir="rtl">آج ہی اپنے شہر کے لیے پودے چنیں</p>
+    <p class="mx-auto mt-1 text-sm font-medium text-leaf-700">Thodi mitti, thoda paani, aur bohat saari mohabbat.</p>
+    <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
+      <a href="/recommend" class="press inline-flex items-center gap-2 rounded-xl bg-leaf-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-leaf-700">
+        <img src="{{ url_for('static', filename='img/seedling.svg') }}" alt="" class="h-4 w-4 brightness-0 invert">
+        Show me what to grow
+      </a>
+      <a href="/match" class="press inline-flex items-center gap-2 rounded-xl border border-leaf-200 bg-white px-6 py-3 text-sm font-semibold text-leaf-700 transition hover:bg-leaf-50">
+        Or take the matchmaker
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- From the creator -->
+<section class="mx-auto max-w-6xl px-4 pb-16 sm:px-6">
+  <div class="mx-auto flex max-w-3xl flex-col items-center gap-5 rounded-3xl border border-leaf-100 bg-leaf-50/60 px-6 py-7 text-center sm:flex-row sm:items-center sm:text-left">
+    <span class="tile h-14 w-14 bg-leaf-600 font-display text-lg font-semibold text-white">SA</span>
+    <div class="min-w-0 flex-1">
+      <p class="text-xs font-semibold uppercase tracking-wide text-ink-500">From the creator</p>
+      <p class="mt-1 font-display text-lg font-semibold text-ink-900">Saqlain Abbas</p>
+      <p class="font-urdu text-sm text-leaf-700" dir="rtl">ثقلین عباس</p>
+      <p class="mt-1 text-sm leading-relaxed text-ink-500">
+        Hamara Bagh is built as an educational project — to make local growing knowledge free,
+        honest and open for every baghban in Pakistan.
+      </p>
+    </div>
+    <a href="https://www.linkedin.com/in/saqlainabbas11" target="_blank" rel="noopener"
+       class="press inline-flex shrink-0 items-center gap-2 rounded-xl border border-leaf-200 bg-white px-4 py-2.5 text-sm font-semibold text-[#0a66c2] shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-leaf-300 hover:shadow-md">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      connect on LinkedIn 🙌
+    </a>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.getElementById('hero-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const city = document.getElementById('hero-city').value.trim();
+    window.location.href = '/recommend' + (city ? '?city=' + encodeURIComponent(city) : '');
+  });
+
+  document.querySelectorAll('.quick-city').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      window.location.href = '/recommend?city=' + encodeURIComponent(btn.dataset.city);
+    });
+  });
+</script>
+{% endblock %}
