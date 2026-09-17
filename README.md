@@ -1,18 +1,46 @@
-# Hamara Bagh (ہمارا باغ)
+<h1 align="center">Hamara Bagh (ہمارا باغ)</h1>
 
-*Pakistan ka gardening saathi — Har Shehar. Har Mausam. Har Paudha.*
+<p align="center"><em>Pakistan ka gardening saathi — Har Shehar. Har Mausam. Har Paudha.</em></p>
+
+<p align="center">
+  <img alt="Python 3.10+" src="https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white">
+  <img alt="Flask 3.0" src="https://img.shields.io/badge/Flask-3.0-000000?logo=flask&logoColor=white">
+  <img alt="Database: SQLite" src="https://img.shields.io/badge/Database-SQLite-003B57?logo=sqlite&logoColor=white">
+  <img alt="Tailwind CSS + daisyUI" src="https://img.shields.io/badge/Tailwind%20CSS%20%2B%20daisyUI-38B2AC?logo=tailwindcss&logoColor=white">
+  <img alt="PRs welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg">
+  <img alt="Made in Pakistan" src="https://img.shields.io/badge/Made%20in-Pakistan-01411C">
+</p>
 
 Open-source plant knowledge + location-based growing recommendations, built
 with Pakistan's climate and gardening beginners specifically in mind — but
 usable by anyone, anywhere.
 
-Backend-first build, complete: the dataset, scoring engine and every API are
-finished, and the UI is a responsive Tailwind + daisyUI front end (loaded via
-CDN — no build step) with per-page SEO meta tags, an Urdu language toggle on
-recommendations, a no-login plant journal, an optional AI plant doctor on
-the troubleshooter, and two newer headline features: a 270+ **flower atlas**
-(`/flowers`) and a questionnaire-driven **plant matchmaker** (`/match`) with
-an optional AI garden plan (free Hugging Face token).
+Everything ships today: the curated dataset, the scoring engine and every API
+are complete, and the front end is a responsive Tailwind + daisyUI UI (loaded
+via CDN — no build step) with per-page SEO meta tags, an Urdu language toggle
+on recommendations, a no-login plant journal, an optional AI plant doctor on
+the troubleshooter, and two headline features — a 270+ flower atlas
+(`/flowers`) and a questionnaire-driven plant matchmaker (`/match`) with an
+optional AI garden plan (free Hugging Face token).
+
+## Table of contents
+
+- [Why this exists](#why-this-exists)
+- [Quick start](#quick-start)
+- [The front end](#the-front-end)
+- [How the recommendation score works](#how-the-recommendation-score-works)
+- [The flower atlas and the matchmaker](#the-flower-atlas-and-the-matchmaker)
+- [Crowdsourced community layer](#crowdsourced-community-layer)
+- [Urdu language support](#urdu-language-support)
+- [Watering reminders](#watering-reminders)
+- [AI features (optional)](#ai-features-optional)
+- [API endpoints](#api-endpoints)
+- [Data sources and reliability](#data-sources-and-reliability)
+- [Architecture](#architecture)
+- [Deploying on a free tier](#deploying-on-a-free-tier)
+- [Roadmap and good first contributions](#roadmap-and-good-first-contributions)
+- [Author](#author)
+
 
 ## Why this exists
 
@@ -21,136 +49,24 @@ now." This project builds that missing layer itself: a curated plant
 dataset + live climate data + a scoring engine that matches the two,
 on top of several free third-party APIs for supplemental data.
 
-## Architecture
+## Quick start
 
-```
-greenmitra/
-├── run.py                  # entry point
-├── config.py                # config (all API keys optional; loads .env)
-├── data/
-│   ├── plants.json                  # curated core dataset (the real backbone)
-│   ├── city_climate_reference.json  # reference climate for major PK cities
-│   ├── city_growing_guides.json     # 115 city growing guides, grouped by province
-│   ├── flowers.json                 # 270+ ornamentals in 12 groups (generated)
-│   ├── troubleshoot_rules.json      # symptom -> cause -> fix rules
-│   └── strings.json                 # UI/API strings (English + Urdu)
-├── scripts/
-│   ├── seed_db.py           # loads data/plants.json into the database
-│   ├── merge_plants_json.py # validates + merges new plant JSON batches
-│   ├── merge_city_guides.py # merges province-organised guide batches (skip-if-exists)
-│   ├── build_flowers_json.py # generates data/flowers.json (the flower atlas catalog)
-│   └── import_from_perenual.py  # bulk-import more species (needs a free key)
-├── app/
-│   ├── __init__.py          # app factory + JSON error handlers
-│   ├── models.py            # Plant, ApiCache, UserPlantLog, PlantReport, PlantSubmission
-│   ├── extensions.py        # SQLAlchemy instance
-│   ├── utils.py             # shared request helpers (safe int parsing, etc.)
-│   ├── services/            # all business logic lives here
-│   │   ├── cache_service.py         # generic TTL cache (per-source TTLs)
-│   │   ├── weather_service.py       # Open-Meteo: geocoding, climate, AQI, hardiness
-│   │   ├── recommendation_engine.py # THE core logic: climate -> plant scoring
-│   │   ├── care_calculator.py       # dynamic watering interval estimator
-│   │   ├── seasonal_calendar.py     # Rabi/Kharif sowing season logic
-│   │   ├── troubleshoot_service.py  # symptom-based diagnosis
-│   │   ├── community_service.py     # crowdsourced report aggregation
-│   │   ├── i18n.py          # tiny translation layer (strings.json)
-│   │   ├── perenual_service.py      # Perenual API (optional key)
-│   │   ├── taxonomy_service.py      # GBIF + iNaturalist (no key needed)
-│   │   ├── wikipedia_service.py     # Wikipedia summaries (no key needed)
-│   │   ├── ai_service.py            # AI answers + AI garden plan (optional free HF token)
-│   │   ├── flower_service.py        # loads the flowers.json atlas catalog
-│   │   ├── match_service.py         # the matchmaker: questionnaire -> ranked matches
-│   │   └── trefle_service.py        # Trefle API (optional, flaky - best effort)
-│   ├── routes/               # thin Flask blueprints, one per concern
-│   │   ├── main.py           # HTML pages + /uploads photo serving
-│   │   ├── plants.py         # /api/plants
-│   │   ├── flowers.py        # /api/flowers (the atlas catalog)
-│   │   ├── match.py          # /api/match (matchmaker + AI garden plan)
-│   │   ├── location.py       # /api/location  (the star feature)
-│   │   ├── care.py           # /api/care (watering + troubleshoot)
-│   │   ├── external.py       # /api/external  (direct access to each 3rd-party source)
-│   │   ├── journal.py        # /api/journal  (no-login tracking, reminders, photos)
-│   │   ├── community.py      # /api/community (crowdsourced outcome reports)
-│   │   └── submissions.py    # /api/submissions ("suggest a plant" review queue)
-│   ├── templates/            # Jinja pages (Tailwind + daisyUI via CDN, Fraunces/Inter fonts)
-│   └── static/                # small custom CSS + shared JS helpers (script.js)
-```
-
-## Setup
+Requires Python 3.10+ (developed on 3.11) and pip.
 
 ```bash
 cd greenmitra
+
 python -m venv venv
-source venv/bin/activate        # Windows: venv\Scripts\activate
+venv\Scripts\activate           # Windows
+source venv/bin/activate        # macOS / Linux
+
 pip install -r requirements.txt
 
-cp .env.example .env            # edit if you have a Perenual/Trefle/Hugging Face key - all optional
+copy .env.example .env          # Windows (cp on macOS/Linux) — edit only for optional keys
 
 python scripts/seed_db.py       # loads the curated plant dataset into SQLite
 python run.py                   # starts on http://localhost:5000
 ```
-
-No API key is required to run the full app. Perenual and Trefle keys are
-optional enrichment sources — everything else (Open-Meteo, GBIF,
-iNaturalist, Wikipedia) is free with no signup. A free Hugging Face token
-is also optional: it adds plain-language AI answers to the troubleshooter
-(see "AI plant doctor" below).
-
-## Data sources used, and how reliable each actually is
-
-| Source | Needs a key? | Reliability | What it's used for |
-|---|---|---|---|
-| Our own `data/plants.json` | No | Always available | Core backbone — the climate/care matching data no API provides |
-| Open-Meteo (weather + air quality + geocoding) | No | Very reliable | Live climate snapshot per location, air quality |
-| GBIF | No | Institutional, very reliable | Taxonomy verification, real-world distribution |
-| iNaturalist | No | Reliable | Photos, community-verified names |
-| Wikipedia REST API | No | Very reliable | Plain-language plant summaries |
-| Perenual | Yes (free tier) | OK, but ~100 req/day + partial coverage — cached hard | Extra care-guide detail, more species coverage |
-| Trefle | Yes (free) | **Unreliable** — has had extended outages, search endpoint returns errors intermittently as of 2025 | Bonus only, wrapped to fail soft and never break a request |
-| Hugging Face Inference Providers | Yes (free token) | Free monthly credits, stable OpenAI-compatible router | Plain-language AI answers on /troubleshoot (optional, token-gated) |
-
-## Key API endpoints
-
-- `GET /api/location/recommend?city=Karachi` — **the core feature**. Returns
-  a climate snapshot, zone classification, air quality, current agri
-  season, and every plant scored/ranked for that location right now.
-- `GET /api/location/climate?city=Islamabad` — raw climate snapshot only
-- `GET /api/location/seasonal-calendar` — what to sow this month (Rabi/Kharif aware)
-- `GET /api/location/growing-guides` — province-grouped index of every city guide (powers the /guides filters)
-- `GET /api/location/growing-guide?city=Sukkur` — one city's Rabi/Kharif notes, challenges + star plants
-- `GET /api/plants?q=tomato&category=vegetable` — search the local dataset
-- `GET /api/plants/<id>?enrich=1` — plant detail + live Wikipedia/GBIF enrichment
-- `GET /api/flowers` — the full ornamental catalog (270+ entries in 12 groups;
-  the /flowers page filters it client-side, one fetch = instant filters)
-- `GET /api/flowers/<slug>` — one catalog entry
-- `POST /api/match/recommend` — body `{city, space, sun, water, experience,
-  pets, purposes[], priorities[]}` → ranked matches + an honest "avoid" list
-- `POST /api/match/explain` — same body; the optional AI garden plan (needs
-  `HUGGINGFACE_API_TOKEN`; returns 503 without one)
-- `GET /api/care/watering/<plant_id>?city=Lahore` — climate-adjusted watering interval
-- `POST /api/care/troubleshoot/diagnose` — body `{"symptoms": ["yellow_leaves"]}`
-- `POST /api/care/troubleshoot/ask` — free-text question for the AI plant
-  doctor (needs a free `HUGGINGFACE_API_TOKEN`; returns 503 without one)
-- `GET /api/external/status` — which external sources are enabled/working
-- `POST /api/journal` — add a plant to a no-login personal journal (client-id based)
-- `GET /api/journal/reminders?client_id=...` — what's overdue for watering right now
-- `POST /api/journal/<id>/photo` — attach a progress photo (multipart field `photo`, max 6 MB)
-- `GET /api/location/compare?plant_id=1&city_a=Karachi&city_b=Islamabad` — side-by-side verdict for one plant in two places
-- `GET /api/location/hardiness?city=Murree` — approximate USDA-equivalent hardiness from 5 years of history
-- `GET /api/community/reports?plant_id=1&city=Karachi` — browse crowdsourced outcome reports
-- `POST /api/community/reports` — "this worked / didn't work for me in [city]"
-- `GET /api/community/summary?plant_id=1&city=Karachi` — outcome counts + confidence level
-- `POST /api/community/reports/<id>/vote` — upvote a report (once per client)
-- `POST /api/submissions` — suggest a plant for the dataset (review queue)
-- `GET /api/submissions?status=pending` — review queue (gated by `ADMIN_TOKEN` when set)
-
-Text-bearing endpoints (`/api/location/recommend`, `/api/location/compare`,
-`/api/location/seasonal-calendar`) accept `?lang=ur` and return localized
-verdicts, reasons and labels. Journal mutation endpoints require the same
-`client_id` that created the entry. API errors (bad input, 404s, oversized
-uploads) always come back as JSON, never HTML.
-
-Full route list is readable directly in `app/routes/`.
 
 ## The front end
 
@@ -160,8 +76,8 @@ step. Styling is [Tailwind (Play CDN)](https://tailwindcss.com) +
 white-and-light-green palette with a hand-drawn SVG illustration set, a
 barely-there leaf pattern and a calm, motion-free layout (no floating or
 scroll-reveal effects; the home hero photo is served from Unsplash). Because
-the CSS comes from
-CDNs, pages need internet access on first load; everything else is local.
+the CSS comes from CDNs, pages need internet access on first load;
+everything else is local.
 
 - Nine pages share `base.html`: landing `/`, `/recommend` (the centrepiece —
   city input, live climate summary, scored plant cards, two-city compare,
@@ -201,7 +117,7 @@ location's live 16-day forecast:
   plants when local air quality is currently poor, small bonus for
   pollution-tolerant ones
 
-## The flower atlas (`/flowers`) and the matchmaker (`/match`)
+## The flower atlas and the matchmaker
 
 `data/flowers.json` holds 270+ ornamentals — seasonal flowers, roses, bulbs,
 palms, cacti, succulents, fragrant climbers, flowering trees, fruit trees and
@@ -260,7 +176,185 @@ species, its city's live climate, and its `last_watered_at` into
 `overdue` / `due_now` / `upcoming` statuses. The calculation is done;
 sending push/email notifications on top of it is a roadmap item.
 
+## AI features (optional)
 
+
+  
+
+## API endpoints
+
+**Location and climate**
+
+- `GET /api/location/recommend?city=Karachi` — **the core feature**. Returns
+  a climate snapshot, zone classification, air quality, current agri
+  season, and every plant scored/ranked for that location right now.
+- `GET /api/location/climate?city=Islamabad` — raw climate snapshot only
+- `GET /api/location/seasonal-calendar` — what to sow this month (Rabi/Kharif aware)
+- `GET /api/location/growing-guides` — province-grouped index of every city guide (powers the /guides filters)
+- `GET /api/location/growing-guide?city=Sukkur` — one city's Rabi/Kharif notes, challenges + star plants
+- `GET /api/location/compare?plant_id=1&city_a=Karachi&city_b=Islamabad` — side-by-side verdict for one plant in two places
+- `GET /api/location/hardiness?city=Murree` — approximate USDA-equivalent hardiness from 5 years of history
+
+**Plants and flowers**
+
+- `GET /api/plants?q=tomato&category=vegetable` — search the local dataset
+- `GET /api/plants/<id>?enrich=1` — plant detail + live Wikipedia/GBIF enrichment
+- `GET /api/flowers` — the full ornamental catalog (270+ entries in 12 groups;
+  the /flowers page filters it client-side, one fetch = instant filters)
+- `GET /api/flowers/<slug>` — one catalog entry
+
+**Matchmaker**
+
+- `POST /api/match/recommend` — body `{city, space, sun, water, experience,
+  pets, purposes[], priorities[]}` → ranked matches + an honest "avoid" list
+- `POST /api/match/explain` — same body; the optional AI garden plan (needs
+  `HUGGINGFACE_API_TOKEN`; returns 503 without one)
+
+**Care (watering + troubleshooting)**
+
+- `GET /api/care/watering/<plant_id>?city=Lahore` — climate-adjusted watering interval
+- `POST /api/care/troubleshoot/diagnose` — body `{"symptoms": ["yellow_leaves"]}`
+- `POST /api/care/troubleshoot/ask` — free-text question for the AI plant
+  doctor (needs a free `HUGGINGFACE_API_TOKEN`; returns 503 without one)
+
+**Journal (no login)**
+
+- `POST /api/journal` — add a plant to a no-login personal journal (client-id based)
+- `GET /api/journal/reminders?client_id=...` — what's overdue for watering right now
+- `POST /api/journal/<id>/photo` — attach a progress photo (multipart field `photo`, max 6 MB)
+
+**Community**
+
+- `GET /api/community/reports?plant_id=1&city=Karachi` — browse crowdsourced outcome reports
+- `POST /api/community/reports` — "this worked / didn't work for me in [city]"
+- `GET /api/community/summary?plant_id=1&city=Karachi` — outcome counts + confidence level
+- `POST /api/community/reports/<id>/vote` — upvote a report (once per client)
+
+**Submissions and status**
+
+- `POST /api/submissions` — suggest a plant for the dataset (review queue)
+- `GET /api/submissions?status=pending` — review queue (gated by `ADMIN_TOKEN` when set)
+- `GET /api/external/status` — which external sources are enabled/working
+
+Text-bearing endpoints (`/api/location/recommend`, `/api/location/compare`,
+`/api/location/seasonal-calendar`) accept `?lang=ur` and return localized
+verdicts, reasons and labels. Journal mutation endpoints require the same
+`client_id` that created the entry. API errors (bad input, 404s, oversized
+uploads) always come back as JSON, never HTML.
+
+Full route list is readable directly in `app/routes/`.
+
+## Data sources and reliability
+
+| Source | Needs a key? | Reliability | What it's used for |
+|---|---|---|---|
+| Our own `data/plants.json` | No | Always available | Core backbone — the climate/care matching data no API provides |
+| Open-Meteo (weather + air quality + geocoding) | No | Very reliable | Live climate snapshot per location, air quality |
+| GBIF | No | Institutional, very reliable | Taxonomy verification, real-world distribution |
+| iNaturalist | No | Reliable | Photos, community-verified names |
+| Wikipedia REST API | No | Very reliable | Plain-language plant summaries |
+| Perenual | Yes (free tier) | OK, but ~100 req/day + partial coverage — cached hard | Extra care-guide detail, more species coverage |
+| Trefle | Yes (free) | **Unreliable** — has had extended outages, search endpoint returns errors intermittently as of 2025 | Bonus only, wrapped to fail soft and never break a request |
+| Hugging Face Inference Providers | Yes (free token) | Free monthly credits, stable OpenAI-compatible router | Plain-language AI answers on /troubleshoot (optional, token-gated) |
+
+## Architecture
+
+```
+greenmitra/
+├── run.py                  # entry point
+├── config.py                # config (all API keys optional; loads .env)
+├── Procfile                 # production start command (gunicorn run:app)
+├── requirements.txt         # pinned dependencies
+├── data/
+│   ├── plants.json                  # curated core dataset (the real backbone)
+│   ├── city_climate_reference.json  # reference climate for major PK cities
+│   ├── city_growing_guides.json     # 115 city growing guides, grouped by province
+│   ├── flowers.json                 # 270+ ornamentals in 12 groups (generated)
+│   ├── troubleshoot_rules.json      # symptom -> cause -> fix rules
+│   └── strings.json                 # UI/API strings (English + Urdu)
+├── scripts/
+│   ├── seed_db.py           # loads data/plants.json into the database
+│   ├── merge_plants_json.py # validates + merges new plant JSON batches
+│   ├── merge_city_guides.py # merges province-organised guide batches (skip-if-exists)
+│   ├── build_flowers_json.py # generates data/flowers.json (the flower atlas catalog)
+│   └── import_from_perenual.py  # bulk-import more species (needs a free key)
+├── app/
+│   ├── __init__.py          # app factory + JSON error handlers
+│   ├── models.py            # Plant, ApiCache, UserPlantLog, PlantReport, PlantSubmission
+│   ├── extensions.py        # SQLAlchemy instance
+│   ├── utils.py             # shared request helpers (safe int parsing, etc.)
+│   ├── services/            # all business logic lives here
+│   │   ├── cache_service.py         # generic TTL cache (per-source TTLs)
+│   │   ├── weather_service.py       # Open-Meteo: geocoding, climate, AQI, hardiness
+│   │   ├── recommendation_engine.py # THE core logic: climate -> plant scoring
+│   │   ├── care_calculator.py       # dynamic watering interval estimator
+│   │   ├── seasonal_calendar.py     # Rabi/Kharif sowing season logic
+│   │   ├── troubleshoot_service.py  # symptom-based diagnosis
+│   │   ├── community_service.py     # crowdsourced report aggregation
+│   │   ├── i18n.py          # tiny translation layer (strings.json)
+│   │   ├── perenual_service.py      # Perenual API (optional key)
+│   │   ├── taxonomy_service.py      # GBIF + iNaturalist (no key needed)
+│   │   ├── wikipedia_service.py     # Wikipedia summaries (no key needed)
+│   │   ├── ai_service.py            # AI answers + AI garden plan (optional free HF token)
+│   │   ├── flower_service.py        # loads the flowers.json atlas catalog
+│   │   ├── match_service.py         # the matchmaker: questionnaire -> ranked matches
+│   │   └── trefle_service.py        # Trefle API (optional, flaky - best effort)
+│   ├── routes/               # thin Flask blueprints, one per concern
+│   │   ├── main.py           # HTML pages + /uploads photo serving
+│   │   ├── plants.py         # /api/plants
+│   │   ├── flowers.py        # /api/flowers (the atlas catalog)
+│   │   ├── match.py          # /api/match (matchmaker + AI garden plan)
+│   │   ├── location.py       # /api/location  (the star feature)
+│   │   ├── care.py           # /api/care (watering + troubleshoot)
+│   │   ├── external.py       # /api/external  (direct access to each 3rd-party source)
+│   │   ├── journal.py        # /api/journal  (no-login tracking, reminders, photos)
+│   │   ├── community.py      # /api/community (crowdsourced outcome reports)
+│   │   └── submissions.py    # /api/submissions ("suggest a plant" review queue)
+│   ├── templates/            # Jinja pages (Tailwind + daisyUI via CDN, Fraunces/Inter fonts)
+│   └── static/                # small custom CSS + shared JS helpers (script.js)
+```
+
+## Deploying on a free tier
+
+This is deliberately lightweight (Flask + SQLite) so it fits free hosting:
+
+- A `Procfile` is included (`gunicorn run:app --bind 0.0.0.0:$PORT`), so
+  platform hosts can start the app out of the box
+- **Render** (free web service tier), **PythonAnywhere** (free tier) or a
+  **Hugging Face Space** (Docker) are the easiest starting points for a
+  Flask app like this
+- On first deploy, tables auto-create on boot — run
+  `python scripts/seed_db.py` once to load the curated plant dataset
+- SQLite is fine at this scale — swap `DATABASE_URL` in `.env` for Postgres
+  later only if you outgrow it
+- Check each host's *current* free-tier limits before committing — these
+  change often
+
+## Roadmap and good first contributions
+
+- **Expand `data/plants.json`** — the curated set (83 plants today) is a
+  starting seed, not the ceiling. `scripts/merge_plants_json.py` validates
+  and merges researched JSON batches (schema, enums, temperature ordering,
+  duplicate protection), and `scripts/import_from_perenual.py` bulk-imports
+  from Perenual; the Pakistan-relevant species are best curated from
+  PARC/extension guides
+- **Frontend refinements** — the UI is built (see
+  [The front end](#the-front-end)); nicer empty states, more components and
+  an Urdu translation of every page (the recommendations page already has an
+  EN/اردو toggle) are welcome
+- **Wire watering reminders into real push/email delivery** — the
+  computation already exists at `GET /api/journal/reminders`; sending is
+  missing
+- **A full Pakistan hardiness-zone map** — the per-location profile already
+  exists at `GET /api/location/hardiness`; turning it into a map layer
+  (GBIF occurrence + Open-Meteo normals) would be a genuinely valuable
+  open dataset
+- **More languages** — add a column to `data/strings.json` (English + Urdu
+  ship now)
+- **Community layer growth** — show reports on plant pages, add basic
+  moderation
+- **"Suggest a plant" review flow polish** — the submissions API exists;
+  approving still means merging into `data/plants.json` by hand
 
 ## Author
 
@@ -268,6 +362,7 @@ sending push/email notifications on top of it is a roadmap item.
 
 Hamara Bagh is a solo-built open-source project: the plant dataset, the
 scoring engine and the whole front end. If you use it, find a bug, or want
-to help expand the dataset — reach out on LinkedIn.
+to help expand the dataset — reach out on LinkedIn. And if it helps your
+garden, starring the repo helps other growers find it.
 
 
