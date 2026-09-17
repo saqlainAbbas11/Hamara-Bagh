@@ -260,70 +260,7 @@ species, its city's live climate, and its `last_watered_at` into
 `overdue` / `due_now` / `upcoming` statuses. The calculation is done;
 sending push/email notifications on top of it is a roadmap item.
 
-## AI features (optional)
 
-Two AI features share one free token — the troubleshooter's **AI plant
-doctor** and the matchmaker's **AI garden plan** — and both stay completely
-invisible without it. The rule-based core of each feature always works
-offline.
-
-- Get a **free** token at <https://hf.co/settings/tokens> (fine-grained,
-  with the "Make calls to Inference Providers" permission) and set it in
-  `.env` as `HUGGINGFACE_API_TOKEN`, then restart the app
-- Calls go through Hugging Face's OpenAI-compatible router
-  (`https://router.huggingface.co/v1/chat/completions`); free accounts get
-  a monthly inference-credit allowance — no paid plan needed
-- `HF_MODEL` (also in `.env`) picks the first model tried — the default is
-  `Qwen/Qwen2.5-7B-Instruct`; any conversational model on the router can be
-  swapped in, and when the router reports a model has no provider, other
-  widely-served models are tried automatically
-- The model gets real context: the plant you typed, the symptoms you
-  ticked, and the rule engine's top-ranked causes; it is prompted as a
-  Pakistan-focused master gardener (short, actionable, organic and
-  low-cost fixes first, no pesticide brands or chemical doses)
-- On `/match` the same token powers the **AI garden plan**: your profile
-  plus the engine's scored matches are sent as grounded context, and the
-  model writes a short seasonal plan (planting order, watering rhythm,
-  month-by-month expectations). The card only appears when
-  `GET /api/external/status` reports the token is configured.
-- **No token? Nothing breaks.** The AI box stays hidden (the page checks
-  `GET /api/external/status`) and the troubleshooter behaves exactly as
-  before; upstream failures return friendly JSON errors the page shows
-  instead of crashing
-
-## Deploying on a free tier
-
-This is deliberately lightweight (Flask + SQLite) so it fits free hosting:
-
-- **Render** (free web service tier) or **PythonAnywhere** (free tier) are
-  the easiest starting points for a Flask app like this
-- Use `gunicorn run:app` as the start command in production (already in
-  requirements.txt)
-- SQLite is fine at this scale — swap `DATABASE_URL` in `.env` for Postgres
-  later only if you outgrow it
-- Check each host's *current* free-tier limits before committing — these
-  change often
-
-## Ideas for what to build next (good first contributions)
-
-- **Frontend refinements** — the UI is built (see "The front end" above);
-  nicer empty states, more components and an Urdu translation of every page
-  (the recommendations page already has an EN/اردو toggle) are welcome
-- Expand `data/plants.json` — 51 plants and counting is a starting seed, not
-  the ceiling. `scripts/merge_plants_json.py` validates and merges researched
-  JSON batches (schema, enums, temperature ordering, duplicate protection),
-  and `scripts/import_from_perenual.py` bulk-imports from Perenual; the
-  Pakistan-relevant species are best curated from PARC/extension guides
-- Wire watering reminders into real push/email delivery (the computation
-  already exists at `GET /api/journal/reminders`; sending is missing)
-- A full Pakistan hardiness-zone map — the per-location profile already
-  exists at `GET /api/location/hardiness`; turning it into a map layer
-  (GBIF occurrence + Open-Meteo normals) would be a genuinely valuable
-  open dataset
-- More languages — add a column to `data/strings.json` (English + Urdu ship now)
-- Community layer growth: show reports on plant pages, add basic moderation
-- "Suggest a plant" review flow polish (submissions API exists; approving
-  still means merging into `data/plants.json` by hand)
 
 ## Author
 
@@ -333,7 +270,4 @@ Hamara Bagh is a solo-built open-source project: the plant dataset, the
 scoring engine and the whole front end. If you use it, find a bug, or want
 to help expand the dataset — reach out on LinkedIn.
 
-## License
 
-Pick one before your first public commit — MIT is a common, permissive
-default for a project you want others to freely build on.
